@@ -2,6 +2,7 @@
 #include <iostream>
 #include <string>
 #include "Scene.h"
+#include "Stage.h"
 
 Scene::Scene()
 {
@@ -10,7 +11,7 @@ Scene::Scene()
     Scene::score = 0;
 }
 
-//
+
 void Scene::startScene()
 {
     initscr();
@@ -27,9 +28,11 @@ WINDOW *Scene::changeScene(int stage)
     WINDOW *winGame;
     WINDOW *winScore;
     WINDOW *winUser;
-    winGame = newwin(20, 60, 3, 3);
+    winGame = newwin(25, 60, 3, 3);
     winScore = newwin(5, 15, 5, 70);
     winUser = newwin(5, 15, 13, 70);
+
+	MapSet mapset;
 
     start_color();
 
@@ -55,6 +58,9 @@ WINDOW *Scene::changeScene(int stage)
         wbkgd(winGame, COLOR_PAIR(1));
         wattron(winGame, COLOR_PAIR(1));
         mvwprintw(winGame, 1, 1, "Stage One");
+		mapset.LoadMap();
+        for (int i = 0; i < mapset.getrow(); i++)
+            mvwprintw(winGame, i + 2, 2, mapset.getMap(i));
         score++;
     }
     else if (stage == 2)
@@ -62,6 +68,9 @@ WINDOW *Scene::changeScene(int stage)
         wbkgd(winGame, COLOR_PAIR(2));
         wattron(winGame, COLOR_PAIR(2));
         mvwprintw(winGame, 1, 1, "Stage Two");
+        mapset.LoadMap();
+        for (int i = 0; i < mapset.getrow(); i++)
+            mvwprintw(winGame, i + 2, 2, mapset.getMap(i));
         score++;
     }
     else if (stage == 3)
@@ -69,6 +78,9 @@ WINDOW *Scene::changeScene(int stage)
         wbkgd(winGame, COLOR_PAIR(3));
         wattron(winGame, COLOR_PAIR(3));
         mvwprintw(winGame, 1, 1, "Stage Three");
+        mapset.LoadMap();
+        for (int i = 0; i < mapset.getrow(); i++)
+            mvwprintw(winGame, i + 2, 2, mapset.getMap(i));
         score++;
     }
     else
@@ -76,6 +88,9 @@ WINDOW *Scene::changeScene(int stage)
         wbkgd(winGame, COLOR_PAIR(4));
         wattron(winGame, COLOR_PAIR(4));
         mvwprintw(winGame, 1, 1, "Stage Four");
+        mapset.LoadMap();
+        for (int i = 0; i < mapset.getrow(); i++)
+            mvwprintw(winGame, i + 2, 2, mapset.getMap(i));
         score++;
     }
 

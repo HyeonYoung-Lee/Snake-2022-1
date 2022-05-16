@@ -42,8 +42,12 @@ void	MapSet::setMap(int i, int j, int num) {
 	this -> map[i][j] = num + '0';
 }
 
-char**	MapSet::getMap() {
-	return (this -> map);
+char*	MapSet::getMap(int row) {
+	return (this -> map[row]);
+}
+
+int	MapSet::getrow() {
+	return	(row);
 }
 
 std::ostream& operator<<(std::ostream& os, const MapSet& m) {

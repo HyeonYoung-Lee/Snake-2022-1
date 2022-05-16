@@ -14,5 +14,7 @@ public:
 	void	LoadMap();
 	void	setMap(int i, int j, int num);
 	char**	getMap();
+	char*	getMap(int row);
+	int	getrow();
 	friend std::ostream& operator<<(std::ostream& os, const MapSet& map);
 };
