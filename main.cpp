@@ -11,6 +11,7 @@ int main()
     Scene scene;
 
     WINDOW *win;
+    WINDOW *winGaming;
     scene.startScene();
 
     keypad(stdscr, TRUE);
@@ -19,11 +20,13 @@ int main()
     win = scene.changeScene(0);
 
     // turn into Game scene
-    getch();
+    
 
-    while (true)
-    {
-        win = scene.changeScene(1);
+    for(int i=1;i<5;i++){
+        getch();
+        win = scene.changeScene(i);
+        winGaming = scene.gamingScene(i);
+        
     }
     // win = scene.changeScene(1);
 

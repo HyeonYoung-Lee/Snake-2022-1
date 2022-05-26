@@ -3,7 +3,8 @@
 #include <string>
 #include "Scene.h"
 #include "Stage.h"
-
+#include <thread>
+using std::this_thread::sleep_for;
 Scene::Scene()
 {
     Scene::width = 90;
@@ -22,11 +23,59 @@ void Scene::startScene()
     refresh();
     return;
 }
+WINDOW *Scene::gamingScene(int stage)
+{
+    WINDOW *winGaming;
+    winGaming = newwin(23, 58, 4, 4);
+    MapSet mapset;
+    Snake snake;
+
+
+    if (stage == 0)
+    {
+        
+    }
+    else if (stage == 1)
+    {
+        
+        mapset.LoadMap(0);
+        mapset.LoadMap(2);
+        for (int i = 0; i < mapset.getrow(); i++)
+            mvwprintw(winGaming, i + 2, 2, mapset.getMap(i));
+        score++;
+    }
+    else if (stage == 2)
+    {
+        mapset.LoadMap(1);
+        for (int i = 0; i < mapset.getrow(); i++)
+            mvwprintw(winGaming, i + 2, 2, mapset.getMap(i));
+    }
+    else if (stage == 3)
+    {
+        mapset.LoadMap(2);
+        for (int i = 0; i < mapset.getrow(); i++)
+            mvwprintw(winGaming, i + 2, 2, mapset.getMap(i));
+        score++;
+    }
+    else
+    {
+        mapset.LoadMap(3);
+        for (int i = 0; i < mapset.getrow(); i++)
+            mvwprintw(winGaming, i + 2, 2, mapset.getMap(i));
+        score++;
+    }
+    wrefresh(winGaming);
+    return winGaming;
+
+
+}
 WINDOW *Scene::changeScene(int stage)
 {
-    WINDOW *winGame;
+    
     WINDOW *winScore;
     WINDOW *winUser;
+    WINDOW *winGame;
+    WINDOW *trash;
     winGame = newwin(25, 60, 3, 3);
     winScore = newwin(5, 15, 5, 70);
     winUser = newwin(5, 15, 13, 70);
@@ -58,42 +107,26 @@ WINDOW *Scene::changeScene(int stage)
         wbkgd(winGame, COLOR_PAIR(1));
         wattron(winGame, COLOR_PAIR(1));
         mvwprintw(winGame, 1, 1, "Stage One");
-        mapset.LoadMap(0);
-        mapset.moveSnake(snake);
-        for (int i = 0; i < mapset.getrow(); i++)
-            mvwprintw(winGame, i + 2, 2, mapset.getMap(i));
+        
     }
-
-    // else if (stage == 2)
-    // {
-    //     wbkgd(winGame, COLOR_PAIR(2));
-    //     wattron(winGame, COLOR_PAIR(2));
-    //     mvwprintw(winGame, 1, 1, "Stage Two");
-    //     mapset.LoadMap(1);
-    //     for (int i = 0; i < mapset.getrow(); i++)
-    //         mvwprintw(winGame, i + 2, 2, mapset.getMap(i));
-    //     score++;
-    // }
-    // else if (stage == 3)
-    // {
-    //     wbkgd(winGame, COLOR_PAIR(3));
-    //     wattron(winGame, COLOR_PAIR(3));
-    //     mvwprintw(winGame, 1, 1, "Stage Three");
-    //     mapset.LoadMap(2);
-    //     for (int i = 0; i < mapset.getrow(); i++)
-    //         mvwprintw(winGame, i + 2, 2, mapset.getMap(i));
-    //     score++;
-    // }
-    // else
-    // {
-    //     wbkgd(winGame, COLOR_PAIR(4));
-    //     wattron(winGame, COLOR_PAIR(4));
-    //     mvwprintw(winGame, 1, 1, "Stage Four");
-    //     mapset.LoadMap(3);
-    //     for (int i = 0; i < mapset.getrow(); i++)
-    //         mvwprintw(winGame, i + 2, 2, mapset.getMap(i));
-    //     score++;
-    // }
+    else if (stage == 2)
+    {
+        wbkgd(winGame, COLOR_PAIR(2));
+        wattron(winGame, COLOR_PAIR(2));
+        mvwprintw(winGame, 1, 1, "Stage Two");
+    }
+    else if (stage == 3)
+    {
+        wbkgd(winGame, COLOR_PAIR(3));
+        wattron(winGame, COLOR_PAIR(3));
+        mvwprintw(winGame, 1, 1, "Stage Three");
+    }
+    else
+    {
+        wbkgd(winGame, COLOR_PAIR(4));
+        wattron(winGame, COLOR_PAIR(4));
+        mvwprintw(winGame, 1, 1, "Stage Four");
+    }
 
     // Score control
     mvwprintw(winScore, 1, 1, "Score:");
@@ -108,5 +141,5 @@ WINDOW *Scene::changeScene(int stage)
     wrefresh(winGame);
     wrefresh(winScore);
     wrefresh(winUser);
-    return winGame;
+    return trash;
 }
