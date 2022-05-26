@@ -14,7 +14,7 @@ class MapSet
    char **map;
 
 public:
-   void LoadMap();
+   void LoadMap(int mapNum);
    void setMap(int i, int j, int num);
    void moveSnake(Snake snake);
    char **getMap();
