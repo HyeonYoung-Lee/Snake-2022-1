@@ -1,10 +1,10 @@
 #include "Stage.h"
 #include "Snake.h"
 
-void   MapSet::LoadMap() {
+void   MapSet::LoadMap(int mapNum) {
    std::ifstream   mapfile;
    srand((unsigned) time (NULL));
-   mapfile.open("stage" + std::to_string(rand() % 4), std::ios_base::in|std::ios_base::binary);
+   mapfile.open("stage" + std::to_string(mapNum), std::ios_base::in|std::ios_base::binary);
 
    if (mapfile.fail()) {
       std::cout << "Map file does not exist.";

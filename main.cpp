@@ -16,18 +16,21 @@ int main()
 
     // turn into Game scene
     getch();
-    win = scene.changeScene(1);
+	while (true) {
+		win = scene.changeScene(1);
+	}
+    // win = scene.changeScene(1);
 
-    // example - if press any key, change game stage and score++
-    // stage two
-    getch();
-    win = scene.changeScene(2);
-    // stage three
-    getch();
-    win = scene.changeScene(3);
-    // stage four
-    getch();
-    win = scene.changeScene(4);
+    // // example - if press any key, change game stage and score++
+    // // stage two
+    // getch();
+    // win = scene.changeScene(2);
+    // // stage three
+    // getch();
+    // win = scene.changeScene(3);
+    // // stage four
+    // getch();
+    // win = scene.changeScene(4);
 
     // exit game
     getch();

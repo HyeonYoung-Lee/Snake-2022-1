@@ -59,7 +59,7 @@ WINDOW *Scene::changeScene(int stage)
         wbkgd(winGame, COLOR_PAIR(1));
         wattron(winGame, COLOR_PAIR(1));
         mvwprintw(winGame, 1, 1, "Stage One");
-      mapset.LoadMap();
+      mapset.LoadMap(0);
         mapset.moveSnake(snake);
         for (int i = 0; i < mapset.getrow(); i++){
             mvwprintw(winGame, i + 2, 2, mapset.getMap(i));
@@ -68,36 +68,36 @@ WINDOW *Scene::changeScene(int stage)
 
         score++;
     }
-    else if (stage == 2)
-    {
-        wbkgd(winGame, COLOR_PAIR(2));
-        wattron(winGame, COLOR_PAIR(2));
-        mvwprintw(winGame, 1, 1, "Stage Two");
-        mapset.LoadMap();
-        for (int i = 0; i < mapset.getrow(); i++)
-            mvwprintw(winGame, i + 2, 2, mapset.getMap(i));
-        score++;
-    }
-    else if (stage == 3)
-    {
-        wbkgd(winGame, COLOR_PAIR(3));
-        wattron(winGame, COLOR_PAIR(3));
-        mvwprintw(winGame, 1, 1, "Stage Three");
-        mapset.LoadMap();
-        for (int i = 0; i < mapset.getrow(); i++)
-            mvwprintw(winGame, i + 2, 2, mapset.getMap(i));
-        score++;
-    }
-    else
-    {
-        wbkgd(winGame, COLOR_PAIR(4));
-        wattron(winGame, COLOR_PAIR(4));
-        mvwprintw(winGame, 1, 1, "Stage Four");
-        mapset.LoadMap();
-        for (int i = 0; i < mapset.getrow(); i++)
-            mvwprintw(winGame, i + 2, 2, mapset.getMap(i));
-        score++;
-    }
+    // else if (stage == 2)
+    // {
+    //     wbkgd(winGame, COLOR_PAIR(2));
+    //     wattron(winGame, COLOR_PAIR(2));
+    //     mvwprintw(winGame, 1, 1, "Stage Two");
+    //     mapset.LoadMap(1);
+    //     for (int i = 0; i < mapset.getrow(); i++)
+    //         mvwprintw(winGame, i + 2, 2, mapset.getMap(i));
+    //     score++;
+    // }
+    // else if (stage == 3)
+    // {
+    //     wbkgd(winGame, COLOR_PAIR(3));
+    //     wattron(winGame, COLOR_PAIR(3));
+    //     mvwprintw(winGame, 1, 1, "Stage Three");
+    //     mapset.LoadMap(2);
+    //     for (int i = 0; i < mapset.getrow(); i++)
+    //         mvwprintw(winGame, i + 2, 2, mapset.getMap(i));
+    //     score++;
+    // }
+    // else
+    // {
+    //     wbkgd(winGame, COLOR_PAIR(4));
+    //     wattron(winGame, COLOR_PAIR(4));
+    //     mvwprintw(winGame, 1, 1, "Stage Four");
+    //     mapset.LoadMap(3);
+    //     for (int i = 0; i < mapset.getrow(); i++)
+    //         mvwprintw(winGame, i + 2, 2, mapset.getMap(i));
+    //     score++;
+    // }
 
     // Score control
     mvwprintw(winScore, 1, 1, "Score:");
