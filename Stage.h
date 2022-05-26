@@ -7,16 +7,18 @@
 #include <sstream>
 #include "Snake.h"
 
-class MapSet {
-   int   row;
-   int   col;
+class MapSet
+{
+   int row;
+   int col;
    char **map;
+
 public:
-   void   LoadMap();
-   void   setMap(int i, int j, int num);
-    void    moveSnake(Snake snake);
-   char**   getMap();
-   char*   getMap(int row);
-   int   getrow();
-   friend std::ostream& operator<<(std::ostream& os, const MapSet& map);
+   void LoadMap();
+   void setMap(int i, int j, int num);
+   void moveSnake(Snake snake);
+   char **getMap();
+   char *getMap(int row);
+   int getrow();
+   friend std::ostream &operator<<(std::ostream &os, const MapSet &map);
 };
