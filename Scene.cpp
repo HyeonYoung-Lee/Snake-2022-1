@@ -32,7 +32,8 @@ WINDOW *Scene::changeScene(int stage)
     winScore = newwin(5, 15, 5, 70);
     winUser = newwin(5, 15, 13, 70);
 
-	MapSet mapset;
+   MapSet mapset;
+    Snake snake;
 
     start_color();
 
@@ -58,9 +59,13 @@ WINDOW *Scene::changeScene(int stage)
         wbkgd(winGame, COLOR_PAIR(1));
         wattron(winGame, COLOR_PAIR(1));
         mvwprintw(winGame, 1, 1, "Stage One");
-		mapset.LoadMap();
-        for (int i = 0; i < mapset.getrow(); i++)
+      mapset.LoadMap();
+        mapset.moveSnake(snake);
+        for (int i = 0; i < mapset.getrow(); i++){
             mvwprintw(winGame, i + 2, 2, mapset.getMap(i));
+        }
+
+
         score++;
     }
     else if (stage == 2)
