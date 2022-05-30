@@ -8,9 +8,9 @@ Snake::Snake()
     this->isDead = false;
     this->x = 6;
     this->y = 6;
-
+    this->score = 0;
 }
-Snake::~Snake(){}
+Snake::~Snake() {}
 
 void Snake::setDir(int direction)
 {
@@ -19,32 +19,51 @@ void Snake::setDir(int direction)
 
 void Snake::willMove()
 {
-    if(direction == 1) {
+    if (direction == 1)
+    {
         y--;
     }
-    else if(direction == 2){
+    else if (direction == 2)
+    {
         x++;
     }
-    else if(direction == 3){
+    else if (direction == 3)
+    {
         y++;
     }
-    else if(direction == 4){
+    else if (direction == 4)
+    {
         x--;
     }
 }
 
-void Snake::upDate(){
-    int  KeyPressed;
+void Snake::upDate()
+{
+    int KeyPressed;
 
     KeyPressed = getch();
     switch (KeyPressed)
     {
     case KEY_LEFT:
-        if(direction !=4 ) direction = 4;
-        else break;
+        if (direction != 4)
+            direction = 4;
+        else
+            break;
         break;
 
     default:
         break;
     }
+}
+
+void Snake::setFirst()
+{
+    this->x = 6;
+    this->y = 6;
+    return;
+}
+
+void Snake::addScore()
+{
+    (this->score)++;
 }

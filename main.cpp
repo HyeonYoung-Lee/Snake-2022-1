@@ -19,23 +19,21 @@ int main()
     keypad(stdscr, TRUE);
 
     // show Intro scene
-    win = scene.changeScene(0);
+    win = scene.changeScene(0, snake.score);
 
     // turn into Game scene
-
+    getch();
     for (int i = 1; i < 5; i++)
     {
-        getch();
-        win = scene.changeScene(i);
-
+        snake.setFirst();
+        win = scene.changeScene(i, snake.score);
         while (true)
         {
             winGaming = scene.gamingScene(i, snake);
             key = getch();
             if (key == 99)
             {
-                delwin(winGaming);
-                endwin();
+                // delwin(winGaming);
                 break;
             }
             switch (key)

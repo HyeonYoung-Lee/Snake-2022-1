@@ -3,11 +3,10 @@ class Scene
 {
 protected:
     int width, height;
-    int score;
 
 public:
     Scene();
     void startScene();
-    WINDOW *changeScene(int stage);
+    WINDOW *changeScene(int stage, int score);
     WINDOW *gamingScene(int stage, Snake snake);
 };

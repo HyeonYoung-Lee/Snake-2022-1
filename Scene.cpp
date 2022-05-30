@@ -5,11 +5,11 @@
 #include "Stage.h"
 #include <thread>
 using std::this_thread::sleep_for;
+
 Scene::Scene()
 {
     Scene::width = 90;
     Scene::height = 100;
-    Scene::score = 0;
 }
 
 void Scene::startScene()
@@ -39,7 +39,6 @@ WINDOW *Scene::gamingScene(int stage, Snake snake)
         mvwprintw(winGaming, 0, 0, "Stage One");
         for (int i = 0; i < mapset.getrow(); i++)
             mvwprintw(winGaming, i + 2, 0, mapset.getMap(i));
-        score++;
     }
     else if (stage == 2)
     {
@@ -48,7 +47,6 @@ WINDOW *Scene::gamingScene(int stage, Snake snake)
         mvwprintw(winGaming, 0, 0, "Stage Two");
         for (int i = 0; i < mapset.getrow(); i++)
             mvwprintw(winGaming, i + 2, 0, mapset.getMap(i));
-        score++;
     }
     else if (stage == 3)
     {
@@ -57,7 +55,6 @@ WINDOW *Scene::gamingScene(int stage, Snake snake)
         mvwprintw(winGaming, 0, 0, "Stage Three");
         for (int i = 0; i < mapset.getrow(); i++)
             mvwprintw(winGaming, i + 2, 0, mapset.getMap(i));
-        score++;
     }
     else if (stage == 4)
     {
@@ -67,12 +64,11 @@ WINDOW *Scene::gamingScene(int stage, Snake snake)
         mvwprintw(winGaming, 0, 0, "Stage Four");
         for (int i = 0; i < mapset.getrow(); i++)
             mvwprintw(winGaming, i + 2, 0, mapset.getMap(i));
-        score++;
     }
     wrefresh(winGaming);
     return winGaming;
 }
-WINDOW *Scene::changeScene(int stage)
+WINDOW *Scene::changeScene(int stage, int score)
 {
     WINDOW *winScore;
     WINDOW *winUser;
