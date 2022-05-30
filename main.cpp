@@ -3,6 +3,9 @@
 #include "Scene.h"
 #include "Snake.h"
 
+#include <chrono>
+#include <thread>
+
 using namespace std;
 
 int main()
@@ -30,12 +33,13 @@ int main()
         while (true)
         {
             winGaming = scene.gamingScene(i, snake);
-            key = getch();
+            // getch();
+            key = KEY_RIGHT;
             if (key == 99)
             {
-                // delwin(winGaming);
                 break;
             }
+            this_thread::sleep_for(chrono::milliseconds(500));
             switch (key)
             {
             case KEY_LEFT:

@@ -17,6 +17,13 @@ void Snake::setDir(int direction)
     this->direction = direction;
 }
 
+void Snake::setFirst()
+{
+    this->x = 6;
+    this->y = 6;
+    return;
+}
+
 void Snake::willMove()
 {
     if (direction == 1)
