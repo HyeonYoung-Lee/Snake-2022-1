@@ -4,7 +4,7 @@
 
 Snake::Snake()
 {
-    this->direction = 1;
+    this->direction = 2;
     this->isDead = false;
     this->x = 6;
     this->y = 6;
