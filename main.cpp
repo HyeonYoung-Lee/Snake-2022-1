@@ -10,6 +10,7 @@ int main()
     // create default window including game screen, score board, user name
     Scene scene;
     Snake snake;
+    int key;
 
     WINDOW *win;
     WINDOW *winGaming;
@@ -21,28 +22,19 @@ int main()
     win = scene.changeScene(0);
 
     // turn into Game scene
-    
 
-    for(int i=1;i<5;i++){
+    for (int i = 1; i < 5; i++)
+    {
         getch();
         win = scene.changeScene(i);
-        winGaming = scene.gamingScene(i);
-        
-        
+        while (true)
+        {
+            key = getch();
+            winGaming = scene.gamingScene(i, &snake, &key);
+            if (key == 99)
+                break;
+        }
     }
-    getch();
-    // win = scene.changeScene(1);
-
-    // // example - if press any key, change game stage and score++
-    // // stage two
-    // getch();
-    // win = scene.changeScene(2);
-    // // stage three
-    // getch();
-    // win = scene.changeScene(3);
-    // // stage four
-    // getch();
-    // win = scene.changeScene(4);
 
     // exit game
     delwin(win);

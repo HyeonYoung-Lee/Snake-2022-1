@@ -25,27 +25,23 @@ void Scene::startScene()
 }
 // WINDOW *Scene::movingSnake(int stage)
 // {
-    
+
 // }
-WINDOW *Scene::gamingScene(int stage)
+WINDOW *Scene::gamingScene(int stage, Snake *snake, int *key)
 {
     WINDOW *winGaming;
-    winGaming = newwin(23, 58, 4,4);
+    winGaming = newwin(23, 58, 4, 4);
     MapSet mapset;
-    Snake snake;
-
 
     if (stage == 0)
     {
-        
     }
     else if (stage == 1)
     {
-        
         mapset.LoadMap(0);
         mvwprintw(winGaming, 0, 0, "Stage One");
         for (int i = 0; i < mapset.getrow(); i++)
-            mvwprintw(winGaming, i+2, 0, mapset.getMap(i));
+            mvwprintw(winGaming, i + 2, 0, mapset.getMap(i));
         score++;
     }
     else if (stage == 2)
@@ -53,33 +49,31 @@ WINDOW *Scene::gamingScene(int stage)
         mapset.LoadMap(1);
         mvwprintw(winGaming, 0, 0, "Stage Two");
         for (int i = 0; i < mapset.getrow(); i++)
-            mvwprintw(winGaming, i+2, 0, mapset.getMap(i));
+            mvwprintw(winGaming, i + 2, 0, mapset.getMap(i));
+        score++;
     }
     else if (stage == 3)
     {
         mapset.LoadMap(2);
         mvwprintw(winGaming, 0, 0, "Stage Three");
         for (int i = 0; i < mapset.getrow(); i++)
-            mvwprintw(winGaming, i+2, 0, mapset.getMap(i));
+            mvwprintw(winGaming, i + 2, 0, mapset.getMap(i));
         score++;
     }
-    else if(stage == 4)
+    else if (stage == 4)
     {
 
         mapset.LoadMap(3);
         mvwprintw(winGaming, 0, 0, "Stage Four");
         for (int i = 0; i < mapset.getrow(); i++)
-            mvwprintw(winGaming, i+2, 0, mapset.getMap(i));
+            mvwprintw(winGaming, i + 2, 0, mapset.getMap(i));
         score++;
     }
     wrefresh(winGaming);
     return winGaming;
-
-
 }
 WINDOW *Scene::changeScene(int stage)
 {
-    
     WINDOW *winScore;
     WINDOW *winUser;
     WINDOW *winGame;
@@ -89,8 +83,6 @@ WINDOW *Scene::changeScene(int stage)
     winUser = newwin(5, 15, 13, 70);
 
     MapSet mapset;
-    Snake snake;
-
     start_color();
 
     init_pair(0, COLOR_BLUE, COLOR_BLACK);
@@ -115,7 +107,6 @@ WINDOW *Scene::changeScene(int stage)
         wbkgd(winGame, COLOR_PAIR(1));
         wattron(winGame, COLOR_PAIR(1));
         mvwprintw(winGame, 1, 1, "Stage One");
-        
     }
     else if (stage == 2)
     {
