@@ -72,3 +72,45 @@ int Snake::getScore()
 {
     return score;
 }
+
+// score board accessor
+void Snake::setCurrentLength(int cl)
+{
+    currentLength = cl;
+}
+int Snake::getCurrentLength()
+{
+    return currentLength;
+}
+void Snake::setMaxLength(int ml)
+{
+    maxLength = ml;
+}
+int Snake::getMaxLength()
+{
+    return maxLength;
+}
+void Snake::setGrowthItems(int gi)
+{
+    growthItems = gi;
+}
+int Snake::getGrowthItems()
+{
+    return growthItems;
+}
+void Snake::setPoisonItems(int pi)
+{
+    poisonItems = pi;
+}
+int Snake::getPoisonItems()
+{
+    return poisonItems;
+}
+void Snake::setGateUses(int gu)
+{
+    gateUses = gu;
+}
+int Snake::getGateUses()
+{
+    return gateUses;
+}

@@ -26,44 +26,14 @@ public:
     int getScore();
 
     // score board accessor
-    void setCurrentLength(int cl)
-    {
-        currentLength = cl;
-    }
-    int getCurrentLength()
-    {
-        return currentLength;
-    }
-    void setMaxLength(int ml)
-    {
-        maxLength = ml;
-    }
-    int getMaxLength()
-    {
-        return maxLength;
-    }
-    void setGrowthItems(int gi)
-    {
-        growthItems = gi;
-    }
-    int getGrowthItems()
-    {
-        return growthItems;
-    }
-    void setPoisonItems(int pi)
-    {
-        poisonItems = pi;
-    }
-    int getPoisonItems()
-    {
-        return poisonItems;
-    }
-    void setGateUses(int gu)
-    {
-        gateUses = gu;
-    }
-    int getGateUses()
-    {
-        return gateUses;
-    }
+    void setCurrentLength(int cl);
+    int getCurrentLength();
+    void setMaxLength(int ml);
+    int getMaxLength();
+    void setGrowthItems(int gi);
+    int getGrowthItems();
+    void setPoisonItems(int pi);
+    int getPoisonItems();
+    void setGateUses(int gu);
+    int getGateUses();
 };
