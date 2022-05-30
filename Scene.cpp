@@ -72,12 +72,8 @@ WINDOW *Scene::gamingScene(int stage, Snake snake)
 WINDOW *Scene::changeScene(int stage, Snake snake)
 {
     WINDOW *winScene;
-
-    WINDOW *winUser;
     WINDOW *trash;
-
     winScene = newwin(25, 60, 3, 3);
-    winUser = newwin(5, 15, 13, 70);
 
     MapSet mapset;
     start_color();
@@ -89,7 +85,6 @@ WINDOW *Scene::changeScene(int stage, Snake snake)
     init_pair(4, COLOR_WHITE, COLOR_BLACK);
 
     wborder(winScene, '*', '*', '*', '*', '*', '*', '*', '*');
-    wborder(winUser, '|', '|', '-', '-', '+', '+', '+', '+');
 
     // Scene window control
     if (stage == 0)
@@ -123,13 +118,6 @@ WINDOW *Scene::changeScene(int stage, Snake snake)
         mvwprintw(winScene, 1, 1, "Stage Four");
     }
 
-    // Mission Board
-    mvwprintw(winUser, 1, 1, "Name:");
-    mvwprintw(winUser, 2, 1, "User");
-
     wrefresh(winScene);
-
-    // wrefresh(winScore);
-    wrefresh(winUser);
     return winScene;
 }
