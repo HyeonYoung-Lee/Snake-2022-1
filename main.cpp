@@ -27,12 +27,32 @@ int main()
     {
         getch();
         win = scene.changeScene(i);
+
         while (true)
         {
+            winGaming = scene.gamingScene(i, snake);
             key = getch();
-            winGaming = scene.gamingScene(i, &snake, &key);
             if (key == 99)
+            {
+                delwin(winGaming);
+                endwin();
                 break;
+            }
+            switch (key)
+            {
+            case KEY_LEFT:
+                --snake.x;
+                break;
+            case KEY_RIGHT:
+                ++snake.x;
+                break;
+            case KEY_UP:
+                --snake.y;
+                break;
+            case KEY_DOWN:
+                ++snake.y;
+                break;
+            }
         }
     }
 
