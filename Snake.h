@@ -11,5 +11,6 @@ public:
     void setDir(int dir);   //Snake 방향 설정
     void willMove();  //Snake 움직임
     void upDate();
+    void setFirst();
 
 };
