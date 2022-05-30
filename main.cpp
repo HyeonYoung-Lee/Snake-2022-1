@@ -5,7 +5,6 @@
 
 #include <chrono>
 #include <thread>
-#include "kbhit.h"
 
 using namespace std;
 
@@ -37,7 +36,6 @@ int main()
     {
         snake.setFirst();
         win = scene.changeScene(i, snake.score);
-        key = KEY_RIGHT;
         while (true)
         {
             winGaming = scene.gamingScene(i, snake);
@@ -59,9 +57,7 @@ int main()
 
             if (key == 99)
             {
-                key = getch();
-                if (key == 99)
-                    break;
+                break;
             }
             // this_thread::sleep_for(chrono::milliseconds(500));
             switch (key)
