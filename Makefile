@@ -1,6 +1,6 @@
 CC=g++
 CCFLAGS=-std=c++11
-OBJECTS=main.cpp Scene.cpp Stage.cpp Snake.cpp
+OBJECTS=main.cpp Scene.cpp Stage.cpp Snake.cpp ScoreBoard.cpp
 CURSE=-lncurses
 
 all:

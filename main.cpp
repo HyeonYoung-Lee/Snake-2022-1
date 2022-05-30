@@ -2,7 +2,7 @@
 #include <iostream>
 #include "Scene.h"
 #include "Snake.h"
-
+#include "ScoreBoard.h"
 #include <chrono>
 #include <thread>
 
@@ -10,19 +10,23 @@ using namespace std;
 
 int main()
 {
-    // create default window including game screen, score board, user name
+    // create default window including game screen, Score board, Mission
     Scene scene;
     Snake snake;
+    ScoreBoard scoreBoard;
     int key;
 
     WINDOW *win;
     WINDOW *winGaming;
+    WINDOW *winScoreBoard;
+    WINDOW *winMission;
+
     scene.startScene();
 
     keypad(stdscr, TRUE);
 
     // show Intro scene
-    win = scene.changeScene(0, snake.score);
+    win = scene.changeScene(0, snake);
 
     // turn into Game scene
     getch();
@@ -35,10 +39,12 @@ int main()
     for (int i = 1; i < 5; i++)
     {
         snake.setFirst();
-        win = scene.changeScene(i, snake.score);
+        win = scene.changeScene(i, snake);
+
         while (true)
         {
             winGaming = scene.gamingScene(i, snake);
+            winScoreBoard = scoreBoard.upDateScoreBoard(snake);
             // nodelay(winGaming, true);
             // getch();
             key = KEY_RIGHT;
@@ -62,21 +68,21 @@ int main()
             // this_thread::sleep_for(chrono::milliseconds(500));
             switch (key)
             {
-            case KEY_LEFT:
-                --snake.x;
-                snake.direction = 4;
+            case KEY_UP:
+                --snake.y;
+                snake.direction = 1;
                 break;
             case KEY_RIGHT:
                 ++snake.x;
                 snake.direction = 2;
                 break;
-            case KEY_UP:
-                --snake.y;
-                snake.direction = 1;
-                break;
             case KEY_DOWN:
                 ++snake.y;
                 snake.direction = 3;
+                break;
+            case KEY_LEFT:
+                --snake.x;
+                snake.direction = 4;
                 break;
             }
         }

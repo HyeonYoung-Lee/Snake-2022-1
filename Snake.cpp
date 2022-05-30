@@ -65,5 +65,10 @@ void Snake::setFirst()
 
 void Snake::addScore()
 {
-    (this->score)++;
+    score++;
+}
+
+int Snake::getScore()
+{
+    return score;
 }

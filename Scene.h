@@ -7,6 +7,6 @@ protected:
 public:
     Scene();
     void startScene();
-    WINDOW *changeScene(int stage, int score);
+    WINDOW *changeScene(int stage, Snake snake);
     WINDOW *gamingScene(int stage, Snake snake);
 };
