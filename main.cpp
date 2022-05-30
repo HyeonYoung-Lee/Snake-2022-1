@@ -5,6 +5,7 @@
 
 #include <chrono>
 #include <thread>
+#include "kbhit.h"
 
 using namespace std;
 
@@ -30,30 +31,35 @@ int main()
     {
         snake.setFirst();
         win = scene.changeScene(i, snake.score);
+        key = KEY_RIGHT;
         while (true)
         {
             winGaming = scene.gamingScene(i, snake);
-            // getch();
-            key = KEY_RIGHT;
-            if (key == 99)
+            if (kbhit())
             {
-                break;
+                key = getch();
+                if (key == 99)
+                    break;
             }
             this_thread::sleep_for(chrono::milliseconds(500));
-            switch (key)
+            if (kbhit())
             {
-            case KEY_LEFT:
-                --snake.x;
-                break;
-            case KEY_RIGHT:
-                ++snake.x;
-                break;
-            case KEY_UP:
-                --snake.y;
-                break;
-            case KEY_DOWN:
-                ++snake.y;
-                break;
+                key = getch();
+                switch (key)
+                {
+                case KEY_LEFT:
+                    --snake.x;
+                    break;
+                case KEY_RIGHT:
+                    ++snake.x;
+                    break;
+                case KEY_UP:
+                    --snake.y;
+                    break;
+                case KEY_DOWN:
+                    ++snake.y;
+                    break;
+                }
             }
         }
     }
