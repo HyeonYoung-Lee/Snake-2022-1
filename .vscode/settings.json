@@ -1,6 +1,7 @@
 {
 	"files.associations": {
         "ios": "cpp",
-        "thread": "cpp"
+        "thread": "cpp",
+        "chrono": "cpp"
     }
 }

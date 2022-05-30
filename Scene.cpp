@@ -136,5 +136,5 @@ WINDOW *Scene::changeScene(int stage, int score)
     wrefresh(winGame);
     wrefresh(winScore);
     wrefresh(winUser);
-    return trash;
+    return winGame;
 }
