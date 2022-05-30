@@ -3,6 +3,7 @@
 #include "Scene.h"
 #include "Snake.h"
 #include "ScoreBoard.h"
+#include "Mission.h"
 #include <chrono>
 #include <thread>
 
@@ -14,6 +15,7 @@ int main()
     Scene scene;
     Snake snake;
     ScoreBoard scoreBoard;
+    Mission missionBoard;
     int key;
 
     WINDOW *win;
@@ -40,11 +42,11 @@ int main()
     {
         snake.setFirst();
         win = scene.changeScene(i, snake);
-
         while (true)
         {
             winGaming = scene.gamingScene(i, snake);
             winScoreBoard = scoreBoard.upDateScoreBoard(snake);
+            winMission = missionBoard.updateMissionBoard(snake);
             // nodelay(winGaming, true);
             // getch();
             key = KEY_RIGHT;
