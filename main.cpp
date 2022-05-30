@@ -45,7 +45,7 @@ int main()
         while (true)
         {
             winGaming = scene.gamingScene(i, snake);
-            winScoreBoard = scoreBoard.upDateScoreBoard(snake);
+            winScoreBoard = scoreBoard.updateScoreBoard(snake);
             winMission = missionBoard.updateMissionBoard(snake);
             // nodelay(winGaming, true);
             // getch();

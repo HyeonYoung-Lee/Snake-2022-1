@@ -11,7 +11,7 @@ ScoreBoard::ScoreBoard()
     height = 5;
 }
 
-WINDOW *ScoreBoard::upDateScoreBoard(Snake snake)
+WINDOW *ScoreBoard::updateScoreBoard(Snake snake)
 {
     WINDOW *winScore;
     winScore = newwin(height, width, 5, 70);

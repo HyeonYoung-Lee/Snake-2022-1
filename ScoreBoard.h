@@ -6,5 +6,5 @@ protected:
 
 public:
     ScoreBoard();
-    WINDOW *upDateScoreBoard(Snake snake);
+    WINDOW *updateScoreBoard(Snake snake);
 };
