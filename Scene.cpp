@@ -73,12 +73,10 @@ WINDOW *Scene::changeScene(int stage, Snake snake)
 {
     WINDOW *winScene;
 
-    // WINDOW *winScore;
     WINDOW *winUser;
     WINDOW *trash;
 
     winScene = newwin(25, 60, 3, 3);
-    // winScore = newwin(5, 15, 5, 70);
     winUser = newwin(5, 15, 13, 70);
 
     MapSet mapset;
@@ -91,7 +89,6 @@ WINDOW *Scene::changeScene(int stage, Snake snake)
     init_pair(4, COLOR_WHITE, COLOR_BLACK);
 
     wborder(winScene, '*', '*', '*', '*', '*', '*', '*', '*');
-    // wborder(winScore, '|', '|', '-', '-', '+', '+', '+', '+');
     wborder(winUser, '|', '|', '-', '-', '+', '+', '+', '+');
 
     // Scene window control
@@ -125,14 +122,6 @@ WINDOW *Scene::changeScene(int stage, Snake snake)
         wattron(winScene, COLOR_PAIR(4));
         mvwprintw(winScene, 1, 1, "Stage Four");
     }
-
-    // Score Board
-    /*
-    mvwprintw(winScore, 1, 1, "Score Board");
-    std::string S = std::to_string(snake.getScore());
-    auto charScore = S.c_str();
-    mvwprintw(winScore, 2, 1, charScore);
-    */
 
     // Mission Board
     mvwprintw(winUser, 1, 1, "Name:");

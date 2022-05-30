@@ -18,7 +18,7 @@ WINDOW *ScoreBoard::upDateScoreBoard(Snake snake)
     wborder(winScore, '|', '|', '-', '-', '+', '+', '+', '+');
 
     mvwprintw(winScore, 1, 1, "Score Board");
-    std::string S = std::to_string(0);
+    std::string S = std::to_string(snake.getScore());
     auto charScore = S.c_str();
     mvwprintw(winScore, 2, 1, charScore);
     wrefresh(winScore);
