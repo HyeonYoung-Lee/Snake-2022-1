@@ -1,18 +1,29 @@
 #pragma once
+#include <vector>
+
 class Snake
 {
+    std::vector<std::vector<int> > snakeBody;
+	int	direction; // snake의 머리 진행 방향
+	//    1      //    1 북
+	// 4     2   // 4 서  2 동
+	//    3      //    3 남
+	bool	isAlive;
+
 public:
     Snake();
-    ~Snake();
-    int direction; // Snake의 방향  // 1 북 2 동 3 남 4 서
-    int y, x;      // snake의 머리 위치
     int score;
 
-    bool isDead;          // Snake 생존여부
-    void setDir(int dir); // Snake 방향 설정
-    void willMove();      // Snake 움직임
-    void upDate();
-    void setFirst();
+	//getter and setter
+	int	getDirection() { return	direction; }
+	void	setDirection(int direction) { this -> direction = direction; }
+	bool	getIsAlive() { return	isAlive; }
+	void	setIsAlive(bool isAlive) { this -> isAlive = isAlive; }
+	std::vector<std::vector<int> >	getSnakeBody() { return	this -> snakeBody; }
+
+	void	addSnakeBody(int row, int col, int num);
+	void	clearSnake();
+	void	understandKey(int key);
 
     // score
     void addScore();
