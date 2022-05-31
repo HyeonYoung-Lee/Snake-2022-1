@@ -1,12 +1,15 @@
+#ifndef __ITEM__
+#define __ITEM__
 class Item
 {
 private:
-    int x, y;
+    int item[3];
 
 public:
-    Item();
-    void setX(int x);
-    void setY(int y);
+    Item(int value);
+    void resetItem();
     int getX();
     int getY();
+    int getValue();
 };
+#endif
