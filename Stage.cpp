@@ -57,12 +57,27 @@ void	MapSet::printSnake(Snake snake) {
 
 char *MapSet::getMap(int row)
 {
-	return (this->map[row]);
+	return (this -> map[row]);
+}
+
+char *MapSet::printMap(int row)
+{
+	char*	tmp = this -> map[row];
+	for (int i = 0; i < getCol(); i++) {
+		if (tmp[i] == '0')
+			tmp[i] = ' ';
+	}
+	return	tmp;
 }
 
 int MapSet::getRow()
 {
 	return (row);
+}
+
+int	MapSet::getCol()
+{
+	return (col);
 }
 
 bool	MapSet::checkMapElement(std::vector<std::vector<int> > snakeBody) {
