@@ -1,7 +1,7 @@
 #include <ncurses.h>
 #include <iostream>
 #include "Snake.h"
-
+// ignore
 Snake::Snake()
 {
 	// SnakeBody First setting
@@ -26,7 +26,6 @@ Snake::Snake()
 
 	this->score = 0;
 }
-
 
 void Snake::addSnakeBody(int row, int col, int num = 3)
 {
