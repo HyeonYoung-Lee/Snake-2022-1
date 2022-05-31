@@ -28,41 +28,13 @@ WINDOW *Scene::gamingScene(int stage, MapSet mapset, Snake snake)
     WINDOW *winGaming;
     winGaming = newwin(23, 58, 4, 4);
     // snake = snake.clearSnake();
-    if (stage == 0)
+    if (stage != 0)
     {
-    }
-    else if (stage == 1)
-    {
-        mapset.LoadMap(0);
+        mapset.LoadMap(stage);
         mapset.printSnake(snake);
-        mvwprintw(winGaming, 0, 0, "Stage One");
-        for (int i = 0; i < mapset.getRow(); i++)
-            mvwprintw(winGaming, i + 2, 0, mapset.printMap(i));
-    }
-    else if (stage == 2)
-    {
-        mapset.LoadMap(1);
-        mapset.printSnake(snake);
-        mvwprintw(winGaming, 0, 0, "Stage Two");
-        for (int i = 0; i < mapset.getRow(); i++)
-            mvwprintw(winGaming, i + 2, 0, mapset.printMap(i));
-    }
-    else if (stage == 3)
-    {
-        mapset.LoadMap(2);
-        mapset.printSnake(snake);
-        // if (mapset.checkMapElement(snake.getSnakeBody()) == false) {
-        // 		snake.setIsAlive(false);
-        // 	}
-        mvwprintw(winGaming, 0, 0, "Stage Three");
-        for (int i = 0; i < mapset.getRow(); i++)
-            mvwprintw(winGaming, i + 2, 0, mapset.printMap(i));
-    }
-    else if (stage == 4)
-    {
-        mapset.LoadMap(3);
-        mapset.printSnake(snake);
-        mvwprintw(winGaming, 0, 0, "Stage Four");
+        std::string stage_string = "Stage " + std::to_string(stage);
+        auto charStage = stage_string.c_str();
+        mvwprintw(winGaming, 0, 0, charStage);
         for (int i = 0; i < mapset.getRow(); i++)
             mvwprintw(winGaming, i + 2, 0, mapset.printMap(i));
     }
