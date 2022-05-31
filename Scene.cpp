@@ -2,7 +2,6 @@
 #include <iostream>
 #include <string>
 #include "Scene.h"
-#include "Stage.h"
 #include <thread>
 using std::this_thread::sleep_for;
 
@@ -24,61 +23,59 @@ void Scene::startScene()
     return;
 }
 
-WINDOW *Scene::gamingScene(int stage, Snake snake)
+WINDOW *Scene::gamingScene(int stage, MapSet mapset, Snake snake)
 {
     WINDOW *winGaming;
     winGaming = newwin(23, 58, 4, 4);
-    MapSet mapset;
+    // snake = snake.clearSnake();
     if (stage == 0)
     {
     }
     else if (stage == 1)
     {
         mapset.LoadMap(0);
-        mapset.moveSnake(snake);
+        mapset.printSnake(snake);
         mvwprintw(winGaming, 0, 0, "Stage One");
-        for (int i = 0; i < mapset.getrow(); i++)
+        for (int i = 0; i < mapset.getRow(); i++)
             mvwprintw(winGaming, i + 2, 0, mapset.getMap(i));
     }
     else if (stage == 2)
     {
         mapset.LoadMap(1);
-        mapset.moveSnake(snake);
+        mapset.printSnake(snake);
         mvwprintw(winGaming, 0, 0, "Stage Two");
-        for (int i = 0; i < mapset.getrow(); i++)
+        for (int i = 0; i < mapset.getRow(); i++)
             mvwprintw(winGaming, i + 2, 0, mapset.getMap(i));
     }
     else if (stage == 3)
     {
         mapset.LoadMap(2);
-        mapset.moveSnake(snake);
+        mapset.printSnake(snake);
+        // if (mapset.checkMapElement(snake.getSnakeBody()) == false) {
+        // 		snake.setIsAlive(false);
+        // 	}
         mvwprintw(winGaming, 0, 0, "Stage Three");
-        for (int i = 0; i < mapset.getrow(); i++)
+        for (int i = 0; i < mapset.getRow(); i++)
             mvwprintw(winGaming, i + 2, 0, mapset.getMap(i));
     }
     else if (stage == 4)
     {
-
         mapset.LoadMap(3);
-        mapset.moveSnake(snake);
+        mapset.printSnake(snake);
         mvwprintw(winGaming, 0, 0, "Stage Four");
-        for (int i = 0; i < mapset.getrow(); i++)
+        for (int i = 0; i < mapset.getRow(); i++)
             mvwprintw(winGaming, i + 2, 0, mapset.getMap(i));
     }
     wrefresh(winGaming);
     return winGaming;
 }
-WINDOW *Scene::changeScene(int stage, int score)
-{
-    WINDOW *winScore;
-    WINDOW *winUser;
-    WINDOW *winGame;
-    WINDOW *trash;
-    winGame = newwin(25, 60, 3, 3);
-    winScore = newwin(5, 15, 5, 70);
-    winUser = newwin(5, 15, 13, 70);
 
-    MapSet mapset;
+WINDOW *Scene::changeScene(int stage, Snake snake)
+{
+    WINDOW *winScene;
+    WINDOW *trash;
+    winScene = newwin(25, 60, 3, 3);
+
     start_color();
 
     init_pair(0, COLOR_BLUE, COLOR_BLACK);
@@ -87,54 +84,40 @@ WINDOW *Scene::changeScene(int stage, int score)
     init_pair(3, COLOR_MAGENTA, COLOR_BLACK);
     init_pair(4, COLOR_WHITE, COLOR_BLACK);
 
-    wborder(winGame, '*', '*', '*', '*', '*', '*', '*', '*');
-    wborder(winScore, '|', '|', '-', '-', '+', '+', '+', '+');
-    wborder(winUser, '|', '|', '-', '-', '+', '+', '+', '+');
+    wborder(winScene, '*', '*', '*', '*', '*', '*', '*', '*');
 
-    // Game window control
+    // Scene window control
     if (stage == 0)
     {
-        wbkgd(winGame, COLOR_PAIR(0));
-        wattron(winGame, COLOR_PAIR(0));
-        mvwprintw(winGame, 5, 5, "Press Any Key To Start Snake Game!");
+        wbkgd(winScene, COLOR_PAIR(0));
+        wattron(winScene, COLOR_PAIR(0));
+        mvwprintw(winScene, 5, 5, "Press Any Key To Start Snake Game!");
     }
     else if (stage == 1)
     {
-        wbkgd(winGame, COLOR_PAIR(1));
-        wattron(winGame, COLOR_PAIR(1));
-        mvwprintw(winGame, 1, 1, "Stage One");
+        wbkgd(winScene, COLOR_PAIR(1));
+        wattron(winScene, COLOR_PAIR(1));
+        mvwprintw(winScene, 1, 1, "Stage One");
     }
     else if (stage == 2)
     {
-        wbkgd(winGame, COLOR_PAIR(2));
-        wattron(winGame, COLOR_PAIR(2));
-        mvwprintw(winGame, 1, 1, "Stage Two");
+        wbkgd(winScene, COLOR_PAIR(2));
+        wattron(winScene, COLOR_PAIR(2));
+        mvwprintw(winScene, 1, 1, "Stage Two");
     }
     else if (stage == 3)
     {
-        wbkgd(winGame, COLOR_PAIR(3));
-        wattron(winGame, COLOR_PAIR(3));
-        mvwprintw(winGame, 1, 1, "Stage Three");
+        wbkgd(winScene, COLOR_PAIR(3));
+        wattron(winScene, COLOR_PAIR(3));
+        mvwprintw(winScene, 1, 1, "Stage Three");
     }
     else
     {
-        wbkgd(winGame, COLOR_PAIR(4));
-        wattron(winGame, COLOR_PAIR(4));
-        mvwprintw(winGame, 1, 1, "Stage Four");
+        wbkgd(winScene, COLOR_PAIR(4));
+        wattron(winScene, COLOR_PAIR(4));
+        mvwprintw(winScene, 1, 1, "Stage Four");
     }
 
-    // Score control
-    mvwprintw(winScore, 1, 1, "Score:");
-    std::string S = std::to_string(score);
-    auto charScore = S.c_str();
-    mvwprintw(winScore, 2, 1, charScore);
-
-    // User name control
-    mvwprintw(winUser, 1, 1, "Name:");
-    mvwprintw(winUser, 2, 1, "User");
-
-    wrefresh(winGame);
-    wrefresh(winScore);
-    wrefresh(winUser);
-    return winGame;
+    wrefresh(winScene);
+    return winScene;
 }

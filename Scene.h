@@ -1,4 +1,4 @@
-#include "Snake.h"
+#include "Stage.h"
 class Scene
 {
 protected:
@@ -7,6 +7,6 @@ protected:
 public:
     Scene();
     void startScene();
-    WINDOW *changeScene(int stage, int score);
-    WINDOW *gamingScene(int stage, Snake snake);
+    WINDOW *changeScene(int stage, Snake snake);
+    WINDOW *gamingScene(int stage, MapSet mapset, Snake snake);
 };
