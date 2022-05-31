@@ -37,7 +37,7 @@ WINDOW *Scene::gamingScene(int stage, MapSet mapset, Snake snake)
         mapset.printSnake(snake);
         mvwprintw(winGaming, 0, 0, "Stage One");
         for (int i = 0; i < mapset.getRow(); i++)
-            mvwprintw(winGaming, i + 2, 0, mapset.getMap(i));
+            mvwprintw(winGaming, i + 2, 0, mapset.printMap(i));
     }
     else if (stage == 2)
     {
@@ -45,7 +45,7 @@ WINDOW *Scene::gamingScene(int stage, MapSet mapset, Snake snake)
         mapset.printSnake(snake);
         mvwprintw(winGaming, 0, 0, "Stage Two");
         for (int i = 0; i < mapset.getRow(); i++)
-            mvwprintw(winGaming, i + 2, 0, mapset.getMap(i));
+            mvwprintw(winGaming, i + 2, 0, mapset.printMap(i));
     }
     else if (stage == 3)
     {
@@ -56,7 +56,7 @@ WINDOW *Scene::gamingScene(int stage, MapSet mapset, Snake snake)
         // 	}
         mvwprintw(winGaming, 0, 0, "Stage Three");
         for (int i = 0; i < mapset.getRow(); i++)
-            mvwprintw(winGaming, i + 2, 0, mapset.getMap(i));
+            mvwprintw(winGaming, i + 2, 0, mapset.printMap(i));
     }
     else if (stage == 4)
     {
@@ -64,7 +64,7 @@ WINDOW *Scene::gamingScene(int stage, MapSet mapset, Snake snake)
         mapset.printSnake(snake);
         mvwprintw(winGaming, 0, 0, "Stage Four");
         for (int i = 0; i < mapset.getRow(); i++)
-            mvwprintw(winGaming, i + 2, 0, mapset.getMap(i));
+            mvwprintw(winGaming, i + 2, 0, mapset.printMap(i));
     }
     wrefresh(winGaming);
     return winGaming;
