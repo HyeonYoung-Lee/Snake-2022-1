@@ -29,9 +29,7 @@ void	Snake::addSnakeBody(int row, int col, int num = 3) {
 }
 
 void	Snake::clearSnake() {
-	for (int i = 0; i < snakeBody.size(); i++) {
-		snakeBody.pop_back();
-	}
+	snakeBody.clear();
 	std::vector<int> v0;
 	v0.push_back(6);	v0.push_back(6);	v0.push_back(3);
 	std::vector<int> v1;
@@ -44,6 +42,8 @@ void	Snake::clearSnake() {
 }
 
 void	Snake::understandKey(int key) {
+    if(key == 99)
+        return;
 	if (key == ERR) {
 		if (getDirection() == 1) key = KEY_UP;
 		else if (getDirection() == 2) key = KEY_RIGHT;
