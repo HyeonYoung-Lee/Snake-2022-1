@@ -22,4 +22,6 @@ WINDOW *ScoreBoard::updateScoreBoard(Snake snake)
     auto charScore = S.c_str();
     mvwprintw(winScore, 2, 1, charScore);
     wrefresh(winScore);
+
+    return winScore;
 }
