@@ -1,10 +1,10 @@
-class GrowthItem
+class Item
 {
 private:
     int x, y;
 
 public:
-    GrowthItem();
+    Item();
     void setX(int x);
     void setY(int y);
     int getX();
