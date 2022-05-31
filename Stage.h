@@ -18,7 +18,9 @@ public:
    void setMap(int row, int col, int num, Snake snake);
    void	printSnake(Snake snake);
    char *getMap(int row);
+   char *printMap(int row);
    int getRow();
+   int getCol();
    bool	checkMapElement(std::vector<std::vector<int> > snakeBody);
    friend std::ostream &operator<<(std::ostream &os, const MapSet &map);
 };
