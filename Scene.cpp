@@ -23,15 +23,21 @@ void Scene::startScene()
     return;
 }
 
-WINDOW *Scene::gamingScene(int stage, MapSet mapset, Snake snake)
+WINDOW *Scene::gamingScene(int stage, MapSet mapset, Snake snake, Item growth, Item poison)
 {
     WINDOW *winGaming;
     winGaming = newwin(23, 58, 4, 4);
     // snake = snake.clearSnake();
+
     if (stage != 0)
     {
         mapset.LoadMap(stage);
         mapset.printSnake(snake);
+
+        // Item //
+        mapset.printItem(growth);
+        mapset.printItem(poison);
+
         std::string stage_string = "Stage " + std::to_string(stage);
         auto charStage = stage_string.c_str();
         mvwprintw(winGaming, 0, 0, charStage);
