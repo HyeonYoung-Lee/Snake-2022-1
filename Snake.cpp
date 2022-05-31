@@ -27,6 +27,7 @@ Snake::Snake()
 	this->score = 0;
 }
 
+
 void Snake::addSnakeBody(int row, int col, int num = 3)
 {
 	std::vector<int> toAdd;
