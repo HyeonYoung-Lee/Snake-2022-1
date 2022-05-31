@@ -2,7 +2,6 @@
 #include <iostream>
 #include <string>
 #include "Scene.h"
-#include "Stage.h"
 #include <thread>
 using std::this_thread::sleep_for;
 
@@ -24,45 +23,47 @@ void Scene::startScene()
     return;
 }
 
-WINDOW *Scene::gamingScene(int stage, Snake snake)
+WINDOW *Scene::gamingScene(int stage, MapSet mapset, Snake snake)
 {
     WINDOW *winGaming;
     winGaming = newwin(23, 58, 4, 4);
-    MapSet mapset;
+    // snake = snake.clearSnake();
     if (stage == 0)
     {
     }
     else if (stage == 1)
     {
         mapset.LoadMap(0);
-        mapset.moveSnake(snake);
+        mapset.printSnake(snake);
         mvwprintw(winGaming, 0, 0, "Stage One");
-        for (int i = 0; i < mapset.getrow(); i++)
+        for (int i = 0; i < mapset.getRow(); i++)
             mvwprintw(winGaming, i + 2, 0, mapset.getMap(i));
     }
     else if (stage == 2)
     {
         mapset.LoadMap(1);
-        mapset.moveSnake(snake);
+        mapset.printSnake(snake);
         mvwprintw(winGaming, 0, 0, "Stage Two");
-        for (int i = 0; i < mapset.getrow(); i++)
+        for (int i = 0; i < mapset.getRow(); i++)
             mvwprintw(winGaming, i + 2, 0, mapset.getMap(i));
     }
     else if (stage == 3)
     {
         mapset.LoadMap(2);
-        mapset.moveSnake(snake);
+        mapset.printSnake(snake);
+        // if (mapset.checkMapElement(snake.getSnakeBody()) == false) {
+        // 		snake.setIsAlive(false);
+        // 	}
         mvwprintw(winGaming, 0, 0, "Stage Three");
-        for (int i = 0; i < mapset.getrow(); i++)
+        for (int i = 0; i < mapset.getRow(); i++)
             mvwprintw(winGaming, i + 2, 0, mapset.getMap(i));
     }
     else if (stage == 4)
     {
-
         mapset.LoadMap(3);
-        mapset.moveSnake(snake);
+        mapset.printSnake(snake);
         mvwprintw(winGaming, 0, 0, "Stage Four");
-        for (int i = 0; i < mapset.getrow(); i++)
+        for (int i = 0; i < mapset.getRow(); i++)
             mvwprintw(winGaming, i + 2, 0, mapset.getMap(i));
     }
     wrefresh(winGaming);
@@ -75,7 +76,6 @@ WINDOW *Scene::changeScene(int stage, Snake snake)
     WINDOW *trash;
     winScene = newwin(25, 60, 3, 3);
 
-    MapSet mapset;
     start_color();
 
     init_pair(0, COLOR_BLUE, COLOR_BLACK);
