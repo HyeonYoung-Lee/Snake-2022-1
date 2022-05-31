@@ -59,36 +59,10 @@ WINDOW *Scene::changeScene(int stage, Snake snake)
     wborder(winScene, '*', '*', '*', '*', '*', '*', '*', '*');
 
     // Scene window control
+    wbkgd(winScene, COLOR_PAIR(stage));
+    wattron(winScene, COLOR_PAIR(stage));
     if (stage == 0)
-    {
-        wbkgd(winScene, COLOR_PAIR(0));
-        wattron(winScene, COLOR_PAIR(0));
         mvwprintw(winScene, 5, 5, "Press Any Key To Start Snake Game!");
-    }
-    else if (stage == 1)
-    {
-        wbkgd(winScene, COLOR_PAIR(1));
-        wattron(winScene, COLOR_PAIR(1));
-        mvwprintw(winScene, 1, 1, "Stage One");
-    }
-    else if (stage == 2)
-    {
-        wbkgd(winScene, COLOR_PAIR(2));
-        wattron(winScene, COLOR_PAIR(2));
-        mvwprintw(winScene, 1, 1, "Stage Two");
-    }
-    else if (stage == 3)
-    {
-        wbkgd(winScene, COLOR_PAIR(3));
-        wattron(winScene, COLOR_PAIR(3));
-        mvwprintw(winScene, 1, 1, "Stage Three");
-    }
-    else
-    {
-        wbkgd(winScene, COLOR_PAIR(4));
-        wattron(winScene, COLOR_PAIR(4));
-        mvwprintw(winScene, 1, 1, "Stage Four");
-    }
 
     wrefresh(winScene);
     return winScene;
