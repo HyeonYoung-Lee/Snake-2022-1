@@ -1,5 +1,4 @@
 #include "Stage.h"
-#include "Snake.h"
 
 void MapSet::LoadMap(int mapNum)
 {
@@ -45,16 +44,15 @@ void MapSet::LoadMap(int mapNum)
 	}
 }
 
-void MapSet::setMap(int i, int j, int num)
-{
+void MapSet::setMap(int row, int col, int num, Snake snake) {
 	// char type map에 접근하여 변경. 사용법: row, column, 바꿀 수
-	this->map[i][j] = num + '0';
+	this -> map[row][col] = num + '0';
 }
 
-void MapSet::moveSnake(Snake snake)
-{
-	this->map[snake.y][snake.x] = '3';
-	return;
+void	MapSet::printSnake(Snake snake) {
+	for (int i = 0; i < snake.getSnakeBody().size(); i++) {
+		setMap(snake.getSnakeBody()[i][0], snake.getSnakeBody()[i][1], snake.getSnakeBody()[i][2], snake);
+	}
 }
 
 char *MapSet::getMap(int row)
@@ -62,9 +60,17 @@ char *MapSet::getMap(int row)
 	return (this->map[row]);
 }
 
-int MapSet::getrow()
+int MapSet::getRow()
 {
 	return (row);
+}
+
+bool	MapSet::checkMapElement(std::vector<std::vector<int> > snakeBody) {
+	int	row = snakeBody[0][0];
+	int	col = snakeBody[0][1];
+	if (this -> map[row][col] == 1 || this -> map[row][col] == 2 || this -> map[row][col] == 4)
+		return	false;
+	return	true;
 }
 
 std::ostream &operator<<(std::ostream &os, const MapSet &m)
