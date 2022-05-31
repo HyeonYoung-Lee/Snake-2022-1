@@ -2,7 +2,6 @@
 #include <iostream>
 #include "Scene.h"
 #include "Snake.h"
-
 #include <chrono>
 #include <thread>
 
