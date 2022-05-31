@@ -4,7 +4,7 @@
 #include "Scene.h"
 #include <thread>
 using std::this_thread::sleep_for;
-
+// ingore
 Scene::Scene()
 {
     Scene::width = 90;
