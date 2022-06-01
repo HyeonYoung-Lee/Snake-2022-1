@@ -11,11 +11,13 @@ Item::Item(int value)
 void Item::resetItem()
 {
     int x, y;
-    std::srand(time(NULL));
-    x = rand() % 19 + 1;
-    y = rand() % 39 + 1;
-    item[0] = x;
-    item[1] = y;
+
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_int_distribution<int> disX(1, 19);
+    std::uniform_int_distribution<int> dixY(1, 39);
+    item[0] = disX(gen);
+    item[1] = dixY(gen);
 }
 int Item::getX()
 {
