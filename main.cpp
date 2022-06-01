@@ -38,14 +38,14 @@ int main()
     // cbreak();
     for (int i = 1; i < 5; i++)
     {
-        Item growthItem(5); ///////////// growth와 poison 의 시드가 같아서 위치가 같게 나오는 것 같음 수정 필요
+        Item growthItem(5);
         Item poisonItem(6);
         win = scene.changeScene(i, snake);
         while (snake.getIsAlive())
         {
-            if ((itemTime != 0) && (itemTime % 10 == 0)) // 5초마다 resetItem
+            if ((itemTime != 0) && (itemTime % 20 == 0)) // 10??? resetItem
             {
-                growthItem.resetItem(); ///////////// growth와 poison 의 시드가 같아서 위치가 같게 나오는 것 같음 수정 필요
+                growthItem.resetItem();
                 poisonItem.resetItem();
             }
 
