@@ -43,7 +43,7 @@ int main()
         win = scene.changeScene(i, snake);
         while (snake.getIsAlive())
         {
-            if ((itemTime != 0) && (itemTime % 20 == 0)) // 10√ ∏∂¥Ÿ resetItem
+            if ((itemTime != 0) && (itemTime % 20 == 0)) // 10??? resetItem
             {
                 growthItem.resetItem();
                 poisonItem.resetItem();
