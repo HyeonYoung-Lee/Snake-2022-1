@@ -1,5 +1,5 @@
 #include "Stage.h"
-
+#include "Info.h"
 void MapSet::LoadMap(int mapNum)
 {
 	std::ifstream mapfile;
@@ -70,11 +70,20 @@ char *MapSet::getMap(int row)
 
 char *MapSet::printMap(int row)
 {
+	Info info;
 	char *tmp = this->map[row];
 	for (int i = 0; i < getCol(); i++)
 	{
 		if (tmp[i] == '0')
 			tmp[i] = ' ';
+		else
+		{
+			vector<int> tempV = {row, i};
+			info.setAllWallLoc(tempV);
+			// Info에 맵 정보 저장
+			if (tmp[i] == '2')
+				info.
+		}
 	}
 	return tmp;
 }
