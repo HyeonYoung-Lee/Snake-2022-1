@@ -57,13 +57,8 @@ int main()
             winScoreBoard = scoreBoard.updateScoreBoard(snake);
             winMission = missionBoard.updateMissionBoard(snake);
             nodelay(stdscr, TRUE);
-<<<<<<< HEAD
-            timeout(500);
-            cbreak();
-=======
-            //timeout(1000);
-            //cbreak();
->>>>>>> 60348c1eea7dbe3af732dce3edd58955bc34dd88
+            // timeout(1000);
+            // cbreak();
 
             key = getch();
             noecho();
