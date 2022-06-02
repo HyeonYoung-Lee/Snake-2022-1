@@ -33,7 +33,7 @@ public:
 
     void addSnakeBody(int row, int col, int num);
     void clearSnake();
-    bool understandKey(int key);
+    int understandKey(int key);
     void setPastKey(int key);
     int getPastKey();
 

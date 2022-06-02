@@ -52,8 +52,8 @@ int main()
                 growthItem.resetItem(5);
                 poisonItem.resetItem(6);
             }
-
             winGaming = scene.gamingScene(i, mapset, snake, growthItem, poisonItem);
+            
             winScoreBoard = scoreBoard.updateScoreBoard(snake);
             winMission = missionBoard.updateMissionBoard(snake);
             nodelay(stdscr, TRUE);
@@ -63,12 +63,15 @@ int main()
 
             key = getch();
             noecho();
-            bool check = snake.understandKey(key);
+            int check = snake.understandKey(key);
 
-            if (!check)
+            if (check == 1 || check == 2)
             {
                 if (key == 99)
                     break;
+                else if(check == 2){
+                    break;
+                }
             }
             itemTime += 1;
         }
