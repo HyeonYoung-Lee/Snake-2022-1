@@ -47,6 +47,19 @@ void Snake::addSnakeBody(int row, int col, int num = 3)
 	snakeBody[1][2] = 4;
 }
 
+void Snake::onlyaddSnakeBody(int row, int col, int num = 3) {
+	std::vector<int> toAdd;
+	toAdd.push_back(row);
+	toAdd.push_back(col);
+	toAdd.push_back(num);
+	snakeBody.insert(snakeBody.begin(), toAdd);
+	snakeBody[1][2] = 4;
+}
+
+void Snake::snakePoisoned() {
+	snakeBody.pop_back();
+}
+
 void Snake::clearSnake()
 {
 	snakeBody.clear();
