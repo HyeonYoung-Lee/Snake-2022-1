@@ -83,13 +83,13 @@ void Snake::clearSnake()
 
 int Snake::understandKey(int key)
 {
-    Info info;
-    for(int i=0;i<info.allWallLoc.size();i++){
-        if(snakeBody[0][0] == info.allWallLoc[i][0] && snakeBody[0][1] == info.allWallLoc[i][1]){
-            return 2;
-        }
-    }
-    
+    // Info info;
+    // for(int i=0;i<info.allWallLoc.size();i++){
+    //     if(snakeBody[0][0] == info.allWallLoc[i][0] && snakeBody[0][1] == info.allWallLoc[i][1]){
+    //         return 2;
+    //     }
+    // }
+
 	if ((key == 99) || (key == getPastKey()))
 		return 1;
 
@@ -108,11 +108,8 @@ int Snake::understandKey(int key)
 	switch (key)
 	{
 	case KEY_LEFT:
-		if (snakeBody[0][1] - 1 >= 0)
-		{
-			addSnakeBody(snakeBody[0][0], snakeBody[0][1] - 1, 3);
-			setDirection(4);
-		}
+		addSnakeBody(snakeBody[0][0], snakeBody[0][1] - 1, 3);
+		setDirection(4);
 		break;
 	case KEY_RIGHT:
 		addSnakeBody(snakeBody[0][0], snakeBody[0][1] + 1, 3);
@@ -127,8 +124,6 @@ int Snake::understandKey(int key)
 		setDirection(3);
 		break;
 	}
-    
-
 	setPastKey(key);
 	usleep(500000);
 	return 0;
@@ -152,46 +147,4 @@ void Snake::addScore()
 int Snake::getScore()
 {
 	return score;
-}
-
-// score board accessor
-void Snake::setCurrentLength(int cl)
-{
-	currentLength = cl;
-}
-int Snake::getCurrentLength()
-{
-	return currentLength;
-}
-void Snake::setMaxLength(int ml)
-{
-	maxLength = ml;
-}
-int Snake::getMaxLength()
-{
-	return maxLength;
-}
-void Snake::setGrowthItems(int gi)
-{
-	growthItems = gi;
-}
-int Snake::getGrowthItems()
-{
-	return growthItems;
-}
-void Snake::setPoisonItems(int pi)
-{
-	poisonItems = pi;
-}
-int Snake::getPoisonItems()
-{
-	return poisonItems;
-}
-void Snake::setGateUses(int gu)
-{
-	gateUses = gu;
-}
-int Snake::getGateUses()
-{
-	return gateUses;
 }
