@@ -29,6 +29,7 @@ public:
     bool getIsAlive() { return isAlive; }
     void setIsAlive(bool isAlive) { this->isAlive = isAlive; }
     std::vector<std::vector<int>> getSnakeBody() { return this->snakeBody; }
+	std::vector<std::vector<int>> getSnakeInfo();
 
     void addSnakeBody(int row, int col, int num);
     void clearSnake();

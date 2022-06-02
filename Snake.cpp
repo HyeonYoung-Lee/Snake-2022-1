@@ -26,6 +26,15 @@ Snake::Snake()
 	this->score = KEY_RIGHT;
 }
 
+std::vector<std::vector<int>> Snake::getSnakeInfo() {
+	std::vector<std::vector<int>> tmp;
+	tmp = this->snakeBody;
+	for (int i = 0; i < tmp.size(); i++) {
+		tmp[i].pop_back();
+	}
+	return	tmp;
+}
+
 void Snake::addSnakeBody(int row, int col, int num = 3)
 {
 	std::vector<int> toAdd;
