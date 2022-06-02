@@ -1,2 +1,0 @@
-snake game
-git check branch wynter

@@ -1,5 +1,6 @@
 #pragma once
 #include <vector>
+#include <string>
 #include <ncurses.h>
 #include <unistd.h>
 #include <iostream>
@@ -8,11 +9,10 @@ class Snake
 {
 private:
     // score board 변수
-    int currentLength;
-    int maxLength;
-    int growthItems;
-    int poisonItems;
-    int gateUses;
+    int maxLength = 10;
+    int growthItems = 0;
+    int poisonItems = 0;
+    int gateUses = 0;
     std::vector<std::vector<int>> snakeBody;
     int direction; // snake의 머리 진행 방향
     //    1      //    1 북
@@ -45,14 +45,13 @@ public:
     int getScore();
 
     // score board accessor
-    void setCurrentLength(int cl);
-    int getCurrentLength();
-    void setMaxLength(int ml);
-    int getMaxLength();
-    void setGrowthItems(int gi);
-    int getGrowthItems();
-    void setPoisonItems(int pi);
-    int getPoisonItems();
-    void setGateUses(int gu);
-    int getGateUses();
+    int getCurrentLength() { return snakeBody.size(); }
+    void setMaxLength(int ml) { maxLength = ml; }
+    int getMaxLength() { return maxLength; }
+    void incGrowthItems() { growthItems++; }
+    int getGrowthItems() { return growthItems; }
+    void incPoisonItems() { poisonItems++; }
+    int getPoisonItems() { return poisonItems; }
+    void incGateUses() { gateUses++; }
+    int getGateUses() { return	gateUses; }
 };
