@@ -6,18 +6,22 @@
 #include "Mission.h"
 #include <chrono>
 #include <thread>
-
+#include "Item.h"
+#include "Info.h"
 using namespace std;
 
 int main()
 {
     // create default window including game screen, score board, user name
+    Info info;
     Scene scene;
     MapSet mapset;
     Snake snake;
     ScoreBoard scoreBoard;
     Mission missionBoard;
     int key;
+
+    int itemTime = 0;
 
     WINDOW *win;
     WINDOW *winGaming;
@@ -33,28 +37,40 @@ int main()
     // turn into Game scene
     getch();
     // cbreak();
-
     for (int i = 1; i < 5; i++)
     {
+        Item growthItem(5);
+        Item poisonItem(6);
         win = scene.changeScene(i, snake);
+        key = KEY_RIGHT;
+        snake.setPastKey(key);
+
         while (snake.getIsAlive())
         {
-            winGaming = scene.gamingScene(i, mapset, snake);
+            if ((itemTime != 0) && (itemTime % 20 == 0)) // 10�� �� resetItem
+            {
+                growthItem.resetItem(5);
+                poisonItem.resetItem(6);
+            }
+
+            winGaming = scene.gamingScene(i, mapset, snake, growthItem, poisonItem);
             winScoreBoard = scoreBoard.updateScoreBoard(snake);
             winMission = missionBoard.updateMissionBoard(snake);
             nodelay(stdscr, TRUE);
-            timeout(500);
-            cbreak();
-            
-            key = KEY_RIGHT;
+            // collsion
+            // timeout(1000);
+            // cbreak();
+
             key = getch();
             noecho();
-            snake.understandKey(key);
-            if (key == 99)
-                break;
+            bool check = snake.understandKey(key);
 
-            
-            
+            if (!check)
+            {
+                if (key == 99)
+                    break;
+            }
+            itemTime += 1;
         }
         snake.clearSnake();
     }

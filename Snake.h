@@ -1,5 +1,7 @@
 #pragma once
 #include <vector>
+#include <ncurses.h>
+#include <unistd.h>
 
 class Snake
 {
@@ -16,6 +18,7 @@ private:
     // 4     2   // 4 서  2 동
     //    3      //    3 남
     bool isAlive;
+    int pastKey;
 
 public:
     Snake();
@@ -26,10 +29,13 @@ public:
     bool getIsAlive() { return isAlive; }
     void setIsAlive(bool isAlive) { this->isAlive = isAlive; }
     std::vector<std::vector<int>> getSnakeBody() { return this->snakeBody; }
+	std::vector<std::vector<int>> getSnakeInfo();
 
     void addSnakeBody(int row, int col, int num);
     void clearSnake();
-    void understandKey(int key);
+    bool understandKey(int key);
+    void setPastKey(int key);
+    int getPastKey();
 
     // score
     void addScore();
