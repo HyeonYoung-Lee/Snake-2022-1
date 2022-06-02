@@ -47,7 +47,7 @@ int main()
 
         while (snake.getIsAlive())
         {
-            if ((itemTime != 0) && (itemTime % 20 == 0)) // 10�� �� resetItem
+            if ((itemTime != 0) && (itemTime % 40 == 0)) // 10�� �� resetItem
             {
                 growthItem.resetItem(5);
                 poisonItem.resetItem(6);
