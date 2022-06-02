@@ -1,7 +1,5 @@
-#include <ncurses.h>
-#include <iostream>
 #include "Snake.h"
-// ignore
+
 Snake::Snake()
 {
 	// SnakeBody First setting
@@ -100,6 +98,7 @@ bool Snake::understandKey(int key)
 		break;
 	}
 	setPastKey(key);
+	usleep(300000);
 	return true;
 }
 
