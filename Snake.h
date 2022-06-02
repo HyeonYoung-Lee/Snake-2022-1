@@ -1,5 +1,7 @@
 #pragma once
 #include <vector>
+#include <ncurses.h>
+#include <unistd.h>
 
 class Snake
 {
