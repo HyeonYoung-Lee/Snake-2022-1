@@ -44,19 +44,20 @@ int main()
         win = scene.changeScene(i, snake);
         key = KEY_RIGHT;
         snake.setPastKey(key);
+
         while (snake.getIsAlive())
         {
             if ((itemTime != 0) && (itemTime % 20 == 0)) // 10ÃÊ ÈÄ resetItem
             {
-                growthItem.resetItem();
-                poisonItem.resetItem();
+                growthItem.resetItem(5);
+                poisonItem.resetItem(6);
             }
 
             winGaming = scene.gamingScene(i, mapset, snake, growthItem, poisonItem);
             winScoreBoard = scoreBoard.updateScoreBoard(snake);
             winMission = missionBoard.updateMissionBoard(snake);
             nodelay(stdscr, TRUE);
-            timeout(1000);
+            timeout(500);
             cbreak();
 
             key = getch();
