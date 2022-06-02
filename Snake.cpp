@@ -1,4 +1,5 @@
 #include "Snake.h"
+#include "Info.h"
 
 Snake::Snake()
 {
@@ -80,10 +81,17 @@ void Snake::clearSnake()
 	this->direction = 2;
 }
 
-bool Snake::understandKey(int key)
+int Snake::understandKey(int key)
 {
+    Info info;
+    for(int i=0;i<info.allWallLoc.size();i++){
+        if(snakeBody[0][0] == info.allWallLoc[i][0] && snakeBody[0][1] == info.allWallLoc[i][1]){
+            return 2;
+        }
+    }
+    
 	if ((key == 99) || (key == getPastKey()))
-		return false;
+		return 1;
 
 	if (key == ERR)
 	{
@@ -119,9 +127,11 @@ bool Snake::understandKey(int key)
 		setDirection(3);
 		break;
 	}
+    
+
 	setPastKey(key);
-	usleep(300000);
-	return true;
+	usleep(500000);
+	return 0;
 }
 
 void Snake::setPastKey(int key)
