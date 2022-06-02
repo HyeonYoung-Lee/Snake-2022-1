@@ -23,8 +23,9 @@ Snake::Snake()
 
 	this->direction = 2;
 	this->isAlive = true;
+	this->pastKey = 0;
 
-	this->score = 0;
+	this->score = KEY_RIGHT;
 }
 
 void Snake::addSnakeBody(int row, int col, int num = 3)
@@ -59,10 +60,11 @@ void Snake::clearSnake()
 	this->direction = 2;
 }
 
-void Snake::understandKey(int key)
+bool Snake::understandKey(int key)
 {
-	if (key == 99)
-		return;
+	if ((key == 99) || (key == getPastKey()))
+		return false;
+
 	if (key == ERR)
 	{
 		if (getDirection() == 1)
@@ -97,6 +99,18 @@ void Snake::understandKey(int key)
 		setDirection(3);
 		break;
 	}
+	setPastKey(key);
+	return true;
+}
+
+void Snake::setPastKey(int key)
+{
+	pastKey = key;
+}
+
+int Snake::getPastKey()
+{
+	return pastKey;
 }
 
 void Snake::addScore()

@@ -16,6 +16,7 @@ private:
     // 4     2   // 4 서  2 동
     //    3      //    3 남
     bool isAlive;
+    int pastKey;
 
 public:
     Snake();
@@ -29,7 +30,9 @@ public:
 
     void addSnakeBody(int row, int col, int num);
     void clearSnake();
-    void understandKey(int key);
+    bool understandKey(int key);
+    void setPastKey(int key);
+    int getPastKey();
 
     // score
     void addScore();
