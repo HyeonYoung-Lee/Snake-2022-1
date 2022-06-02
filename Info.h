@@ -1,4 +1,5 @@
 #include <vector>
+#include "Snake.h"
 using namespace std;
 /*############################
 전역 변수 느낌으로 사용하는 클래스
@@ -27,7 +28,7 @@ public:
     static vector<vector<int>> gateLoc;    // gate 위치 (1번:(x, y), 2번(x, y))
 
     Info();
-    void setSnakeLoc();
+	static void setSnakeLoc(Snake snake);
     void setAllWallLoc(vector<int> v);
     void setWallLoc(vector<int> v);
     void setGrowthLoc(int x, int y);
