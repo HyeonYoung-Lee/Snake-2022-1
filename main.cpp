@@ -6,13 +6,14 @@
 #include "Mission.h"
 #include <chrono>
 #include <thread>
-
 #include "Item.h"
+#include "Info.h"
 using namespace std;
 
 int main()
 {
     // create default window including game screen, score board, user name
+    Info info;
     Scene scene;
     MapSet mapset;
     Snake snake;
@@ -41,9 +42,11 @@ int main()
         Item growthItem(5);
         Item poisonItem(6);
         win = scene.changeScene(i, snake);
+        key = KEY_RIGHT;
+        snake.setPastKey(key);
         while (snake.getIsAlive())
         {
-            if ((itemTime != 0) && (itemTime % 20 == 0)) // 10??? resetItem
+            if ((itemTime != 0) && (itemTime % 20 == 0)) // 10ÃÊ ÈÄ resetItem
             {
                 growthItem.resetItem();
                 poisonItem.resetItem();
@@ -53,15 +56,18 @@ int main()
             winScoreBoard = scoreBoard.updateScoreBoard(snake);
             winMission = missionBoard.updateMissionBoard(snake);
             nodelay(stdscr, TRUE);
-            timeout(500);
+            timeout(1000);
             cbreak();
 
-            key = KEY_RIGHT;
             key = getch();
             noecho();
-            snake.understandKey(key);
-            if (key == 99)
-                break;
+            bool check = snake.understandKey(key);
+
+            if (!check)
+            {
+                if (key == 99)
+                    break;
+            }
             itemTime += 1;
         }
         snake.clearSnake();
