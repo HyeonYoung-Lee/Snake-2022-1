@@ -2,6 +2,7 @@
 #include <vector>
 #include <ncurses.h>
 #include <unistd.h>
+#include <iostream>
 
 class Snake
 {
@@ -32,8 +33,10 @@ public:
 	std::vector<std::vector<int>> getSnakeInfo();
 
     void addSnakeBody(int row, int col, int num);
+	void onlyaddSnakeBody(int row, int col, int num);
+	void snakePoisoned();
     void clearSnake();
-    bool understandKey(int key);
+    int understandKey(int key);
     void setPastKey(int key);
     int getPastKey();
 
