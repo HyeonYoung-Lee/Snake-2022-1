@@ -76,18 +76,18 @@ char *MapSet::printMap(int row)
 	{
 		if (tmp[i] == '0')
 			tmp[i] = ' ';
-		else
-		{
-			vector<int> tempV = {row, i};
-			info.setAllWallLoc(tempV);
-			// Info에 맵 정보 저장
-			if (tmp[i] == '2')
-				info.
-		}
+		// else
+		// {
+		// 	vector<int> tempV = {row, i};
+		// 	info.setAllWallLoc(tempV);
+		// 	// // Info에 맵 정보 저장
+		// 	// if (tmp[i] == '2')
+		// 	// {
+		// 	// }
+		// }
 	}
 	return tmp;
 }
-
 int MapSet::getRow()
 {
 	return (row);
