@@ -2,9 +2,11 @@
 #include <iostream>
 #include <string>
 #include "Scene.h"
+#include "Info.h"
 #include <thread>
 using std::this_thread::sleep_for;
 // ignore
+
 Scene::Scene()
 {
     Scene::width = 90;
@@ -23,7 +25,7 @@ void Scene::startScene()
     return;
 }
 
-WINDOW *Scene::gamingScene(int stage, MapSet mapset, Snake snake, Item growth, Item poison)
+WINDOW *Scene::gamingScene(int stage, MapSet &mapset, Snake &snake, Item growth, Item poison)
 {
     WINDOW *winGaming;
     winGaming = newwin(23, 58, 4, 4);
@@ -32,11 +34,34 @@ WINDOW *Scene::gamingScene(int stage, MapSet mapset, Snake snake, Item growth, I
     if (stage != 0)
     {
         mapset.LoadMap(stage);
-        mapset.printSnake(snake);
 
         // Item //
         mapset.printItem(growth);
         mapset.printItem(poison);
+
+		Info info;
+		info.setSnakeLoc(snake);
+		if (info.snakeLoc[0] == info.growthLoc) {
+			mapset.setMap(info.growthLoc[0], info.growthLoc[1], 0);
+			cout << "check";
+			if (snake.getDirection() == 1) {
+				snake.onlyaddSnakeBody(snake.getSnakeBody()[0][0] - 1, snake.getSnakeBody()[0][1], 3);
+			}
+			else if (snake.getDirection() == 2) {
+				snake.onlyaddSnakeBody(snake.getSnakeBody()[0][0], snake.getSnakeBody()[0][1] + 1, 3);
+			}
+			else if (snake.getDirection() == 3) {
+				snake.onlyaddSnakeBody(snake.getSnakeBody()[0][0] + 1, snake.getSnakeBody()[0][1], 3);
+			}
+			else if (snake.getDirection() == 4) {
+				snake.onlyaddSnakeBody(snake.getSnakeBody()[0][0], snake.getSnakeBody()[0][1] - 1, 3);
+			}
+		}
+		if (info.snakeLoc[0] == info.poisonLoc) {
+			mapset.setMap(info.poisonLoc[0], info.poisonLoc[1], 0);
+			snake.snakePoisoned();
+		}
+		mapset.printSnake(snake);
 
         std::string stage_string = "Stage " + std::to_string(stage);
         auto charStage = stage_string.c_str();
