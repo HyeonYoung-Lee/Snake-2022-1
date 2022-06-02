@@ -2,6 +2,9 @@
 #include "Info.h"
 void MapSet::LoadMap(int mapNum)
 {
+	Info info;
+	Info::allWallLoc.clear();
+	Info::wallLoc.clear();
 	std::ifstream mapfile;
 	srand((unsigned)time(NULL));
 	mapfile.open("stage" + std::to_string(mapNum), std::ios_base::in | std::ios_base::binary);
@@ -38,6 +41,13 @@ void MapSet::LoadMap(int mapNum)
 			for (int j = 0; j < col; j++)
 			{
 				map[i][j] = linearr[i + 1][j];
+				if ((map[i][j] == '1') || (map[i][j] == '2'))
+				{
+					vector<int> temp{i, j};
+					info.setAllWallLoc(temp);
+					if (map[i][j] == '1')
+						info.setWallLoc(temp);
+				}
 			}
 		}
 		mapfile.close();
@@ -76,15 +86,6 @@ char *MapSet::printMap(int row)
 	{
 		if (tmp[i] == '0')
 			tmp[i] = ' ';
-		// else
-		// {
-		// 	vector<int> tempV = {row, i};
-		// 	info.setAllWallLoc(tempV);
-		// 	// // Info에 맵 정보 저장
-		// 	// if (tmp[i] == '2')
-		// 	// {
-		// 	// }
-		// }
 	}
 	return tmp;
 }
