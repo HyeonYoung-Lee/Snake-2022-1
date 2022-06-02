@@ -46,7 +46,7 @@ int main()
         snake.setPastKey(key);
         while (snake.getIsAlive())
         {
-            if ((itemTime != 0) && (itemTime % 20 == 0)) // 10ÃÊ ÈÄ resetItem
+            if ((itemTime != 0) && (itemTime % 20 == 0)) // 10ï¿½ï¿½ ï¿½ï¿½ resetItem
             {
                 growthItem.resetItem();
                 poisonItem.resetItem();
@@ -56,8 +56,8 @@ int main()
             winScoreBoard = scoreBoard.updateScoreBoard(snake);
             winMission = missionBoard.updateMissionBoard(snake);
             nodelay(stdscr, TRUE);
-            timeout(1000);
-            cbreak();
+            //timeout(1000);
+            //cbreak();
 
             key = getch();
             noecho();
