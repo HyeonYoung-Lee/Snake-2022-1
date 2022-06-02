@@ -57,6 +57,7 @@ int main()
             winScoreBoard = scoreBoard.updateScoreBoard(snake);
             winMission = missionBoard.updateMissionBoard(snake);
             nodelay(stdscr, TRUE);
+            // collsion
             // timeout(1000);
             // cbreak();
 
