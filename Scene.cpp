@@ -3,6 +3,7 @@
 #include <string>
 #include "Scene.h"
 #include <thread>
+#include "Info.h"
 using std::this_thread::sleep_for;
 // ignore
 Scene::Scene()
@@ -72,4 +73,17 @@ WINDOW *Scene::changeScene(int stage, Snake snake)
 
     wrefresh(winScene);
     return winScene;
+}
+bool Scene::conditionSnake()
+{
+    Info info;
+    int snakeX = info.snakeLoc[0][0];
+    int snakeY = info.snakeLoc[0][1];
+    for(int i=0;i<info.allWallLoc.size();i++){
+        if(snakeX == info.allWallLoc[i][0] && snakeY == info.allWallLoc[i][1]){
+            return false;
+        }
+    }
+    return true;
+    
 }
