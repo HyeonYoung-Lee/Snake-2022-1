@@ -19,18 +19,18 @@ using namespace std;
 class Info
 {
 public:
-    vector<vector<int>> snakeLoc;   // snake body 위치 ((x, y), (x, y)...)
-    vector<vector<int>> allWallLoc; // 모든 벽 위치 (immune wall 포함)
-    vector<vector<int>> wallLoc;    // 벽 위치 (immune wall 제외)
-    vector<int> growthLoc;          // growth 위치 (x, y)
-    vector<int> poisonLoc;          // poison 위치 (x, y)
-    vector<vector<int>> gateLoc;    // gate 위치 (1번:(x, y), 2번(x, y))
+    static vector<vector<int>> snakeLoc;   // snake body 위치 ((x, y), (x, y)...)
+    static vector<vector<int>> allWallLoc; // 모든 벽 위치 (immune wall 포함)
+    static vector<vector<int>> wallLoc;    // 벽 위치 (immune wall 제외)
+    static vector<int> growthLoc;          // growth 위치 (x, y)
+    static vector<int> poisonLoc;          // poison 위치 (x, y)
+    static vector<vector<int>> gateLoc;    // gate 위치 (1번:(x, y), 2번(x, y))
 
     Info();
     void setSnakeLoc();
-    void setAllWallLoc();
-    void setWallLco();
-    void setGrowthLoc();
-    void setPoisonLoc();
+    void setAllWallLoc(vector<int> v);
+    void setWallLoc(vector<int> v);
+    void setGrowthLoc(int x, int y);
+    void setPoisonLoc(int x, int y);
     void setGateLoc();
 };

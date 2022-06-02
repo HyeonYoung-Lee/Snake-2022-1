@@ -1,6 +1,11 @@
 #include "Info.h"
-using namespace std;
 
+vector<vector<int>> Info::snakeLoc;
+vector<vector<int>> Info::allWallLoc;
+vector<vector<int>> Info::wallLoc;
+vector<int> Info::growthLoc = {0, 0};
+vector<int> Info::poisonLoc = {0, 0};
+vector<vector<int>> Info::gateLoc;
 Info::Info(){
     /*############################
     전역 변수 느낌으로 사용하는 클래스
@@ -19,3 +24,29 @@ Info::Info(){
         스네이크 머리가 움직이는 부분에서 사용 -> 두 gate 중 남은 gate 값으로 스네이크 이동
     ############################*/
 };
+
+void Info::setSnakeLoc()
+{
+}
+
+void Info::setAllWallLoc(vector<int> v)
+{
+}
+void Info::setWallLoc(vector<int> v)
+{
+}
+void Info::setGrowthLoc(int x, int y)
+{
+    growthLoc.clear();
+    growthLoc.push_back(x);
+    growthLoc.push_back(y);
+}
+void Info::setPoisonLoc(int x, int y)
+{
+    poisonLoc.clear();
+    poisonLoc.push_back(x);
+    poisonLoc.push_back(y);
+}
+void Info::setGateLoc()
+{
+}
