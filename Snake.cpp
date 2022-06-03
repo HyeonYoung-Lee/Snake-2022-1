@@ -90,8 +90,10 @@ int Snake::understandKey(int key)
     //     }
     // }
 
-	if ((key == 99) || (key == getPastKey()))
+	if ((key == 99))
 		return 1;
+    if (key == getPastKey())
+        return 3;
 
 	if (key == ERR)
 	{

@@ -49,7 +49,7 @@ int main()
         {
             if ((growthItem.getTime() != 0) && (growthItem.getTime() % 40 == 0)) // 10�� �� resetItem
             {
-                poisonItem.resetItem(6);
+                growthItem.resetItem(5);
             }
             if ((poisonItem.getTime() != 0) && (poisonItem.getTime() % 40 == 0)) // 10�� �� resetItem
             {
@@ -76,6 +76,8 @@ int main()
                     break;
                 }
             }
+            if(check == 3) 
+                continue;
             growthItem.upTime();
             poisonItem.upTime();
         }
