@@ -5,6 +5,7 @@
 
 Item::Item(int value)
 {
+    time = 0;
     resetItem(value);
 }
 
@@ -19,6 +20,7 @@ void Item::resetItem(int value)
     item[0] = disX(gen);
     item[1] = dixY(gen);
     item[2] = value; // growth == 5, poison==6
+    time = 0;
 
     Info info;
     if (value == 5)
@@ -39,4 +41,12 @@ int Item::getY()
 int Item::getValue()
 {
     return item[2];
+}
+int Item::getTime()
+{
+    return time;
+}
+void Item::upTime()
+{
+    time++;
 }

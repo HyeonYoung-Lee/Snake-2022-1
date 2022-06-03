@@ -1,5 +1,6 @@
 #include "Scene.h"
 #include "Info.h"
+#include "Item.h"
 
 Scene::Scene()
 {
@@ -19,7 +20,7 @@ void Scene::startScene()
     return;
 }
 
-WINDOW *Scene::gamingScene(int stage, MapSet &mapset, Snake &snake, Item growth, Item poison)
+WINDOW *Scene::gamingScene(int stage, MapSet &mapset, Snake &snake, Item &growth, Item &poison)
 {
     WINDOW *winGaming;
     winGaming = newwin(23, 58, 4, 4);
@@ -37,7 +38,7 @@ WINDOW *Scene::gamingScene(int stage, MapSet &mapset, Snake &snake, Item growth,
         info.setSnakeLoc(snake);
         if (info.snakeLoc[0] == info.growthLoc)
         {
-            mapset.setMap(info.growthLoc[0], info.growthLoc[1], 0);
+            growth.resetItem(5);
 			snake.incGrowthItems();
             if (snake.getDirection() == 1)
             {
@@ -55,10 +56,12 @@ WINDOW *Scene::gamingScene(int stage, MapSet &mapset, Snake &snake, Item growth,
             {
                 snake.onlyaddSnakeBody(snake.getSnakeBody()[0][0], snake.getSnakeBody()[0][1] - 1, 3);
             }
+            
+            
         }
         if (info.snakeLoc[0] == info.poisonLoc)
         {
-            mapset.setMap(info.poisonLoc[0], info.poisonLoc[1], 0);
+            poison.resetItem(6);
 			snake.incPoisonItems();
             snake.snakePoisoned();
 			if (snake.getCurrentLength() < 3) {
@@ -68,13 +71,13 @@ WINDOW *Scene::gamingScene(int stage, MapSet &mapset, Snake &snake, Item growth,
 		for (int i = 0; i < info.allWallLoc.size(); i++) {
 			if (info.snakeLoc[0] == info.allWallLoc[i]) {
             snake.setIsAlive(false);
-        }
-		for (int i = 1; i < info.snakeLoc.size(); i++) {
-			if (info.snakeLoc[0] == info.snakeLoc[i]) {
-				snake.setIsAlive(false);
-			}
+            }
+		    for (int i = 1; i < info.snakeLoc.size(); i++) {
+                if (info.snakeLoc[0] == info.snakeLoc[i]) {
+                    snake.setIsAlive(false);
+                }
 		}
-    }
+        }
         mapset.printSnake(snake);
 
         std::string stage_string = "Stage " + std::to_string(stage);

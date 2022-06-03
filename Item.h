@@ -4,6 +4,8 @@ class Item
 {
 private:
     int item[3];
+    int time;
+    
 
 public:
     Item(int value);
@@ -11,5 +13,7 @@ public:
     int getX();
     int getY();
     int getValue();
+    int getTime();
+    void upTime();
 };
 #endif

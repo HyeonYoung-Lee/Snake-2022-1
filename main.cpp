@@ -47,9 +47,12 @@ int main()
 
         while (snake.getIsAlive())
         {
-            if ((itemTime != 0) && (itemTime % 40 == 0)) // 10�� �� resetItem
+            if ((growthItem.getTime() != 0) && (growthItem.getTime() % 40 == 0)) // 10�� �� resetItem
             {
-                growthItem.resetItem(5);
+                poisonItem.resetItem(6);
+            }
+            if ((poisonItem.getTime() != 0) && (poisonItem.getTime() % 40 == 0)) // 10�� �� resetItem
+            {
                 poisonItem.resetItem(6);
             }
             winGaming = scene.gamingScene(i, mapset, snake, growthItem, poisonItem);
@@ -73,7 +76,8 @@ int main()
                     break;
                 }
             }
-            itemTime += 1;
+            growthItem.upTime();
+            poisonItem.upTime();
         }
         snake.clearSnake();
     }
