@@ -125,7 +125,7 @@ int Snake::understandKey(int key)
 		break;
 	}
 	setPastKey(key);
-	usleep(500000);
+	usleep(300000);
 	return 0;
 }
 

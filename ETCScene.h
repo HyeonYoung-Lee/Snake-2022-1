@@ -1,13 +1,14 @@
 #include <ncurses.h>
+#include <iostream>
 #include <string>
 #include "Snake.h"
 
-class ScoreBoard
+class GameOverScene
 {
 protected:
     int width, height;
 
 public:
-    ScoreBoard();
+    GameOverScene();
     WINDOW *updateScoreBoard(Snake snake);
 };

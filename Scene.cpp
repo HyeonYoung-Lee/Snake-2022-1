@@ -3,7 +3,7 @@
 
 Scene::Scene()
 {
-    Scene::width = 90;
+    Scene::width = 100;
     Scene::height = 100;
 }
 
@@ -61,6 +61,9 @@ WINDOW *Scene::gamingScene(int stage, MapSet &mapset, Snake &snake, Item growth,
             mapset.setMap(info.poisonLoc[0], info.poisonLoc[1], 0);
 			snake.incPoisonItems();
             snake.snakePoisoned();
+			if (snake.getCurrentLength() < 3) {
+				snake.setIsAlive(false);
+			}
         }
 		for (int i = 0; i < info.allWallLoc.size(); i++) {
 			if (info.snakeLoc[0] == info.allWallLoc[i]) {

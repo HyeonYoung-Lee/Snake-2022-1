@@ -1,5 +1,4 @@
 #include "ScoreBoard.h"
-using namespace std;
 
 ScoreBoard::ScoreBoard()
 {
