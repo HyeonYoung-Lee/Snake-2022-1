@@ -8,6 +8,7 @@
 #include <thread>
 #include "Item.h"
 #include "Info.h"
+#include "Gate.h"
 using namespace std;
 
 int main()
@@ -56,7 +57,7 @@ int main()
                 poisonItem.resetItem(6);
             }
             winGaming = scene.gamingScene(i, mapset, snake, growthItem, poisonItem);
-            
+
             winScoreBoard = scoreBoard.updateScoreBoard(snake);
             winMission = missionBoard.updateMissionBoard(snake);
             nodelay(stdscr, TRUE);
@@ -72,11 +73,12 @@ int main()
             {
                 if (key == 99)
                     break;
-                else if(check == 2){
+                else if (check == 2)
+                {
                     break;
                 }
             }
-            if(check == 3) 
+            if (check == 3)
                 continue;
             growthItem.upTime();
             poisonItem.upTime();

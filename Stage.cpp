@@ -73,6 +73,10 @@ void MapSet::printItem(Item item)
 	setMap(item.getX(), item.getY(), item.getValue());
 }
 
+void MapSet::printGate(Gate gate)
+{
+	setMap(gate.getX(), gate.getY(), gate.getValue());
+}
 char *MapSet::getMap(int row)
 {
 	return (this->map[row]);

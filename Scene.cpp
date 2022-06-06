@@ -1,7 +1,7 @@
 #include "Scene.h"
 #include "Info.h"
 #include "Item.h"
-
+#include "Gate.h"
 Scene::Scene()
 {
     Scene::width = 100;
@@ -28,18 +28,18 @@ WINDOW *Scene::gamingScene(int stage, MapSet &mapset, Snake &snake, Item &growth
 
     if (stage != 0)
     {
+        Info info;
         mapset.LoadMap(stage);
 
         // Item //
         mapset.printItem(growth);
         mapset.printItem(poison);
 
-        Info info;
         info.setSnakeLoc(snake);
         if (info.snakeLoc[0] == info.growthLoc)
         {
             growth.resetItem(5);
-			snake.incGrowthItems();
+            snake.incGrowthItems();
             if (snake.getDirection() == 1)
             {
                 snake.onlyaddSnakeBody(snake.getSnakeBody()[0][0] - 1, snake.getSnakeBody()[0][1], 3);
@@ -56,27 +56,30 @@ WINDOW *Scene::gamingScene(int stage, MapSet &mapset, Snake &snake, Item &growth
             {
                 snake.onlyaddSnakeBody(snake.getSnakeBody()[0][0], snake.getSnakeBody()[0][1] - 1, 3);
             }
-            
-            
         }
         if (info.snakeLoc[0] == info.poisonLoc)
         {
             poison.resetItem(6);
-			snake.incPoisonItems();
+            snake.incPoisonItems();
             snake.snakePoisoned();
-			if (snake.getCurrentLength() < 3) {
-				snake.setIsAlive(false);
-			}
-        }
-		for (int i = 0; i < info.allWallLoc.size(); i++) {
-			if (info.snakeLoc[0] == info.allWallLoc[i]) {
-            snake.setIsAlive(false);
+            if (snake.getCurrentLength() < 3)
+            {
+                snake.setIsAlive(false);
             }
-		    for (int i = 1; i < info.snakeLoc.size(); i++) {
-                if (info.snakeLoc[0] == info.snakeLoc[i]) {
+        }
+        for (int i = 0; i < info.allWallLoc.size(); i++)
+        {
+            if (info.snakeLoc[0] == info.allWallLoc[i])
+            {
+                snake.setIsAlive(false);
+            }
+            for (int i = 1; i < info.snakeLoc.size(); i++)
+            {
+                if (info.snakeLoc[0] == info.snakeLoc[i])
+                {
                     snake.setIsAlive(false);
                 }
-		}
+            }
         }
         mapset.printSnake(snake);
 
