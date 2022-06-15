@@ -25,8 +25,6 @@ int main()
     WINDOW *winGaming;
     WINDOW *winScoreBoard;
     WINDOW *winMission;
-    scene.startScene();
-
     keypad(stdscr, TRUE);
 
     // show Intro scene
@@ -58,6 +56,8 @@ int main()
 
 			if (check == -3)
 				continue;
+			if (check == -4)
+				break;
             winGaming = scene.gamingScene(i, mapset, snake, growthItem, poisonItem);
 
             scoreBoard.updateScoreBoard(snake);
