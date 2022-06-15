@@ -14,10 +14,7 @@ int main()
     Info info;
     Scene scene;
     MapSet mapset;
-    Snake snake;
-    ScoreBoard scoreBoard;
-    Mission missionBoard;
-	GameStartScene gameStartScene;
+    GameStartScene gameStartScene;
     int key;
 
     int itemTime = 0;
@@ -25,24 +22,26 @@ int main()
     WINDOW *winGaming;
     keypad(stdscr, TRUE);
 
-
-
     // win = scene.changeScene(0, snake);
 
     // turn into Game scene
-	// show Intro scene
-	// while (true) {
-		gameStartScene.renderGameStartScene();
-	// 	if (gameStartScene.GameStartStatus(gameStartScene.))
-	// }
-	getch();
-	new Scene();
+    // show Intro scene
+    // while (true) {
+    gameStartScene.renderGameStartScene();
+    // 	if (gameStartScene.GameStartStatus(gameStartScene.))
+    // }
+    getch();
+    new Scene();
     for (int i = 1; i < 5; i++)
     {
+        ScoreBoard scoreBoard;
+        Mission missionBoard;
+        Snake snake;
+
         Item growthItem(5);
         Item poisonItem(6);
         scene.changeScene(i, snake); //없앰
-		key = KEY_RIGHT;
+        key = KEY_RIGHT;
         snake.setPastKey(key);
 
         while (snake.getIsAlive())
@@ -55,14 +54,14 @@ int main()
             {
                 poisonItem.resetItem(6);
             }
-			nodelay(stdscr, TRUE);
-			key = getch();
-			int check = snake.understandKey(key);
+            nodelay(stdscr, TRUE);
+            key = getch();
+            int check = snake.understandKey(key);
 
-			if (check == -3)
-				continue;
-			if (check == -4)
-				break;
+            if (check == -3)
+                continue;
+            if (check == -4)
+                break;
             winGaming = scene.gamingScene(i, mapset, snake, growthItem, poisonItem);
 
             scoreBoard.updateScoreBoard(snake);
