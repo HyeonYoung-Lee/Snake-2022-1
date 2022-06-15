@@ -20,7 +20,7 @@ public:
    void setMap(int row, int col, int num);
    void printSnake(Snake snake);
    void printItem(Item item);
-   void printGate(Gate gate);
+   void printGate(Gate gateset);
    char *getMap(int row);
    char *printMap(int row);
    int getRow();

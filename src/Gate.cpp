@@ -7,34 +7,67 @@ using namespace std;
 
 Gate::Gate()
 {
-    idx = resetGate();
+    initGate();
 }
 
-int Gate::resetGate()
+int Gate::resetGate(int num)
 {
     Info info;
     std::random_device rd;
     std::mt19937 gen(rd());
-    std::uniform_int_distribution<int> first(0, info.wallLoc.size());
+    std::uniform_int_distribution<int> disIdx(0, info.wallLoc.size() - 1);
 
-    int randomIdx = first(gen);
-    gate = info.wallLoc.at(randomIdx);
-    gate.push_back(7);
+    int randomIdx = disIdx(gen);
 
+    if (num == 1)
+    {
+        firstGate = info.wallLoc.at(randomIdx);
+        firstGate.push_back(7);
+        info.setGateLoc(firstGate);
+    }
+    if (num == 2)
+    {
+        while (true)
+        {
+            if (randomIdx != firstGateIdx)
+                break;
+            randomIdx = disIdx(gen);
+        }
+        secondGate = info.wallLoc.at(randomIdx);
+        secondGate.push_back(7);
+        info.setGateLoc(secondGate);
+    }
     return randomIdx;
 }
-
-int Gate::getX()
+bool Gate::getGateExistence()
 {
-    return gate.at(0);
+    return gateIsExist;
 }
 
-int Gate::getY()
+void Gate::setGateExistecne(bool value)
 {
-    return gate.at(1);
+    this->gateIsExist = value;
 }
 
-int Gate::getValue()
+void Gate::initGate()
 {
-    return gate.at(2);
+    Info info;
+    info.gateLoc.clear();
+
+    gateIsExist = false;
+    firstGateIdx = 100000;
+    secondGateIdx = 100000;
+    vector<int> temp{0, 0};
+    firstGate = temp;
+    secondGate = temp;
+}
+
+std::vector<int> Gate::getFirst()
+{
+    return firstGate;
+}
+
+std::vector<int> Gate::getSecond()
+{
+    return secondGate;
 }

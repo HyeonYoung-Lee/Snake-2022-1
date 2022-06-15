@@ -50,6 +50,7 @@ void Info::setPoisonLoc(int x, int y)
     poisonLoc.push_back(x);
     poisonLoc.push_back(y);
 }
-void Info::setGateLoc()
+void Info::setGateLoc(vector<int> v)
 {
+    gateLoc.push_back(v);
 }

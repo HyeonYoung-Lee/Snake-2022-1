@@ -28,10 +28,10 @@ public:
     static vector<vector<int>> gateLoc;    // gate 위치 (1번:(x, y), 2번(x, y))
 
     Info();
-	static void setSnakeLoc(Snake snake);
+    static void setSnakeLoc(Snake snake);
     void setAllWallLoc(vector<int> v);
     void setWallLoc(vector<int> v);
     void setGrowthLoc(int x, int y);
     void setPoisonLoc(int x, int y);
-    void setGateLoc();
+    void setGateLoc(vector<int> v);
 };

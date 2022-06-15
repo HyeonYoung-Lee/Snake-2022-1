@@ -6,7 +6,7 @@ Scene::Scene()
 {
     Scene::width = 100;
     Scene::height = 100;
-	initscr();
+    initscr();
     resize_term(height, width);
     curs_set(0);
     noecho();
@@ -15,7 +15,7 @@ Scene::Scene()
     return;
 }
 
-WINDOW *Scene::gamingScene(int stage, MapSet &mapset, Snake &snake, Item &growth, Item &poison)
+WINDOW *Scene::gamingScene(int stage, MapSet &mapset, Snake &snake, Item &growth, Item &poison, Gate &gateset)
 {
     WINDOW *winGaming;
     winGaming = newwin(23, 58, 4, 4);
@@ -28,6 +28,10 @@ WINDOW *Scene::gamingScene(int stage, MapSet &mapset, Snake &snake, Item &growth
         // Item //
         mapset.printItem(growth);
         mapset.printItem(poison);
+
+        // Gate //
+        if (gateset.getGateExistence())
+            mapset.printGate(gateset);
 
         info.setSnakeLoc(snake);
 
@@ -60,7 +64,7 @@ WINDOW *Scene::gamingScene(int stage, MapSet &mapset, Snake &snake, Item &growth
             if (snake.getCurrentLength() < 3)
             {
                 snake.setIsAlive(false);
-				return	winGaming;
+                return winGaming;
             }
         }
         for (int i = 0; i < info.allWallLoc.size(); i++)
@@ -68,23 +72,23 @@ WINDOW *Scene::gamingScene(int stage, MapSet &mapset, Snake &snake, Item &growth
             if (info.snakeLoc[0] == info.allWallLoc[i])
             {
                 snake.setIsAlive(false);
-				return	winGaming;
+                return winGaming;
             }
         }
-		for (int i = 1; i < info.snakeLoc.size(); i++)
-		{
-			if (info.snakeLoc[0] == info.snakeLoc[i])
-			{
-				snake.setIsAlive(false);
-				return	winGaming;
-			}
-		}
-
-		if (info.snakeLoc[0] != info.growthLoc)
+        for (int i = 1; i < info.snakeLoc.size(); i++)
         {
-			snake.moveSnakeHead();
-		}
-		mapset.printSnake(snake);
+            if (info.snakeLoc[0] == info.snakeLoc[i])
+            {
+                snake.setIsAlive(false);
+                return winGaming;
+            }
+        }
+
+        if (info.snakeLoc[0] != info.growthLoc)
+        {
+            snake.moveSnakeHead();
+        }
+        mapset.printSnake(snake);
 
         std::string stage_string = "Stage " + std::to_string(stage);
         auto charStage = stage_string.c_str();
@@ -93,7 +97,7 @@ WINDOW *Scene::gamingScene(int stage, MapSet &mapset, Snake &snake, Item &growth
             mvwprintw(winGaming, i + 2, 0, mapset.printMap(i));
     }
     wrefresh(winGaming);
-	usleep(500000);
+    usleep(500000);
     return winGaming;
 }
 
@@ -116,10 +120,10 @@ WINDOW *Scene::changeScene(int stage, Snake snake)
     // Scene window control
     wbkgd(winScene, COLOR_PAIR(stage));
     wattron(winScene, COLOR_PAIR(stage));
-    if (stage == 0) {
+    if (stage == 0)
+    {
         // mvwprintw(winScene, 5, 5, "Press Any Key To Start Snake Game!");
-	}
-
+    }
 
     wrefresh(winScene);
     return winScene;
