@@ -5,67 +5,85 @@
 #include "Snake.h"
 using namespace std;
 
-Mission::Mission()
+Mission::Mission(int mlength, int mgrowth, int mposion, int mgate)
 {
-    width = 19;
-    height = 7;
-    bool length = false;
-    bool growth = false;
-    bool poison = false;
-    bool gate = false;
+	width = 19;
+	height = 7;
+
+	misLength = mlength;
+	misGrowth = mgrowth;
+	misPoison = mposion;
+	misGate = mgate;
+
+	length = false;
+	growth = false;
+	poison = false;
+	gate = false;
 }
 
 WINDOW *Mission::updateMissionBoard(Snake snake)
 {
-    WINDOW *winMission;
-    winMission = newwin(height, width, 13, 70);
-    wborder(winMission, '|', '|', '-', '-', '+', '+', '+', '+');
+	WINDOW *winMission;
+	winMission = newwin(height, width, 13, 70);
+	wborder(winMission, '|', '|', '-', '-', '+', '+', '+', '+');
 	mvwprintw(winMission, 1, 1, "Mission");
 	// B: Render
 	std::string MB = std::string("B: ") + std::to_string(getMisLength());
-	if (snake.getCurrentLength() >= misLength) {
+	if (snake.getCurrentLength() >= misLength)
+	{
 		MB += " (v)";
 		length = true;
-	} else {
+	}
+	else
+	{
 		MB += " ( )";
 		length = false;
 	}
-    auto charMB = MB.c_str();
-    mvwprintw(winMission, 2, 1, charMB);
+	auto charMB = MB.c_str();
+	mvwprintw(winMission, 2, 1, charMB);
 	// +: Render
 	std::string MGrowth = std::string("+: ") + std::to_string(getMisGrowth());
-	if (snake.getGrowthItems() >= misGrowth) {
+	if (snake.getGrowthItems() >= misGrowth)
+	{
 		MGrowth += " (v)";
 		growth = true;
-	} else {
+	}
+	else
+	{
 		MGrowth += " ( )";
 		growth = false;
 	}
-    auto charMGrowth = MGrowth.c_str();
-    mvwprintw(winMission, 3, 1, charMGrowth);
+	auto charMGrowth = MGrowth.c_str();
+	mvwprintw(winMission, 3, 1, charMGrowth);
 	// -: Render
 	std::string MPoison = std::string("-: ") + std::to_string(getMisPoison());
-	if (snake.getPoisonItems() < misPoison) {
+	if (snake.getPoisonItems() < misPoison)
+	{
 		MPoison += " (v)";
 		poison = true;
-	} else {
+	}
+	else
+	{
 		MPoison += " ( )";
 		poison = false;
 	}
-    auto charMPoison = MPoison.c_str();
-    mvwprintw(winMission, 4, 1, charMPoison);
+	auto charMPoison = MPoison.c_str();
+	mvwprintw(winMission, 4, 1, charMPoison);
 	// G: Render
 	std::string MGate = std::string("G: ") + std::to_string(getMisGate());
-	if (snake.getGateUses() >= misGate) {
+	if (snake.getGateUses() >= misGate)
+	{
 		MGate += " (v)";
 		gate = true;
-	} else {
+	}
+	else
+	{
 		MGate += " ( )";
 		gate = false;
 	}
-    auto charMGate = MGate.c_str();
-    mvwprintw(winMission, 5, 1, charMGate);
+	auto charMGate = MGate.c_str();
+	mvwprintw(winMission, 5, 1, charMGate);
 
-    wrefresh(winMission);
-    return winMission;
+	wrefresh(winMission);
+	return winMission;
 }

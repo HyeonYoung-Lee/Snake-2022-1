@@ -3,20 +3,22 @@ class Mission
 {
 private:
     int width, height;
-    int misLength = 8;
-    int misGrowth = 5;
-    int misPoison = 3;
-    int misGate = 1;
+
+    int misLength;
+    int misGrowth;
+    int misPoison;
+    int misGate;
+
     bool length;
     bool growth;
     bool poison;
     bool gate;
 
 public:
-    Mission();
+    Mission(int length, int growth, int posion, int gate);
     WINDOW *updateMissionBoard(Snake snake);
-	int getMisLength() {return	misLength; }
-	int getMisGrowth() {return	misGrowth; }
-	int getMisPoison() {return	misPoison; }
-	int	getMisGate() { return	misGate; }
+    int getMisLength() { return misLength; }
+    int getMisGrowth() { return misGrowth; }
+    int getMisPoison() { return misPoison; }
+    int getMisGate() { return misGate; }
 };
