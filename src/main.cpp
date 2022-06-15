@@ -22,7 +22,16 @@ int main()
 
     WINDOW *winGaming;
     keypad(stdscr, TRUE);
-    gameStartScene.renderGameStartScene();
+	key = KEY_UP;
+	gameStartScene.renderGameStartScene(key);
+    while (true) {
+		key = getch();
+		gameStartScene.renderGameStartScene(key);
+		if (gameStartScene.GameStartStatus() == 0)
+			return	0;
+		else if (gameStartScene.GameStartStatus() == 1)
+			break;
+	}
     new Scene();
 
     int len, grth, pois, gate;
