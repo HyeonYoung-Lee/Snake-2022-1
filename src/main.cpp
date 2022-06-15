@@ -14,6 +14,7 @@ int main()
     Info info;
     Scene scene;
     MapSet mapset;
+    Snake snake;
     GameStartScene gameStartScene;
     int key;
 
@@ -32,8 +33,6 @@ int main()
         ScoreBoard scoreBoard;
         Mission missionBoard(len, grth, pois--, gate);
         len += 2, grth += (len / 2), gate *= 2;
-
-        Snake snake;
 
         Item growthItem(5);
         Item poisonItem(6);
@@ -66,7 +65,7 @@ int main()
                 break;
             winGaming = scene.gamingScene(i, mapset, snake, growthItem, poisonItem);
         }
-        // snake.clearSnake();
+        snake.clearSnake();
     }
 
     // exit game

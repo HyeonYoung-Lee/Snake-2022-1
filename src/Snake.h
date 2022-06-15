@@ -23,6 +23,7 @@ private:
 
 public:
     Snake();
+    void setAttribute();
     int score;
     // getter and setter
     int getDirection() { return direction; }

@@ -20,20 +20,29 @@ Snake::Snake()
 	snakeBody.push_back(v1);
 	snakeBody.push_back(v2);
 
-	this->direction = 2;
+	setAttribute();
 	this->isAlive = true;
 	this->pastKey = 0;
 
 	this->score = KEY_RIGHT;
 }
-
-std::vector<std::vector<int>> Snake::getSnakeInfo() {
+void Snake::setAttribute()
+{
+	this->direction = 2;
+	this->maxLength = 12;
+	this->growthItems = 0;
+	this->poisonItems = 0;
+	this->gateUses = 0;
+}
+std::vector<std::vector<int>> Snake::getSnakeInfo()
+{
 	std::vector<std::vector<int>> tmp;
 	tmp = this->snakeBody;
-	for (int i = 0; i < tmp.size(); i++) {
+	for (int i = 0; i < tmp.size(); i++)
+	{
 		tmp[i].pop_back();
 	}
-	return	tmp;
+	return tmp;
 }
 
 void Snake::addSnakeBody(int row, int col, int num = 3)
@@ -47,7 +56,8 @@ void Snake::addSnakeBody(int row, int col, int num = 3)
 	snakeBody[1][2] = 4;
 }
 
-void Snake::onlyaddSnakeBody(int row, int col, int num = 3) {
+void Snake::onlyaddSnakeBody(int row, int col, int num = 3)
+{
 	std::vector<int> toAdd;
 	toAdd.push_back(row);
 	toAdd.push_back(col);
@@ -56,7 +66,8 @@ void Snake::onlyaddSnakeBody(int row, int col, int num = 3) {
 	snakeBody[1][2] = 4;
 }
 
-void Snake::snakePoisoned() {
+void Snake::snakePoisoned()
+{
 	snakeBody.pop_back();
 }
 
@@ -78,33 +89,33 @@ void Snake::clearSnake()
 	snakeBody.push_back(v0);
 	snakeBody.push_back(v1);
 	snakeBody.push_back(v2);
-	this->direction = 2;
+	setAttribute();
 }
 
-void Snake::moveSnakeHead() {
-	if (this -> direction == 1)
-		addSnakeBody(snakeBody[0][0] - 1, snakeBody[0][1], 3);
-	else if (this -> direction == 2)
-		addSnakeBody(snakeBody[0][0], snakeBody[0][1] + 1, 3);
-	else if (this -> direction == 3)
-		addSnakeBody(snakeBody[0][0] + 1, snakeBody[0][1], 3);
-	else if (this -> direction == 4)
-		addSnakeBody(snakeBody[0][0], snakeBody[0][1] - 1, 3);
-
-}
-
-int	Snake::understandKey(int key)
+void Snake::moveSnakeHead()
 {
-    // Info info;
-    // for(int i=0;i<info.allWallLoc.size();i++){
-    //     if(snakeBody[0][0] == info.allWallLoc[i][0] && snakeBody[0][1] == info.allWallLoc[i][1]){
-    //         return 2;
-    //     }
-    // }
+	if (this->direction == 1)
+		addSnakeBody(snakeBody[0][0] - 1, snakeBody[0][1], 3);
+	else if (this->direction == 2)
+		addSnakeBody(snakeBody[0][0], snakeBody[0][1] + 1, 3);
+	else if (this->direction == 3)
+		addSnakeBody(snakeBody[0][0] + 1, snakeBody[0][1], 3);
+	else if (this->direction == 4)
+		addSnakeBody(snakeBody[0][0], snakeBody[0][1] - 1, 3);
+}
+
+int Snake::understandKey(int key)
+{
+	// Info info;
+	// for(int i=0;i<info.allWallLoc.size();i++){
+	//     if(snakeBody[0][0] == info.allWallLoc[i][0] && snakeBody[0][1] == info.allWallLoc[i][1]){
+	//         return 2;
+	//     }
+	// }
 	if (key == 99)
-		return	-4;
-    if (key == this->getPastKey())
-		return	-3;
+		return -4;
+	if (key == this->getPastKey())
+		return -3;
 
 	if (key == ERR)
 	{
@@ -134,7 +145,7 @@ int	Snake::understandKey(int key)
 		break;
 	}
 	setPastKey(key);
-	return	0;
+	return 0;
 }
 
 void Snake::setPastKey(int key)
