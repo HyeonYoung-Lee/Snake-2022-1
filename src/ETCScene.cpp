@@ -7,16 +7,16 @@ GameStartScene::GameStartScene()
 	this->selected = 0;
 }
 
-int	GameStartScene::GameStartStatus(int num, int chk) {
-	if (num == 0 && chk == 1)
+int	GameStartScene::GameStartStatus() {
+	if (this->selectMode == 0 && this->selected == 1) // START ENTER
 		return	0;
-	else if (num == 1 && chk == 1)
+	else if (this->selectMode == 1 && this->selected == 1) // EXIT ENTER
 		return	1;
 	else
-		return	2;
+		return	-1;
 }
 
-WINDOW *GameStartScene::renderGameStartScene() {
+WINDOW *GameStartScene::renderGameStartScene(int key) {
 	WINDOW *winGameStart;
 	initscr();
 
@@ -35,27 +35,23 @@ WINDOW *GameStartScene::renderGameStartScene() {
 		idx++;
     }
 	scenefile.close();
-	// int	key = KEY_UP;
-	// while (true) {
-	// 	key = getch();
-	// 	if (key == KEY_DOWN)
-	// 	{
-	// 		mvwprintw(winGameStart, 24, 28, "  ");
-	// 		mvwprintw(winGameStart, 25, 28, "->");
-	// 		selectMode = 0;
-	// 	}
-	// 	else if (key == KEY_UP)
-	// 	{
-	// 		mvwprintw(winGameStart, 24, 28, "->");
-	// 		mvwprintw(winGameStart, 25, 28, "  ");
-	// 		selectMode = 1;
-	// 	}
-	// 	else if (key == 13)
-	// 	{
-	// 		selected = 1;
-	// 		break;
-	// 	}
-	// }
+	switch (key) {
+		case KEY_DOWN:
+			mvwprintw(winGameStart, 24, 28, "  ");
+			mvwprintw(winGameStart, 26, 28, "->");
+			this->selectMode = 0;
+			this->selected = 0;
+			break;
+		case KEY_UP:
+			mvwprintw(winGameStart, 24, 28, "->");
+			mvwprintw(winGameStart, 26, 28, "  ");
+			this->selectMode = 1;
+			this->selected = 0;
+			break;
+		case 10:
+			this->selected = 1;
+			break;
+	}
 	wborder(winGameStart, '|', '|', '-', '-', '*', '*', '*', '*');
 	wrefresh(winGameStart);
 	return	winGameStart;
