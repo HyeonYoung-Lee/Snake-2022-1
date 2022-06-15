@@ -9,7 +9,7 @@ class Snake
 {
 private:
     // score board 변수
-    int maxLength = 10;
+    int maxLength = 12;
     int growthItems = 0;
     int poisonItems = 0;
     int gateUses = 0;
@@ -30,13 +30,13 @@ public:
     bool getIsAlive() { return isAlive; }
     void setIsAlive(bool isAlive) { this->isAlive = isAlive; }
     std::vector<std::vector<int>> getSnakeBody() { return this->snakeBody; }
-	std::vector<std::vector<int>> getSnakeInfo();
+    std::vector<std::vector<int>> getSnakeInfo();
 
     void addSnakeBody(int row, int col, int num);
-	void onlyaddSnakeBody(int row, int col, int num);
-	void snakePoisoned();
+    void onlyaddSnakeBody(int row, int col, int num);
+    void snakePoisoned();
     void clearSnake();
-	void moveSnakeHead();
+    void moveSnakeHead();
     int understandKey(int key);
     void setPastKey(int key);
     int getPastKey();
@@ -54,5 +54,5 @@ public:
     void incPoisonItems() { poisonItems++; }
     int getPoisonItems() { return poisonItems; }
     void incGateUses() { gateUses++; }
-    int getGateUses() { return	gateUses; }
+    int getGateUses() { return gateUses; }
 };
