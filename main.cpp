@@ -1,11 +1,8 @@
 #include <ncurses.h>
-#include <iostream>
 #include "Scene.h"
 #include "Snake.h"
 #include "ScoreBoard.h"
 #include "Mission.h"
-#include <chrono>
-#include <thread>
 #include "Item.h"
 #include "Info.h"
 #include "Gate.h"
@@ -37,13 +34,12 @@ int main()
 
     // turn into Game scene
     getch();
-    // cbreak();
     for (int i = 1; i < 5; i++)
     {
         Item growthItem(5);
         Item poisonItem(6);
         win = scene.changeScene(i, snake);
-        key = KEY_RIGHT;
+		key = KEY_RIGHT;
         snake.setPastKey(key);
 
         while (snake.getIsAlive())
@@ -56,30 +52,16 @@ int main()
             {
                 poisonItem.resetItem(6);
             }
+			nodelay(stdscr, TRUE);
+			key = getch();
+			int check = snake.understandKey(key);
+
+			if (check == -3)
+				continue;
             winGaming = scene.gamingScene(i, mapset, snake, growthItem, poisonItem);
 
-            winScoreBoard = scoreBoard.updateScoreBoard(snake);
-            winMission = missionBoard.updateMissionBoard(snake);
-            nodelay(stdscr, TRUE);
-            // collsion
-            // timeout(1000);
-            // cbreak();
-
-            key = getch();
-            noecho();
-            int check = snake.understandKey(key);
-
-            if (check == 1 || check == 2)
-            {
-                if (key == 99)
-                    break;
-                else if (check == 2)
-                {
-                    break;
-                }
-            }
-            if (check == 3)
-                continue;
+            scoreBoard.updateScoreBoard(snake);
+            missionBoard.updateMissionBoard(snake);
             growthItem.upTime();
             poisonItem.upTime();
         }

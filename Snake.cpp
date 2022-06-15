@@ -81,7 +81,19 @@ void Snake::clearSnake()
 	this->direction = 2;
 }
 
-int Snake::understandKey(int key)
+void Snake::moveSnakeHead() {
+	if (this -> direction == 1)
+		addSnakeBody(snakeBody[0][0] - 1, snakeBody[0][1], 3);
+	else if (this -> direction == 2)
+		addSnakeBody(snakeBody[0][0], snakeBody[0][1] + 1, 3);
+	else if (this -> direction == 3)
+		addSnakeBody(snakeBody[0][0] + 1, snakeBody[0][1], 3);
+	else if (this -> direction == 4)
+		addSnakeBody(snakeBody[0][0], snakeBody[0][1] - 1, 3);
+
+}
+
+int	Snake::understandKey(int key)
 {
     // Info info;
     // for(int i=0;i<info.allWallLoc.size();i++){
@@ -89,11 +101,10 @@ int Snake::understandKey(int key)
     //         return 2;
     //     }
     // }
-
-	if ((key == 99))
-		return 1;
-    if (key == getPastKey())
-        return 3;
+	if (key == 99)
+		return	-4;
+    if (key == this->getPastKey())
+		return	-3;
 
 	if (key == ERR)
 	{
@@ -110,25 +121,20 @@ int Snake::understandKey(int key)
 	switch (key)
 	{
 	case KEY_LEFT:
-		addSnakeBody(snakeBody[0][0], snakeBody[0][1] - 1, 3);
 		setDirection(4);
 		break;
 	case KEY_RIGHT:
-		addSnakeBody(snakeBody[0][0], snakeBody[0][1] + 1, 3);
 		setDirection(2);
 		break;
 	case KEY_UP:
-		addSnakeBody(snakeBody[0][0] - 1, snakeBody[0][1], 3);
 		setDirection(1);
 		break;
 	case KEY_DOWN:
-		addSnakeBody(snakeBody[0][0] + 1, snakeBody[0][1], 3);
 		setDirection(3);
 		break;
 	}
 	setPastKey(key);
-	usleep(300000);
-	return 0;
+	return	0;
 }
 
 void Snake::setPastKey(int key)

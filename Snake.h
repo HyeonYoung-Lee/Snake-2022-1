@@ -36,6 +36,7 @@ public:
 	void onlyaddSnakeBody(int row, int col, int num);
 	void snakePoisoned();
     void clearSnake();
+	void moveSnakeHead();
     int understandKey(int key);
     void setPastKey(int key);
     int getPastKey();

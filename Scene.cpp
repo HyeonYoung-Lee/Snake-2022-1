@@ -24,7 +24,6 @@ WINDOW *Scene::gamingScene(int stage, MapSet &mapset, Snake &snake, Item &growth
 {
     WINDOW *winGaming;
     winGaming = newwin(23, 58, 4, 4);
-    // snake = snake.clearSnake();
 
     if (stage != 0)
     {
@@ -36,6 +35,11 @@ WINDOW *Scene::gamingScene(int stage, MapSet &mapset, Snake &snake, Item &growth
         mapset.printItem(poison);
 
         info.setSnakeLoc(snake);
+
+		if (info.snakeLoc[0] != info.growthLoc)
+        {
+			snake.moveSnakeHead();
+		}
         if (info.snakeLoc[0] == info.growthLoc)
         {
             growth.resetItem(5);
@@ -56,6 +60,7 @@ WINDOW *Scene::gamingScene(int stage, MapSet &mapset, Snake &snake, Item &growth
             {
                 snake.onlyaddSnakeBody(snake.getSnakeBody()[0][0], snake.getSnakeBody()[0][1] - 1, 3);
             }
+			snake.moveSnakeHead();
         }
         if (info.snakeLoc[0] == info.poisonLoc)
         {
@@ -81,7 +86,8 @@ WINDOW *Scene::gamingScene(int stage, MapSet &mapset, Snake &snake, Item &growth
                 }
             }
         }
-        mapset.printSnake(snake);
+
+		mapset.printSnake(snake);
 
         std::string stage_string = "Stage " + std::to_string(stage);
         auto charStage = stage_string.c_str();
@@ -90,6 +96,7 @@ WINDOW *Scene::gamingScene(int stage, MapSet &mapset, Snake &snake, Item &growth
             mvwprintw(winGaming, i + 2, 0, mapset.printMap(i));
     }
     wrefresh(winGaming);
+	usleep(500000);
     return winGaming;
 }
 
