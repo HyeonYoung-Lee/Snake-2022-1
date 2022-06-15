@@ -60,7 +60,6 @@ WINDOW *Scene::gamingScene(int stage, MapSet &mapset, Snake &snake, Item &growth
             {
                 snake.onlyaddSnakeBody(snake.getSnakeBody()[0][0], snake.getSnakeBody()[0][1] - 1, 3);
             }
-			snake.moveSnakeHead();
         }
         if (info.snakeLoc[0] == info.poisonLoc)
         {
@@ -78,14 +77,14 @@ WINDOW *Scene::gamingScene(int stage, MapSet &mapset, Snake &snake, Item &growth
             {
                 snake.setIsAlive(false);
             }
-            for (int i = 1; i < info.snakeLoc.size(); i++)
-            {
-                if (info.snakeLoc[0] == info.snakeLoc[i])
-                {
-                    snake.setIsAlive(false);
-                }
-            }
         }
+		for (int i = 1; i < info.snakeLoc.size(); i++)
+		{
+			if (info.snakeLoc[0] == info.snakeLoc[i])
+			{
+				snake.setIsAlive(false);
+			}
+		}
 
 		mapset.printSnake(snake);
 
@@ -96,7 +95,7 @@ WINDOW *Scene::gamingScene(int stage, MapSet &mapset, Snake &snake, Item &growth
             mvwprintw(winGaming, i + 2, 0, mapset.printMap(i));
     }
     wrefresh(winGaming);
-	usleep(500000);
+	usleep(150000);
     return winGaming;
 }
 

@@ -7,7 +7,7 @@ void MapSet::LoadMap(int mapNum)
 	Info::wallLoc.clear();
 	std::ifstream mapfile;
 	srand((unsigned)time(NULL));
-	mapfile.open("stage" + std::to_string(mapNum), std::ios_base::in | std::ios_base::binary);
+	mapfile.open("./Framework/stage" + std::to_string(mapNum), std::ios_base::in | std::ios_base::binary);
 
 	if (mapfile.fail())
 	{
