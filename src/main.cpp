@@ -22,25 +22,26 @@ int main()
 
     int itemTime = 0;
 
-    WINDOW *win;
-	WINDOW	*winStart;
     WINDOW *winGaming;
-    WINDOW *winScoreBoard;
-    WINDOW *winMission;
     keypad(stdscr, TRUE);
 
-    // show Intro scene
-	winStart = gameStartScene.renderGameStartScene();
+
+
     // win = scene.changeScene(0, snake);
 
     // turn into Game scene
-    getch();
-	delwin(winStart);
+	// show Intro scene
+	// while (true) {
+		gameStartScene.renderGameStartScene();
+	// 	if (gameStartScene.GameStartStatus(gameStartScene.))
+	// }
+	getch();
+	new Scene();
     for (int i = 1; i < 5; i++)
     {
         Item growthItem(5);
         Item poisonItem(6);
-        win = scene.changeScene(i, snake);
+        scene.changeScene(i, snake); //없앰
 		key = KEY_RIGHT;
         snake.setPastKey(key);
 
@@ -73,7 +74,7 @@ int main()
     }
 
     // exit game
-    delwin(win);
+    // delwin(win);
     delwin(winGaming);
     endwin();
 

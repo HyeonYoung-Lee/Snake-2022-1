@@ -8,9 +8,12 @@ class GameStartScene
 {
 protected:
     int width, height;
+	int	selectMode;
+	int	selected;
 
 public:
     GameStartScene();
+	int	GameStartStatus(int num, int chk);
     WINDOW *renderGameStartScene();
 };
 

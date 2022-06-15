@@ -93,7 +93,7 @@ WINDOW *Scene::gamingScene(int stage, MapSet &mapset, Snake &snake, Item &growth
             mvwprintw(winGaming, i + 2, 0, mapset.printMap(i));
     }
     wrefresh(winGaming);
-	usleep(150000);
+	usleep(500000);
     return winGaming;
 }
 
