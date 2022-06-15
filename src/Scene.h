@@ -1,4 +1,7 @@
 #include "Stage.h"
+#include "ETCScene.h"
+#include <iostream>
+#include <fstream>
 class Scene
 {
 protected:

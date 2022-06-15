@@ -17,21 +17,25 @@ int main()
     Snake snake;
     ScoreBoard scoreBoard;
     Mission missionBoard;
+	GameStartScene gameStartScene;
     int key;
 
     int itemTime = 0;
 
     WINDOW *win;
+	WINDOW	*winStart;
     WINDOW *winGaming;
     WINDOW *winScoreBoard;
     WINDOW *winMission;
     keypad(stdscr, TRUE);
 
     // show Intro scene
-    win = scene.changeScene(0, snake);
+	winStart = gameStartScene.renderGameStartScene();
+    // win = scene.changeScene(0, snake);
 
     // turn into Game scene
     getch();
+	delwin(winStart);
     for (int i = 1; i < 5; i++)
     {
         Item growthItem(5);

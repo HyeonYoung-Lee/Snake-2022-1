@@ -100,6 +100,7 @@ WINDOW *Scene::gamingScene(int stage, MapSet &mapset, Snake &snake, Item &growth
 WINDOW *Scene::changeScene(int stage, Snake snake)
 {
     WINDOW *winScene;
+
     winScene = newwin(25, 60, 3, 3);
 
     start_color();
@@ -115,8 +116,10 @@ WINDOW *Scene::changeScene(int stage, Snake snake)
     // Scene window control
     wbkgd(winScene, COLOR_PAIR(stage));
     wattron(winScene, COLOR_PAIR(stage));
-    if (stage == 0)
-        mvwprintw(winScene, 5, 5, "Press Any Key To Start Snake Game!");
+    if (stage == 0) {
+        // mvwprintw(winScene, 5, 5, "Press Any Key To Start Snake Game!");
+	}
+
 
     wrefresh(winScene);
     return winScene;
