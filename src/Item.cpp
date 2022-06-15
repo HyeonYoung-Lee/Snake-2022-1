@@ -39,6 +39,8 @@ void Item::resetItem(int value)
 
         if (isNotWall && isNotSnake)
             break;
+        else
+            xy.clear();
     }
 
     item[0] = xy.at(0);
