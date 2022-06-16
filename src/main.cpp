@@ -62,17 +62,20 @@ int main()
             scoreBoard.updateScoreBoard(snake);
             missionBoard.updateMissionBoard(snake);
 
-            // reset Gate when snake's length is even num
+            // reset Gate when snake's length is evenNum
             if ((!gateset.getGateExistence()) && (snake.getCurrentLength() % 2 == 0))
             {
                 gateset.resetGate(1);
                 gateset.resetGate(2);
                 gateset.setGateExistecne(true);
+                gateset.setMakeGate();
             }
 
-            // init Gate if snake's length is odd num
-            if ((gateset.getGateExistence()) && (snake.getCurrentLength() % 2 != 0))
-                gateset.initGate();
+            if (snake.getCurrentLength() % 2 != 0)
+                gateset.setGateExistecne(false);
+            // // init Gate if snake's length is odd num
+            // if ((gateset.getGateExistence()) && (snake.getCurrentLength() % 2 != 0))
+            //     gateset.initGate();
 
             // reset item
             /*

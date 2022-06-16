@@ -5,6 +5,7 @@
 class Gate
 {
 private:
+    bool makeGate;
     bool gateIsExist;
     int firstGateIdx; // save gotten index of info.wallLoc to use for avoiding gate overlap
     int secondGateIdx;
@@ -16,6 +17,8 @@ public:
     int resetGate(int num);
     void initGate();
     bool getGateExistence();
+    bool getMakeGate();
+    void setMakeGate();
     void setGateExistecne(bool value);
     std::vector<int> getFirst();
     std::vector<int> getSecond();

@@ -45,38 +45,38 @@ void MapSet::LoadMap(int mapNum)
 				map[i][j] = linearr[i + 1][j];
 				if ((map[i][j] == '1') || (map[i][j] == '2'))
 				{
-					vector<int> temp{i, j};
+					std::vector<int> temp{i, j};
 					info.setAllWallLoc(temp);
 					if (map[i][j] == '1')
 						info.setWallLoc(temp);
 				}
 				else if (map[i][j] == '0')
 				{
-					vector<int> temp{i, j};
+					std::vector<int> temp{i, j};
 					info.setPlaneLoc(temp);
-					planeLog << i << " " << j << endl;
+					planeLog << i << " " << j << std::endl;
 				}
 
-				if (i == 0 && map[i][j] == '1')
-				{
-					vector<int> temp{i, j};
-					info.setUpWallLoc(temp);
-				}
-				if (i == row - 1 && map[i][j] == '1')
-				{
-					vector<int> temp{i, j};
-					info.setDownWallLoc(temp);
-				}
-				if (j == 0 && map[i][j] == '1')
-				{
-					vector<int> temp{i, j};
-					info.setLeftWallLoc(temp);
-				}
-				if (j == col - 1 && map[i][j] == '1')
-				{
-					vector<int> temp{i, j};
-					info.setRightWallLoc(temp);
-				}
+				// if (i == 0 && map[i][j] == '1')
+				// {
+				// 	vector<int> temp{i, j};
+				// 	info.setUpWallLoc(temp);
+				// }
+				// if (i == row - 1 && map[i][j] == '1')
+				// {
+				// 	vector<int> temp{i, j};
+				// 	info.setDownWallLoc(temp);
+				// }
+				// if (j == 0 && map[i][j] == '1')
+				// {
+				// 	vector<int> temp{i, j};
+				// 	info.setLeftWallLoc(temp);
+				// }
+				// if (j == col - 1 && map[i][j] == '1')
+				// {
+				// 	vector<int> temp{i, j};
+				// 	info.setRightWallLoc(temp);
+				// }
 			}
 		}
 		mapfile.close();
@@ -106,7 +106,7 @@ void MapSet::printItem(Item item)
 void MapSet::printGate(Gate gateset)
 {
 	// print first gate
-	vector<int> temp = gateset.getFirst();
+	std::vector<int> temp = gateset.getFirst();
 	setMap(temp.at(0), temp.at(1), temp.at(2));
 
 	// print second gate

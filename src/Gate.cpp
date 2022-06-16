@@ -13,6 +13,7 @@ Gate::Gate()
 int Gate::resetGate(int num)
 {
     Info info;
+    info.gateLoc.clear();
     std::random_device rd;
     std::mt19937 gen(rd());
     std::uniform_int_distribution<int> disIdx(0, info.wallLoc.size() - 1);
@@ -43,10 +44,18 @@ bool Gate::getGateExistence()
 {
     return gateIsExist;
 }
-
 void Gate::setGateExistecne(bool value)
 {
     this->gateIsExist = value;
+}
+
+bool Gate::getMakeGate()
+{
+    return makeGate;
+}
+void Gate::setMakeGate()
+{
+    this->makeGate = true;
 }
 
 void Gate::initGate()
@@ -54,9 +63,10 @@ void Gate::initGate()
     Info info;
     info.gateLoc.clear();
 
+    makeGate = false;
     gateIsExist = false;
-    firstGateIdx = 100000;
-    secondGateIdx = 100000;
+    // firstGateIdx = 100000;
+    // secondGateIdx = 100000;
     vector<int> temp{0, 0};
     firstGate = temp;
     secondGate = temp;

@@ -2,6 +2,9 @@
 #include "Info.h"
 #include "Item.h"
 #include "Gate.h"
+#include <vector>
+
+#include <fstream>
 Scene::Scene()
 {
     Scene::width = 100;
@@ -26,11 +29,11 @@ WINDOW *Scene::gamingScene(int stage, MapSet &mapset, Snake &snake, Item &growth
         mapset.LoadMap(stage);
 
         // Item //
-        if ((growth.getTime() % 2 == 0)) // 10?? ?? resetItem
+        if ((growth.getTime() % 50 == 0)) // 10?? ?? resetItem
         {
             growth.resetItem();
         }
-        if ((poison.getTime() % 2 == 0)) // 10?? ?? resetItem
+        if ((poison.getTime() % 50 == 0)) // 10?? ?? resetItem
         {
             poison.resetItem();
         }
@@ -38,25 +41,50 @@ WINDOW *Scene::gamingScene(int stage, MapSet &mapset, Snake &snake, Item &growth
         mapset.printItem(poison);
 
         // Gate //
-        if (gateset.getGateExistence())
+        if (gateset.getMakeGate())
             mapset.printGate(gateset);
 
         info.setSnakeLoc(snake);
 
+        // Gate
+        //  if ( snake.getCurrentLength() % 2 == 0  && (info.snakeLoc[0] == info.gateLoc[0] || info.snakeLoc[0] == info.gateLoc[1])){
+        //      int loc;
+        //      if (info.snakeLoc[0] == info.gateLoc[0]){
+        //          snake.addSnakeBody(info.gateLoc[1][0]-1, info.gateLoc[1][1], 3);
+        //          snake.setDirection(1);
+        //      }
+        //      if (info.snakeLoc[0] == info.gateLoc[1]){
+        //          snake.addSnakeBody(info.gateLoc[0][0]-1, info.gateLoc[0][1], 3);
+        //          snake.setDirection(1);
+        //      }
+        //  }
 
-        //Gate
-        if ( snake.getCurrentLength() % 2 == 0  && (info.snakeLoc[0] == info.gateLoc[0] || info.snakeLoc[0] == info.gateLoc[1])){
-            int loc;
-            if (info.snakeLoc[0] == info.gateLoc[0]){
-                snake.addSnakeBody(info.gateLoc[1][0]-1, info.gateLoc[1][1], 3);
-                snake.setDirection(1);
+        if (gateset.getGateExistence())
+        {
+            if (info.snakeLoc[0] == info.gateLoc.at(0) || info.snakeLoc[0] == info.gateLoc.at(0))
+            {
+                std::ofstream gateLog;
+                gateLog.open("./log/gateLog", ios::app);
+                std::vector<int> inGate = (info.snakeLoc[0] == info.gateLoc[0]) ? info.gateLoc[0] : info.gateLoc[1];
+                std::vector<int> outGate = (info.snakeLoc[0] == info.gateLoc[0]) ? info.gateLoc[1] : info.gateLoc[0];
+                int newHeadRow = outGate.at(0);
+                int newHeadCol = outGate.at(1);
+                gateLog << "in gate : " << inGate.at(0) << " " << inGate.at(1) << std::endl;
+                gateLog << "out gate : " << newHeadRow << " " << newHeadCol << " ";
+
+                // edge gate
+                if (0 < newHeadRow && newHeadRow < 20)
+                {
+                    if (newHeadCol == 0)
+                    { // left edge -> direction is right
+                        snake.addSnakeBody(newHeadRow, newHeadCol + 1, 3);
+                    }
+                    else if (newHeadCol == 40)
+                    { // right edge -> direction is left
+                        snake.addSnakeBody(newHeadRow, newHeadCol - 1, 3);
+                    }
+                }
             }
-            if (info.snakeLoc[0] == info.gateLoc[1]){
-                snake.addSnakeBody(info.gateLoc[0][0]-1, info.gateLoc[0][1], 3);
-                snake.setDirection(1);
-            }
-
-
         }
 
         if (info.snakeLoc[0] == info.growthLoc)
@@ -76,7 +104,6 @@ WINDOW *Scene::gamingScene(int stage, MapSet &mapset, Snake &snake, Item &growth
                 return winGaming;
             }
         }
-        
 
         for (int i = 0; i < info.allWallLoc.size(); i++)
         {
@@ -94,6 +121,7 @@ WINDOW *Scene::gamingScene(int stage, MapSet &mapset, Snake &snake, Item &growth
                 return winGaming;
             }
         }
+
         snake.moveSnakeHead();
         mapset.printSnake(snake);
 
