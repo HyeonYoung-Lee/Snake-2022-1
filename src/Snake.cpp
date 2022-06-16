@@ -100,8 +100,6 @@ void Snake::moveSnakeHead()
 
 int Snake::understandKey(int key)
 {
-	if (key == 99)
-		return -4;
 	if (key == this->getPastKey())
 		return -3;
 

@@ -68,7 +68,6 @@ int main()
         {
             scoreBoard.updateScoreBoard(snake);
             missionBoard.updateMissionBoard(snake);
-            timeboard.updateTimeBoard();
 
             // reset Gate when snake's length is evenNum
             if ((!info.gateExistence) && (snake.getGrowthItems() != 0) && (snake.getGrowthItems() % 2 == 0))
@@ -90,12 +89,13 @@ int main()
 
             if (check == -3)
                 continue;
-            if (check == -4 || missionBoard.missionAllCleared())
+            if (missionBoard.missionAllCleared())
             {
                 chkstage = 1;
                 break;
             }
             winGaming = scene.gamingScene(i, mapset, snake, growthItem, poisonItem, fGate, sGate);
+			timeboard.updateTimeBoard();
             growthItem.upTime();
             poisonItem.upTime();
         }

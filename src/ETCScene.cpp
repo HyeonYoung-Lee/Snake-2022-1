@@ -139,7 +139,6 @@ WINDOW *GameClearScene::renderGameClearScene() {
 		idx++;
     }
 	scenefile.close();
-	mvwprintw(winGameClear, 23, 28, "->");
 	wborder(winGameClear, '|', '|', '-', '-', '*', '*', '*', '*');
 	wrefresh(winGameClear);
 	return	winGameClear;
