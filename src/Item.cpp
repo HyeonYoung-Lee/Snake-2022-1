@@ -17,6 +17,7 @@ void Item::resetItem(int value)
 {
     Info info;
     vector<int> xy;
+
     while (true)
     {
         std::random_device rd;
@@ -40,7 +41,7 @@ void Item::resetItem(int value)
         if (isNotWall && isNotSnake)
             break;
         else
-            xy.clear();
+            vector<int>().swap(xy);
     }
 
     item[0] = xy.at(0);
