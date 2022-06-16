@@ -26,6 +26,14 @@ WINDOW *Scene::gamingScene(int stage, MapSet &mapset, Snake &snake, Item &growth
         mapset.LoadMap(stage);
 
         // Item //
+        if ((growth.getTime() % 20 == 0)) // 10?? ?? resetItem
+        {
+            growth.resetItem();
+        }
+        if ((poison.getTime() % 20 == 0)) // 10?? ?? resetItem
+        {
+            poison.resetItem();
+        }
         mapset.printItem(growth);
         mapset.printItem(poison);
 
@@ -37,13 +45,13 @@ WINDOW *Scene::gamingScene(int stage, MapSet &mapset, Snake &snake, Item &growth
 
         if (info.snakeLoc[0] == info.growthLoc)
         {
-            growth.resetItem(5);
+            growth.resetItem();
             snake.incGrowthItems();
             snake.snakeGrown();
         }
         if (info.snakeLoc[0] == info.poisonLoc)
         {
-            poison.resetItem(6);
+            poison.resetItem();
             snake.incPoisonItems();
             snake.snakePoisoned();
             if (snake.getCurrentLength() < 3)

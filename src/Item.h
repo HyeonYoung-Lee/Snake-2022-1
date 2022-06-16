@@ -8,7 +8,7 @@ private:
 
 public:
     Item(int value);
-    void resetItem(int value);
+    void resetItem();
     int getX();
     int getY();
     int getValue();

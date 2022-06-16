@@ -3,6 +3,7 @@
 vector<vector<int>> Info::snakeLoc;
 vector<vector<int>> Info::allWallLoc;
 vector<vector<int>> Info::wallLoc;
+vector<vector<int>> Info::planeLoc;
 vector<int> Info::growthLoc = {0, 0};
 vector<int> Info::poisonLoc = {0, 0};
 vector<vector<int>> Info::gateLoc;
@@ -37,6 +38,10 @@ void Info::setAllWallLoc(vector<int> v)
 void Info::setWallLoc(vector<int> v)
 {
     wallLoc.push_back(v);
+}
+void Info::setPlaneLoc(vector<int> v)
+{
+    planeLoc.push_back(v);
 }
 void Info::setGrowthLoc(int x, int y)
 {

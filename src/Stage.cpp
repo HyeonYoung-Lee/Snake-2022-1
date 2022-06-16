@@ -48,6 +48,11 @@ void MapSet::LoadMap(int mapNum)
 					if (map[i][j] == '1')
 						info.setWallLoc(temp);
 				}
+				if (map[i][j] == '0')
+				{
+					vector<int> temp{i, j};
+					info.setPlaneLoc(temp);
+				}
 			}
 		}
 		mapfile.close();

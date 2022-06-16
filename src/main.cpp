@@ -21,7 +21,6 @@ int main()
     GameClearScene gameClearScene;
     int key;
     int chkstage = 0;
-    int itemTime = 0;
 
     WINDOW *winGaming;
     keypad(stdscr, TRUE);
@@ -45,7 +44,7 @@ int main()
     len = 5, grth = 2, pois = 4, gate = 0;
 
     for (int i = 1; i < 5; i++)
-    { 
+    {
         scene = Scene();
         snake.clearSnake();
         ScoreBoard scoreBoard;
@@ -62,8 +61,6 @@ int main()
         {
             scoreBoard.updateScoreBoard(snake);
             missionBoard.updateMissionBoard(snake);
-            growthItem.upTime();
-            poisonItem.upTime();
 
             // reset Gate when snake's length is even num
             if ((!gateset.getGateExistence()) && (snake.getCurrentLength() % 2 == 0))
@@ -77,14 +74,18 @@ int main()
             if ((gateset.getGateExistence()) && (snake.getCurrentLength() % 2 != 0))
                 gateset.initGate();
 
+            // reset item
+            /*
             if ((growthItem.getTime() != 0) && (growthItem.getTime() % 40 == 0)) // 10�� �� resetItem
             {
-                growthItem.resetItem(5);
+                growthItem.resetItem();
             }
             if ((poisonItem.getTime() != 0) && (poisonItem.getTime() % 40 == 0)) // 10�� �� resetItem
             {
-                poisonItem.resetItem(6);
+                poisonItem.resetItem();
             }
+            */
+
             nodelay(stdscr, TRUE);
             key = getch();
             int check = snake.understandKey(key);
@@ -97,6 +98,8 @@ int main()
                 break;
             }
             winGaming = scene.gamingScene(i, mapset, snake, growthItem, poisonItem, gateset);
+            growthItem.upTime();
+            poisonItem.upTime();
         }
         nodelay(stdscr, FALSE);
         scene = Scene();
