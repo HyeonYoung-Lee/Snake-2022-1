@@ -1,9 +1,4 @@
-#include <ncurses.h>
-#include <iostream>
-#include <string>
 #include "Mission.h"
-#include "Snake.h"
-using namespace std;
 
 Mission::Mission(int mlength, int mgrowth, int mposion, int mgate)
 {
@@ -27,7 +22,7 @@ bool	Mission::missionAllCleared() {
 	return	false;
 }
 
-WINDOW *Mission::updateMissionBoard(Snake snake)
+WINDOW *Mission::updateMissionBoard(Snake &snake)
 {
 	WINDOW *winMission;
 	winMission = newwin(height, width, 13, 70);
@@ -72,6 +67,7 @@ WINDOW *Mission::updateMissionBoard(Snake snake)
 	{
 		MPoison += " ( )";
 		poison = false;
+		snake.setIsAlive(false);
 	}
 	auto charMPoison = MPoison.c_str();
 	mvwprintw(winMission, 4, 1, charMPoison);

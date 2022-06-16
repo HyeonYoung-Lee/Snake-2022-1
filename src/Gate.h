@@ -1,7 +1,10 @@
 #ifndef __GATE__
 #define __GATE__
 #include <vector>
+#include <random>
+#include <algorithm>
 #include "Item.h"
+
 class Gate
 {
 private:

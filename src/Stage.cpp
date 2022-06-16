@@ -1,5 +1,5 @@
 #include "Stage.h"
-#include "Info.h"
+
 void MapSet::LoadMap(int mapNum)
 {
 	Info info;

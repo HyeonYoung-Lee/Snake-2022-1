@@ -1,4 +1,8 @@
+#include <ncurses.h>
+#include <iostream>
+#include <string>
 #include "Snake.h"
+
 class Mission
 {
 private:
@@ -16,7 +20,7 @@ private:
 
 public:
     Mission(int length, int growth, int posion, int gate);
-    WINDOW *updateMissionBoard(Snake snake);
+    WINDOW *updateMissionBoard(Snake &snake);
     int getMisLength() { return misLength; }
     int getMisGrowth() { return misGrowth; }
     int getMisPoison() { return misPoison; }

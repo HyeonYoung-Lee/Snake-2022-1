@@ -18,10 +18,10 @@ WINDOW *TimeBoard::updateTimeBoard()
     winScore = newwin(height, width, 21, 70);
     wborder(winScore, '|', '|', '-', '-', '+', '+', '+', '+');
 
-    mvwprintw(winScore, 1, 1, "Total Game Time");
+    mvwprintw(winScore, 1, 1, "Game Time");
 	// Time Render
 	time += 0.5;
-	std::string Time = std::string("Time: ") + std::to_string(int(this->time));
+	std::string Time = std::string("Total Time: ") + std::to_string(int(this->time));
     auto charTime = Time.c_str();
 	mvwprintw(winScore, 2, 1, charTime);
 	// Stage Time Render

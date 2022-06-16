@@ -1,7 +1,4 @@
 #include "Gate.h"
-#include "Info.h"
-#include <random>
-#include <algorithm>
 
 using namespace std;
 

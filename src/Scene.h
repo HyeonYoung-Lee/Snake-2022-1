@@ -1,7 +1,13 @@
 #include "Stage.h"
 #include "ETCScene.h"
+#include "Item.h"
+#include "Gate.h"
+#include <vector>
+#include <algorithm>
+#include <fstream>
 #include <iostream>
 #include <fstream>
+
 class Scene
 {
 protected:

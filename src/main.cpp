@@ -5,7 +5,6 @@
 #include "Mission.h"
 #include "TimeBoard.h"
 #include "Item.h"
-#include "Info.h"
 #include "Gate.h"
 using namespace std;
 

@@ -1,9 +1,4 @@
 #include "Item.h"
-#include "Info.h"
-#include <random>
-#include <time.h>
-#include <vector>
-#include <algorithm>
 
 using namespace std;
 

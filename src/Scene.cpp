@@ -1,10 +1,5 @@
 #include "Scene.h"
-#include "Info.h"
-#include "Item.h"
-#include "Gate.h"
-#include <vector>
-#include <algorithm>
-#include <fstream>
+
 Scene::Scene()
 {
     Scene::width = 100;

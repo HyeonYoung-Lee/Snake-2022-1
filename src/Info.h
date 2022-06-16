@@ -1,3 +1,4 @@
+#pragma once
 #include <vector>
 #include "Snake.h"
 using namespace std;

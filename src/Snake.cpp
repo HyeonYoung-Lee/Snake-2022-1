@@ -1,5 +1,4 @@
 #include "Snake.h"
-#include "Info.h"
 
 Snake::Snake()
 {

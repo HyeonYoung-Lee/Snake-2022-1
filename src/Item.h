@@ -1,5 +1,11 @@
 #ifndef __ITEM__
 #define __ITEM__
+#include <random>
+#include <time.h>
+#include <vector>
+#include <algorithm>
+#include "Info.h"
+
 class Item
 {
 private:
