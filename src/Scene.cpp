@@ -93,32 +93,67 @@ WINDOW *Scene::gamingScene(int stage, MapSet &mapset, Snake &snake, Item &growth
                 gateLog << "out gate : " << newHeadRow << " " << newHeadCol << std::endl;
 
                 // edge gate
-                if (0 < newHeadRow && newHeadRow < 20)
+                if ((0 < newHeadRow && newHeadRow < 20) && (newHeadCol == 0)) // left edge -> direction is right
                 {
                     snake.addSnakeBody(newHeadRow, newHeadCol, 3);
-                    if (newHeadCol == 0) // left edge -> direction is right
-                        snake.setDirection(2);
-                    else if (newHeadCol == 40) // right edge -> direction is left
-                        snake.setDirection(4);
+                    snake.setDirection(2);
                 }
-                else if (0 < newHeadCol && newHeadCol < 40)
+                else if ((0 < newHeadRow && newHeadRow < 20) && (newHeadCol == 40)) // right edge -> direction is left
                 {
                     snake.addSnakeBody(newHeadRow, newHeadCol, 3);
-                    if (newHeadRow == 0) // top edge -> direction is bottom
-                        snake.setDirection(3);
-                    else if (newHeadRow == 20) // bottem edge -> direction is top
-                        snake.setDirection(1);
+                    snake.setDirection(4);
+                }
+                else if ((0 < newHeadCol && newHeadCol < 40) && (newHeadRow == 0)) // top edge -> direction is bottom
+                {
+                    snake.addSnakeBody(newHeadRow, newHeadCol, 3);
+                    snake.setDirection(3);
+                }
+                else if ((0 < newHeadCol && newHeadCol < 40) && (newHeadRow == 20)) // bottem edge -> direction is top
+                {
+                    snake.addSnakeBody(newHeadRow, newHeadCol, 3);
+                    snake.setDirection(1);
                 }
                 else // inner edge
                 {
-                    if (snake.getDirection() == 3)
-                        snake.setDirection(4);
-                    else if (snake.getDirection() == 4)
-                        snake.setDirection(1);
-                    else if (snake.getDirection() == 1)
-                        snake.setDirection(2);
-                    else if (snake.getDirection() == 2)
-                        snake.setDirection(3);
+                    int tempRow;
+                    int tempCol;
+                    if (snake.getDirection() == 1) // in direction == top  -> row--
+                    {
+                        tempRow = newHeadRow - 1;
+                        tempCol = newHeadCol;
+                        // check can remain direction
+                        std::vector<int> temp{tempRow, tempCol};
+                        auto it = std::find(info.allWallLoc.begin(), info.allWallLoc.end(), temp);
+                        if (it != info.allWallLoc.end())
+                            snake.setDirection(2);
+                    }
+                    else if (snake.getDirection() == 2) // in direction == right  -> col++
+                    {
+                        tempRow = newHeadRow;
+                        tempCol = newHeadCol + 1;
+                        std::vector<int> temp{tempRow, tempCol};
+                        auto it = std::find(info.allWallLoc.begin(), info.allWallLoc.end(), temp);
+                        if (it != info.allWallLoc.end())
+                            snake.setDirection(3);
+                    }
+                    else if (snake.getDirection() == 3) // in direction == bottom  -> row++
+                    {
+                        tempRow = newHeadRow + 1;
+                        tempCol = newHeadCol;
+                        std::vector<int> temp{tempRow, tempCol};
+                        auto it = std::find(info.allWallLoc.begin(), info.allWallLoc.end(), temp);
+                        if (it != info.allWallLoc.end())
+                            snake.setDirection(4);
+                    }
+                    else if (snake.getDirection() == 4) // in direction == left  -> col--
+                    {
+                        tempRow = newHeadRow;
+                        tempCol = newHeadCol - 1;
+                        std::vector<int> temp{tempRow, tempCol};
+                        auto it = std::find(info.allWallLoc.begin(), info.allWallLoc.end(), temp);
+                        if (it != info.allWallLoc.end())
+                            snake.setDirection(1);
+                    }
                     snake.addSnakeBody(newHeadRow, newHeadCol, 3);
                 }
                 gateLog.close();
