@@ -8,8 +8,6 @@
 class Gate
 {
 private:
-    // bool makeGate;
-    // bool gateIsExist;
     int gate[3];
 
 public:

@@ -102,12 +102,6 @@ void Snake::moveSnakeHead()
 
 int Snake::understandKey(int key)
 {
-	// Info info;
-	// for(int i=0;i<info.allWallLoc.size();i++){
-	//     if(snakeBody[0][0] == info.allWallLoc[i][0] && snakeBody[0][1] == info.allWallLoc[i][1]){
-	//         return 2;
-	//     }
-	// }
 	if (key == 99)
 		return -4;
 	if (key == this->getPastKey())

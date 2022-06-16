@@ -10,10 +10,6 @@ public:
     static vector<vector<int>> allWallLoc; // ��� �� ��ġ (immune wall ����)
     static vector<vector<int>> wallLoc;    // �� ��ġ (immune wall ����)
     static vector<vector<int>> planeLoc;
-    // static vector<vector<int>> leftSideWall;
-    // static vector<vector<int>> rightSideWall;
-    // static vector<vector<int>> upSideWall;
-    // static vector<vector<int>> downSideWall;
     static vector<int> growthLoc;       // growth ��ġ (x, y)
     static vector<int> poisonLoc;       // poison ��ġ (x, y)
     static vector<vector<int>> gateLoc; // gate ��ġ (1��:(x, y), 2��(x, y))
@@ -25,10 +21,6 @@ public:
     void setAllWallLoc(vector<int> v);
     void setWallLoc(vector<int> v);
     void setPlaneLoc(vector<int> v);
-    // void setLeftWallLoc(vector<int> v);
-    // void setRightWallLoc(vector<int> v);
-    // void setUpWallLoc(vector<int> v);
-    // void setDownWallLoc(vector<int> v);
     void setGrowthLoc(int x, int y);
     void setPoisonLoc(int x, int y);
     void setGateLoc(vector<int> v);
