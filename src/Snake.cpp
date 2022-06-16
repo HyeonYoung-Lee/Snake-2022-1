@@ -52,18 +52,15 @@ void Snake::addSnakeBody(int row, int col, int num = 3)
 	toAdd.push_back(col);
 	toAdd.push_back(num);
 	snakeBody.insert(snakeBody.begin(), toAdd);
+	pastTail = snakeBody[snakeBody.size() - 1];
 	snakeBody.pop_back();
 	snakeBody[1][2] = 4;
 }
 
-void Snake::onlyaddSnakeBody(int row, int col, int num = 3)
+void Snake::snakeGrown()
 {
-	std::vector<int> toAdd;
-	toAdd.push_back(row);
-	toAdd.push_back(col);
-	toAdd.push_back(num);
-	snakeBody.insert(snakeBody.begin(), toAdd);
-	snakeBody[1][2] = 4;
+	if (snakeBody.size() < maxLength)
+		snakeBody.push_back(pastTail);
 }
 
 void Snake::snakePoisoned()

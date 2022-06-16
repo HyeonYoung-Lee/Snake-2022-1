@@ -21,4 +21,5 @@ public:
     int getMisGrowth() { return misGrowth; }
     int getMisPoison() { return misPoison; }
     int getMisGate() { return misGate; }
+	bool	missionAllCleared();
 };

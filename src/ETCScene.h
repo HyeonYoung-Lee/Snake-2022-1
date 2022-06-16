@@ -17,8 +17,6 @@ public:
 	int	GameStartStatus();
 	int	getSelectMode() { return	this->selectMode; }
 	int getSelected() { return	this->selected; }
-	void	setPastKey(int key) { this->pastKey = key; }
-	int getPastKey() { return	this->pastKey; }
 	WINDOW *renderGameStartScene(int key);
 };
 
@@ -26,8 +24,26 @@ class GameOverScene
 {
 protected:
     int width, height;
+	int	selectMode; // Select Using Arrow Keys 0: MAINMENU 1: EXIT
+	int	selected; // Pressed Enter?
+	int	pastKey;
 
 public:
     GameOverScene();
-    WINDOW *updateScoreBoard(Snake snake);
+	int	GameOverStatus();
+	int	getSelectMode() { return	this->selectMode; }
+	int getSelected() { return	this->selected; }
+	WINDOW *renderGameOverScene(int key);
+};
+
+class GameClearScene
+{
+protected:
+    int width, height;
+	int	selected; // Pressed Enter?
+
+public:
+    GameClearScene();
+	int getSelected() { return	this->selected; }
+	WINDOW *renderGameClearScene();
 };
