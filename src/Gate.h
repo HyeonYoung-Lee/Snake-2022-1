@@ -5,22 +5,15 @@
 class Gate
 {
 private:
-    bool makeGate;
-    bool gateIsExist;
-    int firstGateIdx; // save gotten index of info.wallLoc to use for avoiding gate overlap
-    int secondGateIdx;
-    std::vector<int> firstGate; // selected value of info.wallLoc[idx] (vector)
-    std::vector<int> secondGate;
+    // bool makeGate;
+    // bool gateIsExist;
+    int gate[3];
 
 public:
     Gate();
-    int resetGate(int num);
-    void initGate();
-    bool getGateExistence();
-    bool getMakeGate();
-    void setMakeGate();
-    void setGateExistecne(bool value);
-    std::vector<int> getFirst();
-    std::vector<int> getSecond();
+    void resetGate();
+    int getX();
+    int getY();
+    int getValue();
 };
 #endif

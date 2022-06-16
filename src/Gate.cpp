@@ -7,77 +7,48 @@ using namespace std;
 
 Gate::Gate()
 {
-    initGate();
+    gate[2] = 7;
 }
 
-int Gate::resetGate(int num)
+void Gate::resetGate()
 {
     Info info;
-    info.gateLoc.clear();
+    info.MakeGate = true;
+    info.gateExistence = true;
+
     std::random_device rd;
     std::mt19937 gen(rd());
     std::uniform_int_distribution<int> disIdx(0, info.wallLoc.size() - 1);
 
     int randomIdx = disIdx(gen);
+    std::vector<int> temp = info.wallLoc.at(randomIdx);
 
-    if (num == 1)
-    {
-        firstGate = info.wallLoc.at(randomIdx);
-        firstGate.push_back(7);
-        info.setGateLoc(firstGate);
-    }
-    if (num == 2)
+    if (info.gateLoc.size() > 0) // if second gate - avoiding overlap
     {
         while (true)
         {
-            if (randomIdx != firstGateIdx)
+            if (temp != info.gateLoc.at(0))
                 break;
             randomIdx = disIdx(gen);
         }
-        secondGate = info.wallLoc.at(randomIdx);
-        secondGate.push_back(7);
-        info.setGateLoc(secondGate);
     }
-    return randomIdx;
-}
-bool Gate::getGateExistence()
-{
-    return gateIsExist;
-}
-void Gate::setGateExistecne(bool value)
-{
-    this->gateIsExist = value;
+
+    gate[0] = temp.at(0);
+    gate[1] = temp.at(1);
+    info.setGateLoc(temp);
 }
 
-bool Gate::getMakeGate()
+int Gate::getX()
 {
-    return makeGate;
-}
-void Gate::setMakeGate()
-{
-    this->makeGate = true;
+    return gate[0];
 }
 
-void Gate::initGate()
+int Gate::getY()
 {
-    Info info;
-    info.gateLoc.clear();
-
-    makeGate = false;
-    gateIsExist = false;
-    // firstGateIdx = 100000;
-    // secondGateIdx = 100000;
-    vector<int> temp{0, 0};
-    firstGate = temp;
-    secondGate = temp;
+    return gate[1];
 }
 
-std::vector<int> Gate::getFirst()
+int Gate::getValue()
 {
-    return firstGate;
-}
-
-std::vector<int> Gate::getSecond()
-{
-    return secondGate;
+    return gate[2];
 }

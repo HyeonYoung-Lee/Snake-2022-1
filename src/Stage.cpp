@@ -103,15 +103,9 @@ void MapSet::printItem(Item item)
 	setMap(item.getX(), item.getY(), item.getValue());
 }
 
-void MapSet::printGate(Gate gateset)
+void MapSet::printGate(Gate gate)
 {
-	// print first gate
-	std::vector<int> temp = gateset.getFirst();
-	setMap(temp.at(0), temp.at(1), temp.at(2));
-
-	// print second gate
-	temp = gateset.getSecond();
-	setMap(temp.at(0), temp.at(1), temp.at(2));
+	setMap(gate.getX(), gate.getY(), gate.getValue());
 }
 
 char *MapSet::getMap(int row)

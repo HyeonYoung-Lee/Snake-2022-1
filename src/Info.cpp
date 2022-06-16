@@ -12,24 +12,10 @@ vector<vector<int>> Info::planeLoc;
 vector<int> Info::growthLoc = {0, 0};
 vector<int> Info::poisonLoc = {0, 0};
 vector<vector<int>> Info::gateLoc;
-Info::Info(){
-    /*############################
-    ���� ���� �������� ����ϴ�? Ŭ����
-    1. �� ������Ʈ�� �������� -> allWallLoc, wallLoc
-        allWallLock: ������ũ�� �Ӹ��� �����̴� �κ� (�Ӹ���ġ�� ���ϴ� �κ�) ���� ���? -> die
-                    �� ���ο� ���� �ִ� ���? item ������ ���? (�� ��ġ�� ��ġ�ϸ� �ٽ� ���� ����)
-        wallLoc: gate ������ �� ���� �߿��� ���?
+bool Info::MakeGate = false;
+bool Info::gateExistence = false;
 
-    2. ������ũ �����ӽ� �������� -> snakeLoc
-        item ������ ���? (������ũ �ٵ� ��ġ�� ��ġ�ϸ� �ٽ� ���� ����)
-
-    3. item �����ɶ����� �������� -> growthLoc, poisonLoc
-        ������ũ �Ӹ��� �����̴� �κ� (�Ӹ���ġ�� ���ϴ� �κ�) ���� ���? -> score +/-
-
-    4. gate ���涧���� �������� -> gateLoc
-        ������ũ �Ӹ��� �����̴� �κп��� ���? -> �� gate �� ���� gate ������ ������ũ �̵�
-    ############################*/
-};
+Info::Info(){};
 
 void Info::setSnakeLoc(Snake snake)
 {

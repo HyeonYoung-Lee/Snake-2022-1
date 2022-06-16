@@ -1,22 +1,7 @@
 #include <vector>
 #include "Snake.h"
 using namespace std;
-/*############################
-���� ���� �������� ����ϴ� Ŭ����
-1. �� ������Ʈ�� �������� -> allWallLoc, wallLoc
-    allWallLock: ������ũ�� �Ӹ��� �����̴� �κ� (�Ӹ���ġ�� ���ϴ� �κ�) ���� ��� -> die
-                �� ���ο� ���� �ִ� ��� item ������ ��� (�� ��ġ�� ��ġ�ϸ� �ٽ� ���� ����)
-    wallLoc: gate ������ �� ���� �߿��� ���
 
-2. ������ũ �����ӽ� �������� -> snakeLoc
-    item ������ ��� (������ũ �ٵ� ��ġ�� ��ġ�ϸ� �ٽ� ���� ����)
-
-3. item �����ɶ����� �������� -> growthLoc, poisonLoc
-    ������ũ �Ӹ��� �����̴� �κ� (�Ӹ���ġ�� ���ϴ� �κ�) ���� ��� -> score +/-
-
-4. gate ���涧���� �������� -> gateLoc
-    ������ũ �Ӹ��� �����̴� �κп��� ��� -> �� gate �� ���� gate ������ ������ũ �̵�
-############################*/
 class Info
 {
 public:
@@ -31,6 +16,8 @@ public:
     static vector<int> growthLoc;       // growth ��ġ (x, y)
     static vector<int> poisonLoc;       // poison ��ġ (x, y)
     static vector<vector<int>> gateLoc; // gate ��ġ (1��:(x, y), 2��(x, y))
+    static bool MakeGate;
+    static bool gateExistence;
 
     Info();
     static void setSnakeLoc(Snake snake);

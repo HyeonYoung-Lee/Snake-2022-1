@@ -10,5 +10,5 @@ protected:
 public:
     Scene();
     WINDOW *changeScene(int stage, Snake snake);
-    WINDOW *gamingScene(int stage, MapSet &mapset, Snake &snake, Item &growth, Item &poison, Gate &gateset);
+    WINDOW *gamingScene(int stage, MapSet &mapset, Snake &snake, Item &growth, Item &poison, Gate &fGate, Gate &sGate);
 };

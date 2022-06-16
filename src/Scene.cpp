@@ -18,7 +18,7 @@ Scene::Scene()
     return;
 }
 
-WINDOW *Scene::gamingScene(int stage, MapSet &mapset, Snake &snake, Item &growth, Item &poison, Gate &gateset)
+WINDOW *Scene::gamingScene(int stage, MapSet &mapset, Snake &snake, Item &growth, Item &poison, Gate &fGate, Gate &sGate)
 {
     WINDOW *winGaming;
     winGaming = newwin(23, 58, 4, 4);
@@ -40,9 +40,12 @@ WINDOW *Scene::gamingScene(int stage, MapSet &mapset, Snake &snake, Item &growth
         mapset.printItem(growth);
         mapset.printItem(poison);
 
-        // Gate //
-        if (gateset.getMakeGate())
-            mapset.printGate(gateset);
+        // Gate
+        if (info.MakeGate == true)
+        {
+            mapset.printGate(fGate);
+            mapset.printGate(sGate);
+        }
 
         info.setSnakeLoc(snake);
 
@@ -59,7 +62,7 @@ WINDOW *Scene::gamingScene(int stage, MapSet &mapset, Snake &snake, Item &growth
         //      }
         //  }
 
-        if (gateset.getGateExistence())
+        if (info.gateExistence)
         {
             if (info.snakeLoc[0] == info.gateLoc.at(0) || info.snakeLoc[0] == info.gateLoc.at(0))
             {

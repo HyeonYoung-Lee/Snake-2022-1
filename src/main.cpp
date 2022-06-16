@@ -16,9 +16,12 @@ int main()
     MapSet mapset;
     Snake snake;
     GameStartScene gameStartScene;
-    Gate gateset;
     GameOverScene gameOverScene;
     GameClearScene gameClearScene;
+
+    Gate fGate;
+    Gate sGate;
+
     int key;
     int chkstage = 0;
 
@@ -57,22 +60,26 @@ int main()
         key = KEY_RIGHT;
         snake.setPastKey(key);
 
+        info.MakeGate = false;
         while (snake.getIsAlive())
         {
             scoreBoard.updateScoreBoard(snake);
             missionBoard.updateMissionBoard(snake);
 
             // reset Gate when snake's length is evenNum
-            if ((!gateset.getGateExistence()) && (snake.getCurrentLength() % 2 == 0))
+            if ((!info.gateExistence) && (snake.getCurrentLength() % 2 == 0))
             {
-                gateset.resetGate(1);
-                gateset.resetGate(2);
-                gateset.setGateExistecne(true);
-                gateset.setMakeGate();
+                info.gateLoc.clear();
+                fGate.resetGate();
+                sGate.resetGate();
             }
 
             if (snake.getCurrentLength() % 2 != 0)
-                gateset.setGateExistecne(false);
+            {
+                info.gateExistence = false;
+                info.gateExistence = false;
+            }
+
             // // init Gate if snake's length is odd num
             // if ((gateset.getGateExistence()) && (snake.getCurrentLength() % 2 != 0))
             //     gateset.initGate();
@@ -100,7 +107,7 @@ int main()
                 chkstage = 1;
                 break;
             }
-            winGaming = scene.gamingScene(i, mapset, snake, growthItem, poisonItem, gateset);
+            winGaming = scene.gamingScene(i, mapset, snake, growthItem, poisonItem, fGate, sGate);
             growthItem.upTime();
             poisonItem.upTime();
         }
