@@ -5,9 +5,12 @@ void MapSet::LoadMap(int mapNum)
 	Info info;
 	Info::allWallLoc.clear();
 	Info::wallLoc.clear();
+	Info::planeLoc.clear();
 	std::ifstream mapfile;
 	srand((unsigned)time(NULL));
 	mapfile.open("./Framework/stage" + std::to_string(mapNum), std::ios_base::in | std::ios_base::binary);
+
+	std::ofstream planeLog("./log/planeLog" + std::to_string(mapNum));
 
 	if (mapfile.fail())
 	{
@@ -15,7 +18,6 @@ void MapSet::LoadMap(int mapNum)
 	}
 	else
 	{
-
 		char ch;
 		std::string line;
 		std::vector<std::string> linearr;
@@ -48,14 +50,16 @@ void MapSet::LoadMap(int mapNum)
 					if (map[i][j] == '1')
 						info.setWallLoc(temp);
 				}
-				if (map[i][j] == '0')
+				else if (map[i][j] == '0')
 				{
 					vector<int> temp{i, j};
 					info.setPlaneLoc(temp);
+					planeLog << i << " " << j << endl;
 				}
 			}
 		}
 		mapfile.close();
+		planeLog.close();
 	}
 }
 

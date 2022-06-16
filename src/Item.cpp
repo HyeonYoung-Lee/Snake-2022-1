@@ -16,7 +16,6 @@ Item::Item(int value)
 void Item::resetItem()
 {
     Info info;
-    vector<int> xy;
 
     while (true)
     {
@@ -25,28 +24,24 @@ void Item::resetItem()
         std::uniform_int_distribution<int> disX(0, info.planeLoc.size() - 1);
         int randomIdx = disX(gen);
 
-        // bool isNotWall = false;
+        std::vector<int> temp;
+        int tempX = info.planeLoc.at(randomIdx).at(0);
+        int tempY = info.planeLoc.at(randomIdx).at(1);
+        temp.push_back(tempX);
+        temp.push_back(tempY);
+
         bool isNotSnake = false;
-
-        // auto it1 = find(info.allWallLoc.begin(), info.allWallLoc.end(), xy);
-        // if (it1 == info.allWallLoc.end())
-        //     isNotWall = true;
-
-        auto it2 = find(info.snakeLoc.begin(), info.snakeLoc.end(), xy);
+        auto it2 = find(info.snakeLoc.begin(), info.snakeLoc.end(), temp);
         if (it2 == info.snakeLoc.end())
             isNotSnake = true;
 
         if (isNotSnake)
         {
-            xy.push_back(info.planeLoc.at(randomIdx).at(0));
-            xy.push_back(info.planeLoc.at(randomIdx).at(1));
+            item[0] = tempX;
+            item[1] = tempY;
             break;
         }
     }
-
-    item[0] = xy.at(0);
-    item[1] = xy.at(1);
-    // item[2] = value; // growth == 5, poison==6
     time = 0;
 
     if (item[2] == 5)
