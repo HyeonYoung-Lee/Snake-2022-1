@@ -37,6 +37,7 @@ WINDOW *Scene::gamingScene(int stage, MapSet &mapset, Snake &snake, Item &growth
         {
             poison.resetItem();
         }
+
         mapset.printItem(growth);
         mapset.printItem(poison);
 
@@ -49,31 +50,19 @@ WINDOW *Scene::gamingScene(int stage, MapSet &mapset, Snake &snake, Item &growth
 
         info.setSnakeLoc(snake);
 
-        // Gate
-        //  if ( snake.getCurrentLength() % 2 == 0  && (info.snakeLoc[0] == info.gateLoc[0] || info.snakeLoc[0] == info.gateLoc[1])){
-        //      int loc;
-        //      if (info.snakeLoc[0] == info.gateLoc[0]){
-        //          snake.addSnakeBody(info.gateLoc[1][0]-1, info.gateLoc[1][1], 3);
-        //          snake.setDirection(1);
-        //      }
-        //      if (info.snakeLoc[0] == info.gateLoc[1]){
-        //          snake.addSnakeBody(info.gateLoc[0][0]-1, info.gateLoc[0][1], 3);
-        //          snake.setDirection(1);
-        //      }
-        //  }
-
         if (info.gateExistence)
         {
-            if (info.snakeLoc[0] == info.gateLoc.at(0) || info.snakeLoc[0] == info.gateLoc.at(0))
+            if (info.snakeLoc.at(0) == info.gateLoc.at(0) || info.snakeLoc.at(0) == info.gateLoc.at(1))
             {
                 std::ofstream gateLog;
                 gateLog.open("./log/gateLog", ios::app);
-                std::vector<int> inGate = (info.snakeLoc[0] == info.gateLoc[0]) ? info.gateLoc[0] : info.gateLoc[1];
-                std::vector<int> outGate = (info.snakeLoc[0] == info.gateLoc[0]) ? info.gateLoc[1] : info.gateLoc[0];
+                std::vector<int> inGate = (info.snakeLoc.at(0) == info.gateLoc.at(0)) ? info.gateLoc.at(0) : info.gateLoc.at(1);
+                std::vector<int> outGate = (info.snakeLoc.at(0) == info.gateLoc.at(0)) ? info.gateLoc.at(1) : info.gateLoc.at(0);
                 int newHeadRow = outGate.at(0);
                 int newHeadCol = outGate.at(1);
-                gateLog << "in gate : " << inGate.at(0) << " " << inGate.at(1) << std::endl;
-                gateLog << "out gate : " << newHeadRow << " " << newHeadCol << " ";
+                gateLog << "in gate : " << inGate.at(0) << " " << inGate.at(1);
+                gateLog << "out gate : " << newHeadRow << " " << newHeadCol << endl;
+                gateLog.close();
 
                 // edge gate
                 if (0 < newHeadRow && newHeadRow < 20)
@@ -81,10 +70,12 @@ WINDOW *Scene::gamingScene(int stage, MapSet &mapset, Snake &snake, Item &growth
                     if (newHeadCol == 0)
                     { // left edge -> direction is right
                         snake.addSnakeBody(newHeadRow, newHeadCol + 1, 3);
+                        snake.setDirection(2);
                     }
                     else if (newHeadCol == 40)
                     { // right edge -> direction is left
                         snake.addSnakeBody(newHeadRow, newHeadCol - 1, 3);
+                        snake.setDirection(4);
                     }
                 }
             }

@@ -80,22 +80,6 @@ int main()
                 info.gateExistence = false;
             }
 
-            // // init Gate if snake's length is odd num
-            // if ((gateset.getGateExistence()) && (snake.getCurrentLength() % 2 != 0))
-            //     gateset.initGate();
-
-            // reset item
-            /*
-            if ((growthItem.getTime() != 0) && (growthItem.getTime() % 40 == 0)) // 10�� �� resetItem
-            {
-                growthItem.resetItem();
-            }
-            if ((poisonItem.getTime() != 0) && (poisonItem.getTime() % 40 == 0)) // 10�� �� resetItem
-            {
-                poisonItem.resetItem();
-            }
-            */
-
             nodelay(stdscr, TRUE);
             key = getch();
             int check = snake.understandKey(key);

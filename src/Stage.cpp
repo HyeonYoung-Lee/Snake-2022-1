@@ -155,14 +155,3 @@ std::ostream &operator<<(std::ostream &os, const MapSet &m)
 	}
 	return (os);
 }
-
-/*
-int main(void)
-{
-   MapSet ex;
-   ex.LoadMap();
-   std::cout << ex << std::endl;
-   ex.setMap(1, 1, 3);
-   std::cout << ex;
-}
-*/
