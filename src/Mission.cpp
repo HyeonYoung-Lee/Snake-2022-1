@@ -21,6 +21,12 @@ Mission::Mission(int mlength, int mgrowth, int mposion, int mgate)
 	gate = false;
 }
 
+bool	Mission::missionAllCleared() {
+	if (this->length == true && this->growth == true && this->poison == true && this->gate == true)
+		return	true;
+	return	false;
+}
+
 WINDOW *Mission::updateMissionBoard(Snake snake)
 {
 	WINDOW *winMission;

@@ -20,6 +20,7 @@ private:
     //    3      //    3 남
     bool isAlive;
     int pastKey;
+	std::vector<int> pastTail;
 
 public:
     Snake();
@@ -34,7 +35,7 @@ public:
     std::vector<std::vector<int>> getSnakeInfo();
 
     void addSnakeBody(int row, int col, int num);
-    void onlyaddSnakeBody(int row, int col, int num);
+    void snakeGrown();
     void snakePoisoned();
     void clearSnake();
     void moveSnakeHead();

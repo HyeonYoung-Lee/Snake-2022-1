@@ -59,17 +59,89 @@ WINDOW *GameStartScene::renderGameStartScene(int key) {
 
 GameOverScene::GameOverScene()
 {
-    width = 100;
-    height = 100;
+	this->width = 100;
+	this->height = 100;
+	this->selected = 0;
 }
 
-WINDOW *GameOverScene::updateScoreBoard(Snake snake)
+int	GameOverScene::GameOverStatus() {
+	if (this->selectMode == 0 && this->selected == 1) // TRYAGAIN ENTER
+		return	0;
+	else if (this->selectMode == 1 && this->selected == 1) // EXIT ENTER
+		return	1;
+	else
+		return	-1;
+}
+
+WINDOW *GameOverScene::renderGameOverScene(int key) {
+	WINDOW *winGameOver;
+	initscr();
+
+    resize_term(height, width);
+    curs_set(0);
+    noecho();
+	winGameOver = newwin(height, width, 0, 0);
+	std::ifstream	scenefile;
+	std::string	filess;
+	int	idx = 0;
+	scenefile.open("./Framework/gameoverscene");
+	while (!(scenefile.eof())) {
+		getline(scenefile, filess);
+		auto charStr = filess.c_str();
+		mvwprintw(winGameOver, idx, 1, charStr);
+		idx++;
+    }
+	scenefile.close();
+	switch (key) {
+		case KEY_DOWN:
+			mvwprintw(winGameOver, 24, 28, "  ");
+			mvwprintw(winGameOver, 26, 28, "->");
+			this->selectMode = 0;
+			this->selected = 0;
+			break;
+		case KEY_UP:
+			mvwprintw(winGameOver, 24, 28, "->");
+			mvwprintw(winGameOver, 26, 28, "  ");
+			this->selectMode = 1;
+			this->selected = 0;
+			break;
+		case 10:
+			this->selected = 1;
+			break;
+	}
+	wborder(winGameOver, '|', '|', '-', '-', '*', '*', '*', '*');
+	wrefresh(winGameOver);
+	return	winGameOver;
+}
+
+GameClearScene::GameClearScene()
 {
-    WINDOW *winGameover;
-    winGameover = newwin(height, width, 5, 70);
-    wborder(winGameover, '|', '|', '-', '-', '+', '+', '+', '+');
+	this->width = 100;
+	this->height = 100;
+	this->selected = 0;
+}
 
-    mvwprintw(winGameover, 1, 1, "Game Over");
+WINDOW *GameClearScene::renderGameClearScene() {
+	WINDOW *winGameClear;
+	initscr();
 
-    return winGameover;
+    resize_term(height, width);
+    curs_set(0);
+    noecho();
+	winGameClear = newwin(height, width, 0, 0);
+	std::ifstream	scenefile;
+	std::string	filess;
+	int	idx = 0;
+	scenefile.open("./Framework/gameoverscene");
+	while (!(scenefile.eof())) {
+		getline(scenefile, filess);
+		auto charStr = filess.c_str();
+		mvwprintw(winGameClear, idx, 1, charStr);
+		idx++;
+    }
+	scenefile.close();
+	mvwprintw(winGameClear, 26, 28, "->");
+	wborder(winGameClear, '|', '|', '-', '-', '*', '*', '*', '*');
+	wrefresh(winGameClear);
+	return	winGameClear;
 }

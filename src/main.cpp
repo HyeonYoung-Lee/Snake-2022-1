@@ -17,27 +17,32 @@ int main()
     Snake snake;
     GameStartScene gameStartScene;
     Gate gateset;
-
+    GameOverScene gameOverScene;
+    GameClearScene gameClearScene;
     int key;
+    int chkstage = 0;
     int itemTime = 0;
 
     WINDOW *winGaming;
     keypad(stdscr, TRUE);
     key = KEY_UP;
     gameStartScene.renderGameStartScene(key);
-    while (true)
+    while (gameStartScene.GameStartStatus() == -1)
     {
         key = getch();
         gameStartScene.renderGameStartScene(key);
         if (gameStartScene.GameStartStatus() == 0)
+        {
+            endwin();
             return 0;
+        }
         else if (gameStartScene.GameStartStatus() == 1)
             break;
     }
-    new Scene();
+    scene = Scene();
 
     int len, grth, pois, gate;
-    len = 5, grth = 2, pois = 4, gate = 1;
+    len = 5, grth = 2, pois = 4, gate = 0;
 
     for (int i = 1; i < 5; i++)
     {
@@ -84,15 +89,44 @@ int main()
 
             if (check == -3)
                 continue;
-            if (check == -4)
+            if (check == -4 || missionBoard.missionAllCleared())
+            {
+                chkstage = 1;
                 break;
+            }
             winGaming = scene.gamingScene(i, mapset, snake, growthItem, poisonItem, gateset);
+        }
+        nodelay(stdscr, FALSE);
+        scene = Scene();
+        if (chkstage == 1)
+        {
+            gameClearScene.renderGameClearScene();
+            getch();
+            continue;
+        }
+        else
+        {
+            key = KEY_UP;
+            gameOverScene.renderGameOverScene(key);
+            while (gameOverScene.GameOverStatus() == -1)
+            {
+                key = getch();
+                gameOverScene.renderGameOverScene(key);
+                if (gameOverScene.GameOverStatus() == 0)
+                {
+                    endwin();
+                    return 0;
+                }
+                else if (gameOverScene.GameOverStatus() == 1)
+                {
+                    main();
+                    return 0;
+                }
+            }
         }
         snake.clearSnake();
     }
 
-    // exit game
-    // delwin(win);
     delwin(winGaming);
     endwin();
 
