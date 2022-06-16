@@ -20,12 +20,11 @@ private:
     //    3      //    3 남
     bool isAlive;
     int pastKey;
-	std::vector<int> pastTail;
+    std::vector<int> pastTail;
 
 public:
     Snake();
     void setAttribute();
-    int score;
     // getter and setter
     int getDirection() { return direction; }
     void setDirection(int direction) { this->direction = direction; }
@@ -42,10 +41,6 @@ public:
     int understandKey(int key);
     void setPastKey(int key);
     int getPastKey();
-
-    // score
-    void addScore();
-    int getScore();
 
     // score board accessor
     int getCurrentLength() { return snakeBody.size(); }

@@ -71,14 +71,14 @@ int main()
             timeboard.updateTimeBoard();
 
             // reset Gate when snake's length is evenNum
-            if ((!info.gateExistence) && (snake.getCurrentLength() % 2 == 0))
+            if ((!info.gateExistence) && (snake.getGrowthItems() != 0) && (snake.getGrowthItems() % 2 == 0))
             {
                 info.gateLoc.clear();
                 fGate.resetGate();
                 sGate.resetGate();
             }
 
-            if (snake.getCurrentLength() % 2 != 0)
+            if (snake.getGrowthItems() % 2 != 0)
             {
                 info.gateExistence = false;
                 info.gateExistence = false;

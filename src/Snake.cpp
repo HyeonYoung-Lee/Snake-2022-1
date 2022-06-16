@@ -22,8 +22,6 @@ Snake::Snake()
 	setAttribute();
 	this->isAlive = true;
 	this->pastKey = 0;
-
-	this->score = KEY_RIGHT;
 }
 void Snake::setAttribute()
 {
@@ -146,14 +144,4 @@ void Snake::setPastKey(int key)
 int Snake::getPastKey()
 {
 	return pastKey;
-}
-
-void Snake::addScore()
-{
-	score++;
-}
-
-int Snake::getScore()
-{
-	return score;
 }
