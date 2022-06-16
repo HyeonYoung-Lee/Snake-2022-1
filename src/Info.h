@@ -2,35 +2,43 @@
 #include "Snake.h"
 using namespace std;
 /*############################
-Àü¿ª º¯¼ö ´À³¦À¸·Î »ç¿ëÇÏ´Â Å¬·¡½º
-1. ¸Ê ¾÷µ¥ÀÌÆ®½Ã Á¤º¸°»½Å -> allWallLoc, wallLoc
-    allWallLock: ½º³×ÀÌÅ©ÀÇ ¸Ó¸®°¡ ¿òÁ÷ÀÌ´Â ºÎºÐ (¸Ó¸®À§Ä¡°¡ º¯ÇÏ´Â ºÎºÐ) ¿¡¼­ »ç¿ë -> die
-                ¸Ê ³»ºÎ¿¡ º®ÀÌ ÀÖ´Â °æ¿ì item ¸®Á¨½Ã »ç¿ë (¸Ê À§Ä¡¿Í ÀÏÄ¡ÇÏ¸é ´Ù½Ã ³­¼ö »ý¼º)
-    wallLoc: gate »ý¼º½Ã ÀÌ °ªµé Áß¿¡¼­ »ç¿ë
+ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ Å¬ï¿½ï¿½ï¿½ï¿½
+1. ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ -> allWallLoc, wallLoc
+    allWallLock: ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Å©ï¿½ï¿½ ï¿½Ó¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ì´ï¿½ ï¿½Îºï¿½ (ï¿½Ó¸ï¿½ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½Îºï¿½) ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ -> die
+                ï¿½ï¿½ ï¿½ï¿½ï¿½Î¿ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½ item ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ (ï¿½ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½ï¿½Ä¡ï¿½Ï¸ï¿½ ï¿½Ù½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½)
+    wallLoc: gate ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ß¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 
-2. ½º³×ÀÌÅ© ¿òÁ÷ÀÓ½Ã Á¤º¸°»½Å -> snakeLoc
-    item ¸®Á¨½Ã »ç¿ë (½º³×ÀÌÅ© ¹Ùµð À§Ä¡¿Í ÀÏÄ¡ÇÏ¸é ´Ù½Ã ³­¼ö »ý¼º)
+2. ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Å© ï¿½ï¿½ï¿½ï¿½ï¿½Ó½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ -> snakeLoc
+    item ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ (ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Å© ï¿½Ùµï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½ï¿½Ä¡ï¿½Ï¸ï¿½ ï¿½Ù½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½)
 
-3. item ¸®Á¨µÉ¶§¸¶´Ù Á¤º¸°»½Å -> growthLoc, poisonLoc
-    ½º³×ÀÌÅ© ¸Ó¸®°¡ ¿òÁ÷ÀÌ´Â ºÎºÐ (¸Ó¸®À§Ä¡°¡ º¯ÇÏ´Â ºÎºÐ) ¿¡¼­ »ç¿ë -> score +/-
+3. item ï¿½ï¿½ï¿½ï¿½ï¿½É¶ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ -> growthLoc, poisonLoc
+    ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Å© ï¿½Ó¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ì´ï¿½ ï¿½Îºï¿½ (ï¿½Ó¸ï¿½ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½Îºï¿½) ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ -> score +/-
 
-4. gate »ý±æ¶§¸¶´Ù Á¤º¸°»½Å -> gateLoc
-    ½º³×ÀÌÅ© ¸Ó¸®°¡ ¿òÁ÷ÀÌ´Â ºÎºÐ¿¡¼­ »ç¿ë -> µÎ gate Áß ³²Àº gate °ªÀ¸·Î ½º³×ÀÌÅ© ÀÌµ¿
+4. gate ï¿½ï¿½ï¿½æ¶§ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ -> gateLoc
+    ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Å© ï¿½Ó¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ì´ï¿½ ï¿½ÎºÐ¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ -> ï¿½ï¿½ gate ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ gate ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Å© ï¿½Ìµï¿½
 ############################*/
 class Info
 {
 public:
-    static vector<vector<int>> snakeLoc;   // snake body À§Ä¡ ((x, y), (x, y)...)
-    static vector<vector<int>> allWallLoc; // ¸ðµç º® À§Ä¡ (immune wall Æ÷ÇÔ)
-    static vector<vector<int>> wallLoc;    // º® À§Ä¡ (immune wall Á¦¿Ü)
-    static vector<int> growthLoc;          // growth À§Ä¡ (x, y)
-    static vector<int> poisonLoc;          // poison À§Ä¡ (x, y)
-    static vector<vector<int>> gateLoc;    // gate À§Ä¡ (1¹ø:(x, y), 2¹ø(x, y))
+    static vector<vector<int>> snakeLoc;   // snake body ï¿½ï¿½Ä¡ ((x, y), (x, y)...)
+    static vector<vector<int>> allWallLoc; // ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½Ä¡ (immune wall ï¿½ï¿½ï¿½ï¿½)
+    static vector<vector<int>> wallLoc;    // ï¿½ï¿½ ï¿½ï¿½Ä¡ (immune wall ï¿½ï¿½ï¿½ï¿½)
+    static vector<vector<int>> leftSideWall;
+    static vector<vector<int>> rightSideWall;
+    static vector<vector<int>> upSideWall;
+    static vector<vector<int>> downSideWall;
+    static vector<int> growthLoc;          // growth ï¿½ï¿½Ä¡ (x, y)
+    static vector<int> poisonLoc;          // poison ï¿½ï¿½Ä¡ (x, y)
+    static vector<vector<int>> gateLoc;    // gate ï¿½ï¿½Ä¡ (1ï¿½ï¿½:(x, y), 2ï¿½ï¿½(x, y))
 
     Info();
     static void setSnakeLoc(Snake snake);
     void setAllWallLoc(vector<int> v);
     void setWallLoc(vector<int> v);
+    void setLeftWallLoc(vector<int> v);
+    void setRightWallLoc(vector<int> v);
+    void setUpWallLoc(vector<int> v);
+    void setDownWallLoc(vector<int> v);
     void setGrowthLoc(int x, int y);
     void setPoisonLoc(int x, int y);
     void setGateLoc(vector<int> v);

@@ -35,6 +35,22 @@ WINDOW *Scene::gamingScene(int stage, MapSet &mapset, Snake &snake, Item &growth
 
         info.setSnakeLoc(snake);
 
+
+        //Gate
+        if ( snake.getCurrentLength() % 2 == 0  && (info.snakeLoc[0] == info.gateLoc[0] || info.snakeLoc[0] == info.gateLoc[1])){
+            int loc;
+            if (info.snakeLoc[0] == info.gateLoc[0]){
+                snake.addSnakeBody(info.gateLoc[1][0]-1, info.gateLoc[1][1], 3);
+                snake.setDirection(1);
+            }
+            if (info.snakeLoc[0] == info.gateLoc[1]){
+                snake.addSnakeBody(info.gateLoc[0][0]-1, info.gateLoc[0][1], 3);
+                snake.setDirection(1);
+            }
+
+
+        }
+
         if (info.snakeLoc[0] == info.growthLoc)
         {
             growth.resetItem(5);
@@ -52,17 +68,11 @@ WINDOW *Scene::gamingScene(int stage, MapSet &mapset, Snake &snake, Item &growth
                 return winGaming;
             }
         }
+        
+
         for (int i = 0; i < info.allWallLoc.size(); i++)
         {
-            if (info.snakeLoc[0] == info.allWallLoc[i])
-            {
-                snake.setIsAlive(false);
-                return winGaming;
-            }
-        }
-        for (int i = 1; i < info.snakeLoc.size(); i++)
-        {
-            if (info.snakeLoc[0] == info.snakeLoc[i])
+            if (info.snakeLoc[0] == info.allWallLoc[i] && (info.snakeLoc[0] != info.gateLoc[0] && info.snakeLoc[0] != info.gateLoc[1]))
             {
                 snake.setIsAlive(false);
                 return winGaming;
