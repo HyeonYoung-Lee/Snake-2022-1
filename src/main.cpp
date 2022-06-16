@@ -45,11 +45,13 @@ int main()
     len = 5, grth = 2, pois = 4, gate = 0;
 
     for (int i = 1; i < 5; i++)
-    {
+    { 
+        scene = Scene();
+        snake.clearSnake();
         ScoreBoard scoreBoard;
         Mission missionBoard(len, grth, pois--, gate);
         len += 2, grth += (len / 2), gate *= 2;
-
+        chkstage = 0;
         Item growthItem(5);
         Item poisonItem(6);
         scene.changeScene(i, snake); //없앰

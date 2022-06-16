@@ -132,7 +132,7 @@ WINDOW *GameClearScene::renderGameClearScene() {
 	std::ifstream	scenefile;
 	std::string	filess;
 	int	idx = 0;
-	scenefile.open("./Framework/gameoverscene");
+	scenefile.open("./Framework/gameclearscene");
 	while (!(scenefile.eof())) {
 		getline(scenefile, filess);
 		auto charStr = filess.c_str();
@@ -140,7 +140,7 @@ WINDOW *GameClearScene::renderGameClearScene() {
 		idx++;
     }
 	scenefile.close();
-	mvwprintw(winGameClear, 26, 28, "->");
+	mvwprintw(winGameClear, 23, 28, "->");
 	wborder(winGameClear, '|', '|', '-', '-', '*', '*', '*', '*');
 	wrefresh(winGameClear);
 	return	winGameClear;
