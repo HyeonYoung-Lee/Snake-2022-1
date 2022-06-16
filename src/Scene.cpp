@@ -3,7 +3,7 @@
 #include "Item.h"
 #include "Gate.h"
 #include <vector>
-
+#include <algorithm>
 #include <fstream>
 Scene::Scene()
 {
@@ -60,9 +60,8 @@ WINDOW *Scene::gamingScene(int stage, MapSet &mapset, Snake &snake, Item &growth
                 std::vector<int> outGate = (info.snakeLoc.at(0) == info.gateLoc.at(0)) ? info.gateLoc.at(1) : info.gateLoc.at(0);
                 int newHeadRow = outGate.at(0);
                 int newHeadCol = outGate.at(1);
-                gateLog << "in gate : " << inGate.at(0) << " " << inGate.at(1);
+                gateLog << "in gate : " << inGate.at(0) << " " << inGate.at(1) << " ";
                 gateLog << "out gate : " << newHeadRow << " " << newHeadCol << endl;
-                gateLog.close();
 
                 // edge gate
                 if (0 < newHeadRow && newHeadRow < 20)
@@ -78,6 +77,89 @@ WINDOW *Scene::gamingScene(int stage, MapSet &mapset, Snake &snake, Item &growth
                         snake.setDirection(4);
                     }
                 }
+                else if (0 < newHeadCol && newHeadCol < 40)
+                {
+                    if (newHeadRow == 0)
+                    { // top edge -> direction is bottom
+                        snake.addSnakeBody(newHeadRow + 1, newHeadCol, 3);
+                        snake.setDirection(3);
+                    }
+                    else if (newHeadRow == 20)
+                    { // bottem edge -> direction is top
+                        snake.addSnakeBody(newHeadRow - 1, newHeadCol, 3);
+                        snake.setDirection(1);
+                    }
+                }
+                else // inner edge
+                {
+                    // check out gate's direction
+                    bool Left_Right = false;
+                    bool Top_Bottom = false;
+                    vector<int> check{newHeadRow, newHeadCol - 1}; // left
+                    auto itL = find(info.allWallLoc.begin(), info.allWallLoc.end(), check);
+
+                    check.clear();
+                    check.push_back(newHeadRow);
+                    check.push_back(newHeadCol + 1); // right
+                    auto itR = find(info.allWallLoc.begin(), info.allWallLoc.end(), check);
+
+                    if (itL == info.allWallLoc.end() && itR == info.allWallLoc.end())
+                        Left_Right = true;
+
+                    check.clear();
+                    check.push_back(newHeadRow - 1);
+                    check.push_back(newHeadCol); // bottom
+                    auto itB = find(info.allWallLoc.begin(), info.allWallLoc.end(), check);
+
+                    check.clear();
+                    check.push_back(newHeadRow + 1);
+                    check.push_back(newHeadCol); // top
+                    auto itU = find(info.allWallLoc.begin(), info.allWallLoc.end(), check);
+
+                    if (itB == info.allWallLoc.end() && itU == info.allWallLoc.end())
+                        Top_Bottom = true;
+                    gateLog << "Top_bottom : " << Top_Bottom << " Left_Right : " << Left_Right << endl;
+                    // move snake and adjust direction
+                    if (Top_Bottom)
+                    { // possible out direction is top and bottom
+                        if (snake.getDirection() == 4)
+                        {
+                            // in direction is left  => out direction is top
+                            snake.addSnakeBody(newHeadRow - 1, newHeadCol, 3);
+                            snake.setDirection(1);
+                        }
+                        else if (snake.getDirection() == 2)
+                        {
+                            // in direction is right => out direction is bottom
+                            snake.addSnakeBody(newHeadRow + 1, newHeadCol, 3);
+                            snake.setDirection(3);
+                        }
+                        else if (snake.getDirection() == 1) // top -> top
+                            snake.addSnakeBody(newHeadRow - 1, newHeadCol, 3);
+                        else if (snake.getDirection() == 3) // bottom -> bottom
+                            snake.addSnakeBody(newHeadRow + 1, newHeadCol, 3);
+                    }
+                    else if (Left_Right)
+                    { // possible out direction is left and right
+                        if (snake.getDirection() == 1)
+                        {
+                            // in direction is top => out direction is right
+                            snake.addSnakeBody(newHeadRow, newHeadCol + 1, 3);
+                            snake.setDirection(2);
+                        }
+                        else if (snake.getDirection() == 3)
+                        {
+                            // in direction is bottom => out direction is left
+                            snake.addSnakeBody(newHeadRow, newHeadCol - 1, 3);
+                            snake.setDirection(4);
+                        }
+                        else if (snake.getDirection() == 2) // right -> right
+                            snake.addSnakeBody(newHeadRow, newHeadCol + 1, 3);
+                        else if (snake.getDirection() == 4) // left -> left
+                            snake.addSnakeBody(newHeadRow, newHeadCol - 1, 3);
+                    }
+                }
+                gateLog.close();
             }
         }
 
