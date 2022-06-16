@@ -3,6 +3,7 @@
 #include "Snake.h"
 #include "ScoreBoard.h"
 #include "Mission.h"
+#include "TimeBoard.h"
 #include "Item.h"
 #include "Info.h"
 #include "Gate.h"
@@ -15,9 +16,11 @@ int main()
     Scene scene;
     MapSet mapset;
     Snake snake;
+	TimeBoard timeboard;
     GameStartScene gameStartScene;
     GameOverScene gameOverScene;
     GameClearScene gameClearScene;
+	CongratulationsScene congratulationsScene;
 
     Gate fGate;
     Gate sGate;
@@ -56,7 +59,8 @@ int main()
         chkstage = 0;
         Item growthItem(5);
         Item poisonItem(6);
-        scene.changeScene(i, snake); //없앰
+		timeboard.setTime();
+        scene.changeScene(i, snake);
         key = KEY_RIGHT;
         snake.setPastKey(key);
 
@@ -65,6 +69,7 @@ int main()
         {
             scoreBoard.updateScoreBoard(snake);
             missionBoard.updateMissionBoard(snake);
+			timeboard.updateTimeBoard();
 
             // reset Gate when snake's length is evenNum
             if ((!info.gateExistence) && (snake.getCurrentLength() % 2 == 0))
@@ -97,7 +102,10 @@ int main()
         }
         nodelay(stdscr, FALSE);
         scene = Scene();
-        if (chkstage == 1)
+        if (chkstage == 1 && i == 4) {
+			break;
+		}
+		if (chkstage == 1)
         {
             gameClearScene.renderGameClearScene();
             getch();
@@ -125,6 +133,9 @@ int main()
         }
         snake.clearSnake();
     }
+
+	congratulationsScene.renderCongratulationsScene();
+	getch();
 
     delwin(winGaming);
     endwin();

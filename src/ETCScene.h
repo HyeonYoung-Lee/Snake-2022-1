@@ -40,10 +40,18 @@ class GameClearScene
 {
 protected:
     int width, height;
-	int	selected; // Pressed Enter?
 
 public:
     GameClearScene();
-	int getSelected() { return	this->selected; }
 	WINDOW *renderGameClearScene();
+};
+
+class CongratulationsScene
+{
+protected:
+    int width, height;
+
+public:
+    CongratulationsScene();
+	WINDOW *renderCongratulationsScene();
 };

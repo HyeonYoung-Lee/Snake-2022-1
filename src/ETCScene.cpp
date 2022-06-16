@@ -118,7 +118,6 @@ GameClearScene::GameClearScene()
 {
 	this->width = 100;
 	this->height = 100;
-	this->selected = 0;
 }
 
 WINDOW *GameClearScene::renderGameClearScene() {
@@ -144,4 +143,34 @@ WINDOW *GameClearScene::renderGameClearScene() {
 	wborder(winGameClear, '|', '|', '-', '-', '*', '*', '*', '*');
 	wrefresh(winGameClear);
 	return	winGameClear;
+}
+
+CongratulationsScene::CongratulationsScene()
+{
+	this->width = 100;
+	this->height = 100;
+}
+
+WINDOW *CongratulationsScene::renderCongratulationsScene() {
+	WINDOW *winCongratulations;
+	initscr();
+
+    resize_term(height, width);
+    curs_set(0);
+    noecho();
+	winCongratulations = newwin(height, width, 0, 0);
+	std::ifstream	scenefile;
+	std::string	filess;
+	int	idx = 0;
+	scenefile.open("./Framework/congratulationscene");
+	while (!(scenefile.eof())) {
+		getline(scenefile, filess);
+		auto charStr = filess.c_str();
+		mvwprintw(winCongratulations, idx, 1, charStr);
+		idx++;
+    }
+	scenefile.close();
+	wborder(winCongratulations, '|', '|', '-', '-', '*', '*', '*', '*');
+	wrefresh(winCongratulations);
+	return	winCongratulations;
 }
