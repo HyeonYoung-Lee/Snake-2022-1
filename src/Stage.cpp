@@ -56,6 +56,27 @@ void MapSet::LoadMap(int mapNum)
 					info.setPlaneLoc(temp);
 					planeLog << i << " " << j << endl;
 				}
+
+				if (i == 0 && map[i][j] == '1')
+				{
+					vector<int> temp{i, j};
+					info.setUpWallLoc(temp);
+				}
+				if (i == row - 1 && map[i][j] == '1')
+				{
+					vector<int> temp{i, j};
+					info.setDownWallLoc(temp);
+				}
+				if (j == 0 && map[i][j] == '1')
+				{
+					vector<int> temp{i, j};
+					info.setLeftWallLoc(temp);
+				}
+				if (j == col - 1 && map[i][j] == '1')
+				{
+					vector<int> temp{i, j};
+					info.setRightWallLoc(temp);
+				}
 			}
 		}
 		mapfile.close();
