@@ -26,11 +26,11 @@ WINDOW *Scene::gamingScene(int stage, MapSet &mapset, Snake &snake, Item &growth
         mapset.LoadMap(stage);
 
         // Item //
-        if ((growth.getTime() % 20 == 0)) // 10?? ?? resetItem
+        if ((growth.getTime() % 35 == 0)) // 10?? ?? resetItem
         {
             growth.resetItem();
         }
-        if ((poison.getTime() % 20 == 0)) // 10?? ?? resetItem
+        if ((poison.getTime() % 35 == 0)) // 10?? ?? resetItem
         {
             poison.resetItem();
         }
