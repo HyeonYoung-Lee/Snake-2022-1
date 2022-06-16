@@ -50,30 +50,59 @@ WINDOW *Scene::gamingScene(int stage, MapSet &mapset, Snake &snake, Item &growth
 
         info.setSnakeLoc(snake);
 
-        if (info.gateExistence)
+        for (int i = 0; i < info.allWallLoc.size(); i++)
+        {
+            if (info.snakeLoc[0] == info.allWallLoc[i])
+            {
+                if (info.MakeGate == true)
+                {
+                    if (info.snakeLoc[0] != info.gateLoc[0] && info.snakeLoc[0] != info.gateLoc[1])
+                    {
+                        snake.setIsAlive(false);
+                        return winGaming;
+                    }
+                }
+                else
+                {
+                    snake.setIsAlive(false);
+                    return winGaming;
+                }
+            }
+        }
+
+        for (int i = 1; i < info.snakeLoc.size(); i++)
+        {
+            if (info.snakeLoc[0] == info.snakeLoc[i])
+            {
+                snake.setIsAlive(false);
+                return winGaming;
+            }
+        }
+
+        if (info.MakeGate)
         {
             if (info.snakeLoc.at(0) == info.gateLoc.at(0) || info.snakeLoc.at(0) == info.gateLoc.at(1))
             {
                 std::ofstream gateLog;
-                gateLog.open("./log/gateLog", ios::app);
+                gateLog.open("./log/gateLog", std::ios::app);
                 std::vector<int> inGate = (info.snakeLoc.at(0) == info.gateLoc.at(0)) ? info.gateLoc.at(0) : info.gateLoc.at(1);
                 std::vector<int> outGate = (info.snakeLoc.at(0) == info.gateLoc.at(0)) ? info.gateLoc.at(1) : info.gateLoc.at(0);
                 int newHeadRow = outGate.at(0);
                 int newHeadCol = outGate.at(1);
                 gateLog << "in gate : " << inGate.at(0) << " " << inGate.at(1) << " ";
-                gateLog << "out gate : " << newHeadRow << " " << newHeadCol << endl;
+                gateLog << "out gate : " << newHeadRow << " " << newHeadCol << std::endl;
 
                 // edge gate
                 if (0 < newHeadRow && newHeadRow < 20)
                 {
                     if (newHeadCol == 0)
                     { // left edge -> direction is right
-                        snake.addSnakeBody(newHeadRow, newHeadCol + 1, 3);
+                        snake.addSnakeBody(newHeadRow, newHeadCol, 3);
                         snake.setDirection(2);
                     }
                     else if (newHeadCol == 40)
                     { // right edge -> direction is left
-                        snake.addSnakeBody(newHeadRow, newHeadCol - 1, 3);
+                        snake.addSnakeBody(newHeadRow, newHeadCol, 3);
                         snake.setDirection(4);
                     }
                 }
@@ -81,12 +110,12 @@ WINDOW *Scene::gamingScene(int stage, MapSet &mapset, Snake &snake, Item &growth
                 {
                     if (newHeadRow == 0)
                     { // top edge -> direction is bottom
-                        snake.addSnakeBody(newHeadRow + 1, newHeadCol, 3);
+                        snake.addSnakeBody(newHeadRow, newHeadCol, 3);
                         snake.setDirection(3);
                     }
                     else if (newHeadRow == 20)
                     { // bottem edge -> direction is top
-                        snake.addSnakeBody(newHeadRow - 1, newHeadCol, 3);
+                        snake.addSnakeBody(newHeadRow, newHeadCol, 3);
                         snake.setDirection(1);
                     }
                 }
@@ -95,7 +124,7 @@ WINDOW *Scene::gamingScene(int stage, MapSet &mapset, Snake &snake, Item &growth
                     // check out gate's direction
                     bool Left_Right = false;
                     bool Top_Bottom = false;
-                    vector<int> check{newHeadRow, newHeadCol - 1}; // left
+                    std::vector<int> check{newHeadRow, newHeadCol - 1}; // left
                     auto itL = find(info.allWallLoc.begin(), info.allWallLoc.end(), check);
 
                     check.clear();
@@ -118,7 +147,7 @@ WINDOW *Scene::gamingScene(int stage, MapSet &mapset, Snake &snake, Item &growth
 
                     if (itB == info.allWallLoc.end() && itU == info.allWallLoc.end())
                         Top_Bottom = true;
-                    gateLog << "Top_bottom : " << Top_Bottom << " Left_Right : " << Left_Right << endl;
+                    gateLog << "Top_bottom : " << Top_Bottom << " Left_Right : " << Left_Right << std::endl;
                     // move snake and adjust direction
                     if (Top_Bottom)
                     { // possible out direction is top and bottom
@@ -175,23 +204,6 @@ WINDOW *Scene::gamingScene(int stage, MapSet &mapset, Snake &snake, Item &growth
             snake.incPoisonItems();
             snake.snakePoisoned();
             if (snake.getCurrentLength() < 3)
-            {
-                snake.setIsAlive(false);
-                return winGaming;
-            }
-        }
-
-        for (int i = 0; i < info.allWallLoc.size(); i++)
-        {
-            if (info.snakeLoc[0] == info.allWallLoc[i] && (info.snakeLoc[0] != info.gateLoc[0] && info.snakeLoc[0] != info.gateLoc[1]))
-            {
-                snake.setIsAlive(false);
-                return winGaming;
-            }
-        }
-        for (int i = 1; i < info.snakeLoc.size(); i++)
-        {
-            if (info.snakeLoc[0] == info.snakeLoc[i])
             {
                 snake.setIsAlive(false);
                 return winGaming;
