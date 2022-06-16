@@ -3,15 +3,12 @@
 vector<vector<int>> Info::snakeLoc;
 vector<vector<int>> Info::allWallLoc;
 vector<vector<int>> Info::wallLoc;
-<<<<<<< HEAD
 vector<vector<int>> Info::planeLoc;
-=======
 vector<vector<int>> Info::leftSideWall;
 vector<vector<int>> Info::rightSideWall;
 vector<vector<int>> Info::upSideWall;
 vector<vector<int>> Info::downSideWall;
 
->>>>>>> origin/jeffery
 vector<int> Info::growthLoc = {0, 0};
 vector<int> Info::poisonLoc = {0, 0};
 vector<vector<int>> Info::gateLoc;
