@@ -156,6 +156,7 @@ WINDOW *Scene::gamingScene(int stage, MapSet &mapset, Snake &snake, Item &growth
                     }
                     snake.addSnakeBody(newHeadRow, newHeadCol, 3);
                 }
+                snake.incGateUses();
                 gateLog.close();
             }
         }

@@ -16,11 +16,11 @@ int main()
     Scene scene;
     MapSet mapset;
     Snake snake;
-	TimeBoard timeboard;
+    TimeBoard timeboard;
     GameStartScene gameStartScene;
     GameOverScene gameOverScene;
     GameClearScene gameClearScene;
-	CongratulationsScene congratulationsScene;
+    CongratulationsScene congratulationsScene;
 
     Gate fGate;
     Gate sGate;
@@ -47,7 +47,7 @@ int main()
     scene = Scene();
 
     int len, grth, pois, gate;
-    len = 5, grth = 2, pois = 4, gate = 0;
+    len = 5, grth = 2, pois = 4, gate = 1;
 
     for (int i = 1; i < 5; i++)
     {
@@ -59,7 +59,7 @@ int main()
         chkstage = 0;
         Item growthItem(5);
         Item poisonItem(6);
-		timeboard.setTime();
+        timeboard.setTime();
         scene.changeScene(i, snake);
         key = KEY_RIGHT;
         snake.setPastKey(key);
@@ -69,7 +69,7 @@ int main()
         {
             scoreBoard.updateScoreBoard(snake);
             missionBoard.updateMissionBoard(snake);
-			timeboard.updateTimeBoard();
+            timeboard.updateTimeBoard();
 
             // reset Gate when snake's length is evenNum
             if ((!info.gateExistence) && (snake.getCurrentLength() % 2 == 0))
@@ -102,10 +102,11 @@ int main()
         }
         nodelay(stdscr, FALSE);
         scene = Scene();
-        if (chkstage == 1 && i == 4) {
-			break;
-		}
-		if (chkstage == 1)
+        if (chkstage == 1 && i == 4)
+        {
+            break;
+        }
+        if (chkstage == 1)
         {
             gameClearScene.renderGameClearScene();
             getch();
@@ -134,8 +135,8 @@ int main()
         snake.clearSnake();
     }
 
-	congratulationsScene.renderCongratulationsScene();
-	getch();
+    congratulationsScene.renderCongratulationsScene();
+    getch();
 
     delwin(winGaming);
     endwin();
