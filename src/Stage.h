@@ -1,14 +1,12 @@
 #include <vector>
 #include <iostream>
 #include <fstream>
-#include <ctime>
-#include <cstdlib>
 #include <string>
 #include <sstream>
 #include "Snake.h"
 #include "Item.h"
 #include "Gate.h"
-
+#include "Info.h"
 class MapSet
 {
    int row;
