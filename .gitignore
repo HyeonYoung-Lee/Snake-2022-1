@@ -1,3 +1,4 @@
 ## vscode 폴더 업로드 방지용
 .vscode/
 log/
+.DS_Store
