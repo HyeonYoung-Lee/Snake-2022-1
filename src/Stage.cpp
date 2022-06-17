@@ -56,27 +56,6 @@ void MapSet::LoadMap(int mapNum)
 					info.setPlaneLoc(temp);
 					planeLog << i << " " << j << std::endl;
 				}
-
-				// if (i == 0 && map[i][j] == '1')
-				// {
-				// 	vector<int> temp{i, j};
-				// 	info.setUpWallLoc(temp);
-				// }
-				// if (i == row - 1 && map[i][j] == '1')
-				// {
-				// 	vector<int> temp{i, j};
-				// 	info.setDownWallLoc(temp);
-				// }
-				// if (j == 0 && map[i][j] == '1')
-				// {
-				// 	vector<int> temp{i, j};
-				// 	info.setLeftWallLoc(temp);
-				// }
-				// if (j == col - 1 && map[i][j] == '1')
-				// {
-				// 	vector<int> temp{i, j};
-				// 	info.setRightWallLoc(temp);
-				// }
 			}
 		}
 		mapfile.close();
@@ -132,15 +111,6 @@ int MapSet::getRow()
 int MapSet::getCol()
 {
 	return (col);
-}
-
-bool MapSet::checkMapElement(std::vector<std::vector<int>> snakeBody)
-{
-	int row = snakeBody[0][0];
-	int col = snakeBody[0][1];
-	if (this->map[row][col] == 1 || this->map[row][col] == 2 || this->map[row][col] == 4)
-		return false;
-	return true;
 }
 
 std::ostream &operator<<(std::ostream &os, const MapSet &m)
