@@ -45,23 +45,22 @@ WINDOW *Scene::gamingScene(int stage, MapSet &mapset, Snake &snake, Item &growth
 
         info.setSnakeLoc(snake);
 
-        for (int i = 0; i < info.allWallLoc.size(); i++)
+        std::vector<int> snakehead = info.snakeLoc.at(0);
+        auto itWall = std::find(info.allWallLoc.begin(), info.allWallLoc.end(), snakehead);
+        if (itWall != info.allWallLoc.end())
         {
-            if (info.snakeLoc[0] == info.allWallLoc[i])
+            if (info.MakeGate == true)
             {
-                if (info.MakeGate == true)
-                {
-                    if (info.snakeLoc[0] != info.gateLoc[0] && info.snakeLoc[0] != info.gateLoc[1])
-                    {
-                        snake.setIsAlive(false);
-                        return winGaming;
-                    }
-                }
-                else
+                if (info.snakeLoc[0] != info.gateLoc[0] && info.snakeLoc[0] != info.gateLoc[1])
                 {
                     snake.setIsAlive(false);
                     return winGaming;
                 }
+            }
+            else
+            {
+                snake.setIsAlive(false);
+                return winGaming;
             }
         }
 
